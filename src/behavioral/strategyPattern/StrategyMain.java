@@ -28,6 +28,7 @@ public class StrategyMain {
     }
 
     public static void main(String[] args) throws IOException {
+
         while (!order.isClosed()) {
             int cost;
 
@@ -76,6 +77,7 @@ public class StrategyMain {
                 } else {
                     System.out.println("FAIL! Please, check your data.");
                 }
+
                 order.setClosed();
             }
         }
