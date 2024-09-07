@@ -13,11 +13,11 @@ public class AbstractFactoryMain {
 
         classicRestaurant.orderPizza();
         System.out.println();
-        orientalRestaurant.orderPizza();
+        classicRestaurant.orderBurger();
 
         System.out.println("==========================================");
 
-        classicRestaurant.orderBurger();
+        orientalRestaurant.orderPizza();
         System.out.println();
         orientalRestaurant.orderBurger();
 
