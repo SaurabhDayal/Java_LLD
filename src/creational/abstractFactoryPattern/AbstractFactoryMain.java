@@ -13,13 +13,15 @@ public class AbstractFactoryMain {
             Restaurant orientalRestaurant = new OrientalRestaurant();
             Restaurant classicRestaurant = new ClassicRestaurant();
 
-            Pizza classicPizza = classicRestaurant.createPizza();
-            Pizza orientalPizza = orientalRestaurant.createPizza();
+            classicRestaurant.orderPizza();
+            System.out.println();
+            orientalRestaurant.orderPizza();
 
             System.out.println("==========================================");
 
-            Burger classicBurger = classicRestaurant.createBurger();
-            Burger orientalBurger = orientalRestaurant.createBurger();
+             classicRestaurant.orderBurger();
+            System.out.println();
+             orientalRestaurant.orderBurger();
 
         }
 }

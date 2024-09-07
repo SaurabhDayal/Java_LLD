@@ -11,6 +11,12 @@ public abstract class Restaurant {
         burger.prepare();
     }
 
+    public void orderPizza() {
+        System.out.println("Ordering Pizza...");
+        Pizza pizza = createPizza();
+        pizza.bake();
+    }
+
     public abstract Burger createBurger();
 
     public abstract Pizza createPizza();
