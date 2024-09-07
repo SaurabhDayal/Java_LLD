@@ -5,7 +5,7 @@ package behavioral.chainOfResponsibilityPattern.middlewarePkg;
  */
 public class RoleCheckMiddleware extends Middleware {
     public boolean check(String email, String password) {
-        if (email.equals("admin@example.com")) {
+        if (email.equals("admin@")) {
             System.out.println("Hello, admin!");
             return true;
         }

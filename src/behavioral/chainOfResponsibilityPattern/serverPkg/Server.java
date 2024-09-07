@@ -5,9 +5,6 @@ import behavioral.chainOfResponsibilityPattern.middlewarePkg.Middleware;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Server class.
- */
 public class Server {
     private Map<String, String> users = new HashMap<>();
     private Middleware middleware;
@@ -27,9 +24,7 @@ public class Server {
     public boolean logIn(String email, String password) {
         if (middleware.check(email, password)) {
             System.out.println("Authorization have been successful!");
-
             // Do something useful here for authorized users.
-
             return true;
         }
         return false;
