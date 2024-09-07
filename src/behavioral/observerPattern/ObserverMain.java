@@ -8,7 +8,8 @@ import behavioral.observerPattern.observerPkg.SMSObserver;
 
 public class ObserverMain {
     public static void main(String[] args) {
-        // Create the weather station and news station (subjects)
+
+        // Create the weather station and news station (Observables)
         WeatherStation weatherStation = new WeatherStation();
         NewsStation newsStation = new NewsStation();
 
