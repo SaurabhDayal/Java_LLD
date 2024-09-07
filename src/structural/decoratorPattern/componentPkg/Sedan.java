@@ -1,14 +1,14 @@
 package structural.decoratorPattern.componentPkg;
 
 
-public class BasicCar implements Car {
+public class Sedan implements Car {
     @Override
     public String getDescription() {
-        return "Basic Car";
+        return "Sedan";
     }
 
     @Override
     public double getCost() {
-        return 10000; // Base cost
+        return 15000; // Base cost for Sedan
     }
 }
