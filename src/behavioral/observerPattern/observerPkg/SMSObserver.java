@@ -1,17 +1,19 @@
 package behavioral.observerPattern.observerPkg;
 
+import behavioral.observerPattern.observablePkg.Observable;
+
 // Concrete SMS Observer Class
 public class SMSObserver implements Observer {
     private String phoneNumber;
-    private String updateType;  // This will be injected via constructor to differentiate between Weather and News
+    private Observable observable;  // Reference to the observable type (Weather or News)
 
-    public SMSObserver(String phoneNumber, String updateType) {
+    public SMSObserver(String phoneNumber, Observable observable) {
         this.phoneNumber = phoneNumber;
-        this.updateType = updateType;  // "Weather" or "News"
+        this.observable = observable;
     }
 
     @Override
     public void update(String updateMessage) {
-        System.out.println("SMS   ---> " + phoneNumber + ": " + updateType + " Update ---> " + updateMessage);
+        System.out.println("SMS   --->    " + phoneNumber + " :            " + observable.getName() + " Update ---> " + updateMessage);
     }
 }

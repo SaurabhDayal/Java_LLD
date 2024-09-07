@@ -12,12 +12,12 @@ public class ObserverMain {
         WeatherStation weatherStation = new WeatherStation();
         NewsStation newsStation = new NewsStation();
 
-        // Create observers with dynamic constructor injection for different types of updates
-        Observer weatherEmailObserver = new EmailObserver("example1@example.com", "Weather");
-        Observer weatherSmsObserver = new SMSObserver("123-456-7890", "Weather");
+        // Create observers with dynamic constructor injection for different stations
+        Observer weatherEmailObserver = new EmailObserver("example1@example.com", weatherStation);
+        Observer weatherSmsObserver = new SMSObserver("123-456-7890", weatherStation);
 
-        Observer newsEmailObserver = new EmailObserver("example1@example.com", "News");
-        Observer newsSmsObserver = new SMSObserver("123-456-7890", "News");
+        Observer newsEmailObserver = new EmailObserver("example1@example.com", newsStation);
+        Observer newsSmsObserver = new SMSObserver("123-456-7890", newsStation);
 
         // Register weather observers to the weather station
         weatherStation.registerObserver(weatherEmailObserver);

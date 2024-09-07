@@ -1,7 +1,6 @@
 package behavioral.observerPattern.observablePkg;
 
 import behavioral.observerPattern.observerPkg.Observer;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +8,7 @@ import java.util.List;
 public class WeatherStation implements Observable {
     private List<Observer> observers = new ArrayList<>();
     private String weatherUpdate;
+    private final String name = "Weather";  // Observable name
 
     @Override
     public void registerObserver(Observer observer) {
@@ -25,6 +25,10 @@ public class WeatherStation implements Observable {
         for (Observer observer : observers) {
             observer.update(weatherUpdate);
         }
+    }
+
+    public String getName() {
+        return name;
     }
 
     // Method to change the weather and notify observers

@@ -1,17 +1,19 @@
 package behavioral.observerPattern.observerPkg;
 
+import behavioral.observerPattern.observablePkg.Observable;
+
 // Concrete Email Observer Class
 public class EmailObserver implements Observer {
     private String email;
-    private String updateType;  // This will specify whether it's a weather or news update
+    private Observable observable;  // Reference to the observable type (Weather or News)
 
-    public EmailObserver(String email, String updateType) {
+    public EmailObserver(String email, Observable observable) {
         this.email = email;
-        this.updateType = updateType;  // "Weather" or "News"
+        this.observable = observable;
     }
 
     @Override
     public void update(String updateMessage) {
-        System.out.println("Email ---> " + email + ": " + updateType + " Update ---> " + updateMessage);
+        System.out.println("Email --->    " + email + " :    " + observable.getName() + " Update ---> " + updateMessage);
     }
 }
