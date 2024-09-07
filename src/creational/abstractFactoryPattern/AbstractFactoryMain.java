@@ -3,25 +3,23 @@ package creational.abstractFactoryPattern;
 import creational.abstractFactoryPattern.factoryPkg.ClassicRestaurant;
 import creational.abstractFactoryPattern.factoryPkg.OrientalRestaurant;
 import creational.abstractFactoryPattern.factoryPkg.Restaurant;
-import creational.abstractFactoryPattern.productsPkg.Burger;
-import creational.abstractFactoryPattern.productsPkg.Pizza;
 
 public class AbstractFactoryMain {
 
-        public static void main(String[] args) {
+    public static void main(String[] args) {
 
-            Restaurant orientalRestaurant = new OrientalRestaurant();
-            Restaurant classicRestaurant = new ClassicRestaurant();
+        Restaurant orientalRestaurant = new OrientalRestaurant();
+        Restaurant classicRestaurant = new ClassicRestaurant();
 
-            classicRestaurant.orderPizza();
-            System.out.println();
-            orientalRestaurant.orderPizza();
+        classicRestaurant.orderPizza();
+        System.out.println();
+        orientalRestaurant.orderPizza();
 
-            System.out.println("==========================================");
+        System.out.println("==========================================");
 
-             classicRestaurant.orderBurger();
-            System.out.println();
-             orientalRestaurant.orderBurger();
+        classicRestaurant.orderBurger();
+        System.out.println();
+        orientalRestaurant.orderBurger();
 
-        }
+    }
 }
