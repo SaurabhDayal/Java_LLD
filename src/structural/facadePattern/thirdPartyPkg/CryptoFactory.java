@@ -12,5 +12,4 @@ public class CryptoFactory {
             return new BitcoinService();
         }
     }
-
 }

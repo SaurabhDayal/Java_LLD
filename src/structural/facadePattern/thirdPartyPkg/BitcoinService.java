@@ -6,5 +6,4 @@ public class BitcoinService extends CryptoService {
     public void buyCurrency(User user, double amount) {
         System.out.println("Buying " + amount + " of Bitcoin...");
     }
-
 }

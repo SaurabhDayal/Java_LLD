@@ -16,7 +16,5 @@ public class BuyCryptoFacade {
         MailService mailService = new MailService();
         mailService.sendConfirmationMail(user);
         System.out.println(amount + " of " + currency + " bought successfully!");
-
     }
-
 }
