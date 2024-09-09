@@ -2,6 +2,7 @@ package creational.builderPattern.componentsPkg;
 
 
 public class GPSNavigator {
+
     private String route;
 
     public GPSNavigator() {

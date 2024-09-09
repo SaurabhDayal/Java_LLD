@@ -14,13 +14,13 @@ public class BuilderMain {
         CarBuilder builder = new CarBuilder();
         director.constructSportsCar(builder);
 
-        Car car = builder.getResult();
+        Car car = builder.build();
         System.out.println("Car built:\n" + car.getCarType());
 
         CarManualBuilder manualBuilder = new CarManualBuilder();
 
         director.constructSportsCar(manualBuilder);
-        Manual carManual = manualBuilder.getResult();
+        Manual carManual = manualBuilder.build();
         System.out.println("\nCar manual built:\n" + carManual.print());
     }
 

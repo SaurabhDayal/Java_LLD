@@ -7,6 +7,7 @@ import creational.builderPattern.componentsPkg.Transmission;
 import creational.builderPattern.componentsPkg.TripComputer;
 
 public class Car {
+
     private final CarType carType;
     private final int seats;
     private final Engine engine;
@@ -15,8 +16,7 @@ public class Car {
     private final GPSNavigator gpsNavigator;
     private double fuel = 0;
 
-    public Car(CarType carType, int seats, Engine engine, Transmission transmission,
-               TripComputer tripComputer, GPSNavigator gpsNavigator) {
+    public Car(CarType carType, int seats, Engine engine, Transmission transmission, TripComputer tripComputer, GPSNavigator gpsNavigator) {
         this.carType = carType;
         this.seats = seats;
         this.engine = engine;

@@ -46,7 +46,7 @@ public class CarManualBuilder implements Builder {
         this.gpsNavigator = gpsNavigator;
     }
 
-    public Manual getResult() {
+    public Manual build() {
         return new Manual(type, seats, engine, transmission, tripComputer, gpsNavigator);
     }
 }

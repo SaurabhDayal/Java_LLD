@@ -8,6 +8,7 @@ import creational.builderPattern.componentsPkg.Transmission;
 import creational.builderPattern.componentsPkg.TripComputer;
 
 public class CarBuilder implements Builder {
+
     private CarType type;
     private int seats;
     private Engine engine;
@@ -44,7 +45,7 @@ public class CarBuilder implements Builder {
         this.gpsNavigator = gpsNavigator;
     }
 
-    public Car getResult() {
+    public Car build() {
         return new Car(type, seats, engine, transmission, tripComputer, gpsNavigator);
     }
 }
