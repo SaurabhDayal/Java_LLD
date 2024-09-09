@@ -1,4 +1,7 @@
-package structural.compositePattern.compositePkg;
+package structural.compositePattern.deliveryServicePkg;
+
+import structural.compositePattern.compositePkg.Box;
+import structural.compositePattern.compositePkg.CompositeBox;
 
 public class DeliveryService {
 

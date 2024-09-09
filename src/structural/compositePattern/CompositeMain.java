@@ -1,15 +1,16 @@
 package structural.compositePattern;
 
-import structural.compositePattern.Products.Book;
-import structural.compositePattern.Products.VideoGame;
 import structural.compositePattern.compositePkg.CompositeBox;
-import structural.compositePattern.compositePkg.DeliveryService;
+import structural.compositePattern.compositePkg.Products.Book;
+import structural.compositePattern.compositePkg.Products.VideoGame;
+import structural.compositePattern.deliveryServicePkg.DeliveryService;
 
 public class CompositeMain {
 
     public static void main(String[] args) {
 
         DeliveryService deliveryService = new DeliveryService();
+
         deliveryService.setupOrder(
                 new CompositeBox(
                         new VideoGame("1", 100)
@@ -23,7 +24,7 @@ public class CompositeMain {
                         new VideoGame("5", 500)
                 )
         );
-        System.out.println(deliveryService.calculateOrderPrice());
 
+        System.out.println(deliveryService.calculateOrderPrice());
     }
 }

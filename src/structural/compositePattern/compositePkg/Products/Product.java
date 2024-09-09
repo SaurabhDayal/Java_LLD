@@ -1,4 +1,4 @@
-package structural.compositePattern.Products;
+package structural.compositePattern.compositePkg.Products;
 
 import structural.compositePattern.compositePkg.Box;
 

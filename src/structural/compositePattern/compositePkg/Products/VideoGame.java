@@ -1,4 +1,4 @@
-package structural.compositePattern.Products;
+package structural.compositePattern.compositePkg.Products;
 
 public class VideoGame extends Product {
 
