@@ -13,7 +13,6 @@ public class AdapterMain {
 
         NewWeighingMachine adaptedWeighingMachine = new WeightAdapter(oldWeighingMachine);
 
-        // Use the new system with the adapter
         System.out.println("Weight in pounds: " + adaptedWeighingMachine.getWeightInPounds());
     }
 }
