@@ -8,5 +8,4 @@ public record OpenCloseCurtainsCommand(Curtains curtains) implements Command {
     public void execute() {
         curtains.openClose();
     }
-
 }

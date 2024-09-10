@@ -15,5 +15,4 @@ public class FloorLamp extends Component {
     public boolean isLightOn() {
         return light.isSwitchedOn();
     }
-
 }

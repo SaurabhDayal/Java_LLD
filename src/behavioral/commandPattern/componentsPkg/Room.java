@@ -15,5 +15,4 @@ public class Room extends Component {
     public boolean curtainsOpen() {
         return curtains.isOpen();
     }
-
 }
