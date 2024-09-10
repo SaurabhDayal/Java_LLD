@@ -4,13 +4,6 @@ public class Bus extends Vehicle {
 
     private final int doors;
 
-    @Override
-    public String toString() {
-        return "Bus{" +
-                "doors=" + doors +
-                '}';
-    }
-
     public Bus(String brand, String model, String color, int doors) {
         super(brand, model, color);
         this.doors = doors;
@@ -26,4 +19,10 @@ public class Bus extends Vehicle {
         return new Bus(this);
     }
 
+    @Override
+    public String toString() {
+        return "Bus{" +
+                "doors=" + doors +
+                '}';
+    }
 }

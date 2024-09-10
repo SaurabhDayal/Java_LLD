@@ -2,14 +2,6 @@ package creational.prototypePattern.prototypePkg;
 
 
 public abstract class Vehicle {
-    @Override
-    public String toString() {
-        return "Vehicle{" +
-                "brand='" + brand + '\'' +
-                ", model='" + model + '\'' +
-                ", color='" + color + '\'' +
-                '}';
-    }
 
     private final String brand;
     private final String model;
@@ -38,4 +30,12 @@ public abstract class Vehicle {
 
     public abstract Vehicle clone();
 
+    @Override
+    public String toString() {
+        return "Vehicle{" +
+                "brand='" + brand + '\'' +
+                ", model='" + model + '\'' +
+                ", color='" + color + '\'' +
+                '}';
+    }
 }

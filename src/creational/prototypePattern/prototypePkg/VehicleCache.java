@@ -16,7 +16,6 @@ public class VehicleCache {
         cache.put("Mercedes Setra", bus);
     }
 
-
     public Vehicle get(String key) {
         return cache.get(key).clone();
     }
@@ -24,5 +23,4 @@ public class VehicleCache {
     public void put(List<Vehicle> vehicles) {
         vehicles.forEach(vehicle -> cache.put(vehicle.getBrand() + " " + vehicle.getModel(), vehicle));
     }
-
 }

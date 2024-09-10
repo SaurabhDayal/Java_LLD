@@ -5,13 +5,6 @@ public class Car extends Vehicle {
 
     private final int topSpeed;
 
-    @Override
-    public String toString() {
-        return "Car{" +
-                "topSpeed=" + topSpeed +
-                '}';
-    }
-
     public Car(String brand, String model, String color, int topSpeed) {
         super(brand, model, color);
         this.topSpeed = topSpeed;
@@ -27,4 +20,10 @@ public class Car extends Vehicle {
         return new Car(this);
     }
 
+    @Override
+    public String toString() {
+        return "Car{" +
+                "topSpeed=" + topSpeed +
+                '}';
+    }
 }
