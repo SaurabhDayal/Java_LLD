@@ -5,15 +5,6 @@ public abstract class Vehicle {
 
     private final String brand;
     private final String model;
-
-    public String getBrand() {
-        return brand;
-    }
-
-    public String getModel() {
-        return model;
-    }
-
     private final String color;
 
     public Vehicle(String brand, String model, String color) {
@@ -29,6 +20,15 @@ public abstract class Vehicle {
     }
 
     public abstract Vehicle clone();
+
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public String getModel() {
+        return model;
+    }
 
     @Override
     public String toString() {
