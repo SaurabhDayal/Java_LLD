@@ -1,6 +1,6 @@
 package behavioral.commandPattern.commandsPkg;
 
-import behavioral.commandPattern.componentsPkg.Light;
+import behavioral.commandPattern.receiverPkg.Light;
 
 public record SwitchLightsCommand(Light light) implements Command {
 

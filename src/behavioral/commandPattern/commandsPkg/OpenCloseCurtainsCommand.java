@@ -1,6 +1,6 @@
 package behavioral.commandPattern.commandsPkg;
 
-import behavioral.commandPattern.componentsPkg.Curtains;
+import behavioral.commandPattern.receiverPkg.Curtains;
 
 public record OpenCloseCurtainsCommand(Curtains curtains) implements Command {
 

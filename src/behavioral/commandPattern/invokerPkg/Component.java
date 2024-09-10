@@ -1,4 +1,4 @@
-package behavioral.commandPattern.componentsPkg;
+package behavioral.commandPattern.invokerPkg;
 
 import behavioral.commandPattern.commandsPkg.Command;
 

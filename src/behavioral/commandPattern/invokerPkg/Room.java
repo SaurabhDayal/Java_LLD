@@ -1,4 +1,6 @@
-package behavioral.commandPattern.componentsPkg;
+package behavioral.commandPattern.invokerPkg;
+
+import behavioral.commandPattern.receiverPkg.Curtains;
 
 public class Room extends Component {
 

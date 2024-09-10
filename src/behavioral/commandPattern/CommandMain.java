@@ -2,8 +2,8 @@ package behavioral.commandPattern;
 
 import behavioral.commandPattern.commandsPkg.OpenCloseCurtainsCommand;
 import behavioral.commandPattern.commandsPkg.SwitchLightsCommand;
-import behavioral.commandPattern.componentsPkg.FloorLamp;
-import behavioral.commandPattern.componentsPkg.Room;
+import behavioral.commandPattern.invokerPkg.FloorLamp;
+import behavioral.commandPattern.invokerPkg.Room;
 
 public class CommandMain {
 

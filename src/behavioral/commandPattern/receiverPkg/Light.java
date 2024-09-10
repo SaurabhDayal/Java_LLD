@@ -1,4 +1,4 @@
-package behavioral.commandPattern.componentsPkg;
+package behavioral.commandPattern.receiverPkg;
 
 public class Light {
 
