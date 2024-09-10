@@ -17,7 +17,7 @@ public class FlyweightMain {
             store.storeBook(getRandomName(), getRandomPrice(), "Action", "Follett", "Stuff");
             store.storeBook(getRandomName(), getRandomPrice(), "Fantasy", "Ingram", "Extra");
         }
-//        store.displayBooks();
+        store.displayBooks();
         System.out.println(BOOKS_TO_INSERT + " Books Inserted");
         System.out.println("==========================================");
         System.out.println("Memory Usage: ");

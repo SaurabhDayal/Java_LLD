@@ -1,6 +1,5 @@
 package structural.flyweightPattern.contextPkg;
 
-import structural.flyweightPattern.factoryPkg.Book;
 import structural.flyweightPattern.factoryPkg.BookFactory;
 import structural.flyweightPattern.factoryPkg.BookType;
 
@@ -19,5 +18,4 @@ public class Store {
     public void displayBooks() {
         books.forEach(System.out::println);
     }
-
 }
