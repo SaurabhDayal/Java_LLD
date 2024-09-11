@@ -1,9 +1,9 @@
 package behavioral.iteratorPattern;
 
+import behavioral.iteratorPattern.aggregatorPkg.Facebook;
+import behavioral.iteratorPattern.aggregatorPkg.LinkedIn;
+import behavioral.iteratorPattern.aggregatorPkg.SocialNetwork;
 import behavioral.iteratorPattern.profilePkg.Profile;
-import behavioral.iteratorPattern.socialNetworksPkg.Facebook;
-import behavioral.iteratorPattern.socialNetworksPkg.LinkedIn;
-import behavioral.iteratorPattern.socialNetworksPkg.SocialNetwork;
 import behavioral.iteratorPattern.spammerPkg.SocialSpammer;
 
 import java.util.ArrayList;

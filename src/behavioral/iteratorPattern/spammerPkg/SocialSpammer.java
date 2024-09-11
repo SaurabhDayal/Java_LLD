@@ -1,9 +1,9 @@
 package behavioral.iteratorPattern.spammerPkg;
 
 
+import behavioral.iteratorPattern.aggregatorPkg.SocialNetwork;
 import behavioral.iteratorPattern.iteratorsPkg.ProfileIterator;
 import behavioral.iteratorPattern.profilePkg.Profile;
-import behavioral.iteratorPattern.socialNetworksPkg.SocialNetwork;
 
 public class SocialSpammer {
     public SocialNetwork network;

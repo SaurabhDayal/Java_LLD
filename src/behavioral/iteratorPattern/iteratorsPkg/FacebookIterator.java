@@ -1,8 +1,8 @@
 package behavioral.iteratorPattern.iteratorsPkg;
 
 
+import behavioral.iteratorPattern.aggregatorPkg.Facebook;
 import behavioral.iteratorPattern.profilePkg.Profile;
-import behavioral.iteratorPattern.socialNetworksPkg.Facebook;
 
 import java.util.ArrayList;
 import java.util.List;

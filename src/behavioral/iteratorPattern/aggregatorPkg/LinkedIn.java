@@ -1,4 +1,4 @@
-package behavioral.iteratorPattern.socialNetworksPkg;
+package behavioral.iteratorPattern.aggregatorPkg;
 
 
 import behavioral.iteratorPattern.iteratorsPkg.LinkedInIterator;
