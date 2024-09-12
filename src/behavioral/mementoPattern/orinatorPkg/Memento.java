@@ -1,6 +1,7 @@
 package behavioral.mementoPattern.orinatorPkg;
 
 public class Memento {
+
     private final State state;
 
     public Memento(State state) {
