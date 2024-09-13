@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Facebook implements SocialNetwork {
+
     private List<Profile> profiles;
 
     public Facebook(List<Profile> cache) {

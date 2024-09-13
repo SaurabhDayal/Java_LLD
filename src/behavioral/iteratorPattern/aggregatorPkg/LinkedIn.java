@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LinkedIn implements SocialNetwork {
+
     private List<Profile> contacts;
 
     public LinkedIn(List<Profile> cache) {
