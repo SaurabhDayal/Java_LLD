@@ -23,9 +23,11 @@ public class BookingSystem implements Colleague {
 
     public void handleFlightCancellation(Flight flight) {
         System.out.println("BookingSystem: Handling cancellation for flight " + flight.getFlightNumber());
+        // Inform other passengers about flight cancellation
     }
 
     public void handleNewBooking(Passenger passenger) {
         System.out.println("BookingSystem: Processing new booking request from " + passenger.getName());
+        // Process new request by updating data of flight seats
     }
 }
