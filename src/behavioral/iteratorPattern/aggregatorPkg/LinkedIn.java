@@ -21,7 +21,7 @@ public class LinkedIn implements SocialNetwork {
 
     public Profile requestContactInfoFromLinkedInAPI(String profileEmail) {
         // Here would be a POST request to one of the LinkedIn API endpoints.
-        // Instead, we emulates long network connection, which you would expect
+        // Instead, we emulate long network connection, which you would expect
         // in the real life...
         simulateNetworkLatency();
         System.out.println("LinkedIn: Loading profile '" + profileEmail + "' over the network...");
@@ -32,7 +32,7 @@ public class LinkedIn implements SocialNetwork {
 
     public List<String> requestRelatedContactsFromLinkedInAPI(String profileEmail, String contactType) {
         // Here would be a POST request to one of the LinkedIn API endpoints.
-        // Instead, we emulates long network connection, which you would expect
+        // Instead, we emulate long network connection, which you would expect
         // in the real life.
         simulateNetworkLatency();
         System.out.println("LinkedIn: Loading '" + contactType + "' list of '" + profileEmail + "' over the network...");

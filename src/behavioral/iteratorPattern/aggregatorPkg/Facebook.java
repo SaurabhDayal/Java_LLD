@@ -21,7 +21,7 @@ public class Facebook implements SocialNetwork {
 
     public Profile requestProfileFromFacebook(String profileEmail) {
         // Here would be a POST request to one of the Facebook API endpoints.
-        // Instead, we emulates long network connection, which you would expect
+        // Instead, we emulate long network connection, which you would expect
         // in the real life...
         simulateNetworkLatency();
         System.out.println("Facebook: Loading profile '" + profileEmail + "' over the network...");
@@ -32,7 +32,7 @@ public class Facebook implements SocialNetwork {
 
     public List<String> requestProfileFriendsFromFacebook(String profileEmail, String contactType) {
         // Here would be a POST request to one of the Facebook API endpoints.
-        // Instead, we emulates long network connection, which you would expect
+        // Instead, we emulate long network connection, which you would expect
         // in the real life...
         simulateNetworkLatency();
         System.out.println("Facebook: Loading '" + contactType + "' list of '" + profileEmail + "' over the network...");

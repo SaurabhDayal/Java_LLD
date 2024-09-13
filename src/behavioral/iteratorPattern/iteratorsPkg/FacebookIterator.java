@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FacebookIterator implements ProfileIterator {
+
     private Facebook facebook;
     private String type;
     private String email;
@@ -22,7 +23,7 @@ public class FacebookIterator implements ProfileIterator {
     }
 
     private void lazyLoad() {
-        if (emails.size() == 0) {
+        if (emails.isEmpty()) {
             List<String> profiles = facebook.requestProfileFriendsFromFacebook(this.email, this.type);
             for (String profile : profiles) {
                 this.emails.add(profile);

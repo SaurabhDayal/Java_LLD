@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Profile {
+
     private String name;
     private String email;
     private Map<String, List<String>> contacts = new HashMap<>();
