@@ -44,5 +44,4 @@ public class IteratorMain {
         data.add(new Profile("catwoman@yahoo.com", "Liza", "friends:anna.smith@bing.com", "friends:sam@amazon.com"));
         return data;
     }
-
 }
