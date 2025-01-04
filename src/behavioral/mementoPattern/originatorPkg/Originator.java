@@ -1,4 +1,4 @@
-package behavioral.mementoPattern.orinatorPkg;
+package behavioral.mementoPattern.originatorPkg;
 
 public class Originator {
 

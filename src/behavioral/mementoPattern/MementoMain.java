@@ -1,7 +1,7 @@
 package behavioral.mementoPattern;
 
 import behavioral.mementoPattern.caretakerPkg.Caretaker;
-import behavioral.mementoPattern.orinatorPkg.Originator;
+import behavioral.mementoPattern.originatorPkg.Originator;
 
 public class MementoMain {
 

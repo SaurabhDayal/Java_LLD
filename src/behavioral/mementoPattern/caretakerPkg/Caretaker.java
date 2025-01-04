@@ -1,7 +1,7 @@
 package behavioral.mementoPattern.caretakerPkg;
 
-import behavioral.mementoPattern.orinatorPkg.Memento;
-import behavioral.mementoPattern.orinatorPkg.Originator;
+import behavioral.mementoPattern.originatorPkg.Memento;
+import behavioral.mementoPattern.originatorPkg.Originator;
 
 import java.util.Stack;
 
