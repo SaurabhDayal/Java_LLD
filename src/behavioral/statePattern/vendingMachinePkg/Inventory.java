@@ -35,8 +35,7 @@ public class Inventory {
             item.reduceQuantity(quantity);
         }
     }
-
-
+    
     public boolean isEmpty() {
         return items.stream().allMatch(item -> item.getQuantity() <= 0);
     }
