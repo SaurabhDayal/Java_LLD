@@ -12,13 +12,13 @@ public class CommandMain {
         Room room = new Room();
         room.setCommand(new OpenCloseCurtainsCommand(room.getCurtains()));
         room.executeCommand();
-        System.out.println(room.curtainsOpen());
+        System.out.println("Curtains open: " + room.curtainsOpen());
 
         System.out.println("==========================================");
 
         FloorLamp lamp = new FloorLamp();
         lamp.setCommand(new SwitchLightsCommand(lamp.getLight()));
         lamp.executeCommand();
-        System.out.println(lamp.isLightOn());
+        System.out.println("Light on: " + lamp.isLightOn());
     }
 }
