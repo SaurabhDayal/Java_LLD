@@ -17,8 +17,8 @@ public class PayByPayPal implements PayStrategy {
     private boolean signedIn;
 
     static {
-        DATA_BASE.put("amanda1985", "amanda@ya.com");
-        DATA_BASE.put("qwerty", "john@amazon.eu");
+        DATA_BASE.put("amanda@ya.com", "amanda1985");  // email -> password
+        DATA_BASE.put("john@amazon.eu", "qwerty");     // email -> password
     }
 
     /**
