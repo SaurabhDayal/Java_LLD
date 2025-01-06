@@ -21,7 +21,7 @@ public class BuilderMain {
 
         director.constructSportsCar(manualBuilder);
         Manual carManual = manualBuilder.build();
-        System.out.println("\nCar manual built:\n" + carManual.print());
+        System.out.println("Car manual built:\n" + carManual.print());
     }
 
 }
