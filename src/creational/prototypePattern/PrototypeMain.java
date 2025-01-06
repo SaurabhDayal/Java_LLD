@@ -28,7 +28,19 @@ public class PrototypeMain {
 
         VehicleCache registry = new VehicleCache();
         registry.put(vehicles);
-        System.out.println(registry.get("car_brand car_model"));
+        
+        Vehicle clonedVehicle = registry.get("car_brand car_model");
+        if (clonedVehicle != null) {
+            System.out.println(clonedVehicle);
+        } else {
+            System.out.println("Vehicle not found in the registry.");
+        }
 
+        clonedVehicle = registry.get("Mercedes Setra");
+        if (clonedVehicle != null) {
+            System.out.println(clonedVehicle);
+        } else {
+            System.out.println("Vehicle not found in the registry.");
+        }
     }
 }

@@ -30,6 +30,10 @@ public abstract class Vehicle {
         return model;
     }
 
+    public String getColor() {
+        return color;
+    }
+
     @Override
     public String toString() {
         return "Vehicle{" +

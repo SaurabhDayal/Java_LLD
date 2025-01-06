@@ -22,7 +22,11 @@ public class Bus extends Vehicle {
     @Override
     public String toString() {
         return "Bus{" +
-                "doors=" + doors +
+                "Brand='" + getBrand() + '\'' +
+                ", Model='" + getModel() + '\'' +
+                ", Color='" + getColor() + '\'' +
+                ", Doors=" + doors +
                 '}';
     }
+
 }

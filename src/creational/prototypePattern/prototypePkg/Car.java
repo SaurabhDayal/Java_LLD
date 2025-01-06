@@ -23,7 +23,11 @@ public class Car extends Vehicle {
     @Override
     public String toString() {
         return "Car{" +
-                "topSpeed=" + topSpeed +
+                "Brand='" + getBrand() + '\'' +
+                ", Model='" + getModel() + '\'' +
+                ", Color='" + getColor() + '\'' +
+                ", TopSpeed=" + topSpeed +
                 '}';
     }
+
 }
