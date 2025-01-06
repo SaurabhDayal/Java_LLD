@@ -6,11 +6,10 @@ public class SingletonMain {
 
     public static void main(String[] args) {
 
-        System.out.println(Singleton.getInstance("Geekific"));
+        Singleton singleton1 = Singleton.getInstance("Geekific");
+        System.out.println(singleton1.getData());
 
-        Singleton singleton = Singleton.getInstance("Singleton");
-
-        System.out.println(singleton);
-        System.out.println(singleton.getData());
+        Singleton singleton2 = Singleton.getInstance("Singleton");
+        System.out.println(singleton2.getData());
     }
 }
