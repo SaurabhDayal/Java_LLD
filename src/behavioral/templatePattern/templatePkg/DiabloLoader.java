@@ -1,6 +1,5 @@
 package behavioral.templatePattern.templatePkg;
 
-
 public class DiabloLoader extends BaseGameLoader {
 
     @Override
