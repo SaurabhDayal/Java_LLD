@@ -7,5 +7,4 @@ public class OrientalBurger implements Burger {
         // Prepare Oriental Burger
         System.out.println("Preparing Oriental Burger...");
     }
-
 }

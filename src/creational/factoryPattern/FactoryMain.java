@@ -5,18 +5,15 @@ import creational.factoryPattern.factoryPkg.OrientalRestaurant;
 import creational.factoryPattern.factoryPkg.Restaurant;
 
 public class FactoryMain {
+    public static void main(String[] args) {
 
-        public static void main(String[] args) {
+        Restaurant orientalRestaurant = new OrientalRestaurant();
+        orientalRestaurant.orderBurger();
 
-            Restaurant orientalRestaurant = new OrientalRestaurant();
-            orientalRestaurant.orderBurger();
+        System.out.println("==========================================");
 
-            System.out.println("==========================================");
-
-            Restaurant classicRestaurant = new ClassicRestaurant();
-            classicRestaurant.orderBurger();
-
-        }
-
+        Restaurant classicRestaurant = new ClassicRestaurant();
+        classicRestaurant.orderBurger();
     }
+}
 

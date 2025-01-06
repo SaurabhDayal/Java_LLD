@@ -7,5 +7,4 @@ public class ClassicBurger implements Burger {
         // Prepare Classic Burger
         System.out.println("Preparing Classic Burger...");
     }
-
 }
