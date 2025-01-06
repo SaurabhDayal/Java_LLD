@@ -31,5 +31,4 @@ public class PrototypeMain {
         System.out.println(registry.get("car_brand car_model"));
 
     }
-
 }
