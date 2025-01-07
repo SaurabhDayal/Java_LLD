@@ -32,5 +32,4 @@ public class BookType {
     public String getType() {
         return type;
     }
-
 }
