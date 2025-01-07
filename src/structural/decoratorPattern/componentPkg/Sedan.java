@@ -1,6 +1,5 @@
 package structural.decoratorPattern.componentPkg;
 
-
 public class Sedan implements Car {
     @Override
     public String getDescription() {
