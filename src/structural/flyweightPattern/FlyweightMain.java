@@ -8,7 +8,7 @@ import java.util.Random;
 public class FlyweightMain {
 
     private static final int BOOK_TYPES = 2;
-    private static final int BOOKS_TO_INSERT = 10_000_000;
+    private static final int BOOKS_TO_INSERT = 100_000;
 
     public static void main(String[] args) {
 
@@ -23,9 +23,12 @@ public class FlyweightMain {
         System.out.println("Memory Usage: ");
         System.out.println("Book Size (20 bytes) * " + BOOKS_TO_INSERT + " + BookTypes Size (30 bytes) * " + BOOK_TYPES + "");
         System.out.println("==========================================");
-        System.out.println("Total: " + ((BOOKS_TO_INSERT * 20 + BOOK_TYPES * 30) / 1024 / 1024) + "MB (instead of " + ((BOOKS_TO_INSERT * 50) / 1024 / 1024) + "MB)");
-        // Tip: Try to comment out the @ToString annotation in the BookType class and check that indeed the same two objects are being referenced by all our books!
 
+        // Updated memory calculation with float formatting for better clarity in MB
+        float totalMemoryUsed = ((BOOKS_TO_INSERT * 20 + BOOK_TYPES * 30) / 1024.0f / 1024.0f);
+        float expectedMemory = ((BOOKS_TO_INSERT * 50) / 1024.0f / 1024.0f);
+
+        System.out.printf("Total: %.2f MB (instead of %.2f MB)%n", totalMemoryUsed, expectedMemory);
     }
 
     private static String getRandomName() {
