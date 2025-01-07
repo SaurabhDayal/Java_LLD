@@ -33,3 +33,17 @@ public class BookType {
         return type;
     }
 }
+
+/*
+public record BookType(String type, String distributor, String otherData) {
+
+    @Override
+    public String toString() {
+        return "BookType{" +
+                "type='" + type + '\'' +
+                ", distributor='" + distributor + '\'' +
+                ", otherData='" + otherData + '\'' +
+                '}';
+    }
+}
+ */
