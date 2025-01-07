@@ -1,4 +1,4 @@
-package structural.bridgePattern.devicesImplementorPkg;
+package structural.bridgePattern.devicesPkg;
 
 public class Radio implements DeviceImplementor {
     private boolean on = false;

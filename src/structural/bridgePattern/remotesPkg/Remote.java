@@ -1,4 +1,4 @@
-package structural.bridgePattern.remotesAbstractionPkg;
+package structural.bridgePattern.remotesPkg;
 
 
 public interface Remote {

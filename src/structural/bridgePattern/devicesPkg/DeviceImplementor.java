@@ -1,4 +1,4 @@
-package structural.bridgePattern.devicesImplementorPkg;
+package structural.bridgePattern.devicesPkg;
 
 public interface DeviceImplementor {
     boolean isEnabled();

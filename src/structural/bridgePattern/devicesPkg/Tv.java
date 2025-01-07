@@ -1,5 +1,4 @@
-package structural.bridgePattern.devicesImplementorPkg;
-
+package structural.bridgePattern.devicesPkg;
 
 public class Tv implements DeviceImplementor {
     private boolean on = false;

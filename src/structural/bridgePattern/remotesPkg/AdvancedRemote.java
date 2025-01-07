@@ -1,6 +1,6 @@
-package structural.bridgePattern.remotesAbstractionPkg;
+package structural.bridgePattern.remotesPkg;
 
-import structural.bridgePattern.devicesImplementorPkg.DeviceImplementor;
+import structural.bridgePattern.devicesPkg.DeviceImplementor;
 
 public class AdvancedRemote extends BasicRemote {
 

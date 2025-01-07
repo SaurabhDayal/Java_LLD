@@ -1,10 +1,10 @@
 package structural.bridgePattern;
 
-import structural.bridgePattern.devicesImplementorPkg.DeviceImplementor;
-import structural.bridgePattern.devicesImplementorPkg.Radio;
-import structural.bridgePattern.devicesImplementorPkg.Tv;
-import structural.bridgePattern.remotesAbstractionPkg.AdvancedRemote;
-import structural.bridgePattern.remotesAbstractionPkg.BasicRemote;
+import structural.bridgePattern.devicesPkg.DeviceImplementor;
+import structural.bridgePattern.devicesPkg.Radio;
+import structural.bridgePattern.devicesPkg.Tv;
+import structural.bridgePattern.remotesPkg.AdvancedRemote;
+import structural.bridgePattern.remotesPkg.BasicRemote;
 
 public class BridgeMain {
     public static void main(String[] args) {
