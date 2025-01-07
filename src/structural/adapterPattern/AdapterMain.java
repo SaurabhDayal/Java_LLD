@@ -1,6 +1,5 @@
 package structural.adapterPattern;
 
-
 import structural.adapterPattern.adapterPkg.NewWeighingMachine;
 import structural.adapterPattern.adapterPkg.WeightAdapter;
 import structural.adapterPattern.legacyPkg.OldWeighingMachine;

@@ -1,6 +1,5 @@
 package structural.adapterPattern.adapterPkg;
 
-
 import structural.adapterPattern.legacyPkg.OldWeighingMachine;
 
 public class WeightAdapter implements NewWeighingMachine {
