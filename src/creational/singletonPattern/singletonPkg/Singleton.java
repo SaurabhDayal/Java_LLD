@@ -4,6 +4,8 @@ public class Singleton {
 
     private final String data; // Immutable field to store the singleton's data.
     private static volatile Singleton instance; // Volatile to ensure visibility across threads.
+    //  Without volatile, there could be cases where a thread sees a partially initialized
+    //  object due to memory model optimizations like instruction reordering
 
     private Singleton(String data) {
         this.data = data; // Assign the provided data to the final field.
@@ -14,18 +16,14 @@ public class Singleton {
         Singleton result = instance; // Local reference for performance improvement.
 
         if (result == null) { // First check to avoid unnecessary synchronization.
-
             synchronized (Singleton.class) { // Lock to ensure thread-safe access.
-
                 result = instance; // Recheck instance within the synchronized block.
-
                 if (result == null) { // Second check to confirm instance is still null.
-
                     instance = result = new Singleton(data); // Create the singleton instance.
                 }
             }
         }
-        
+
         return result; // Return the singleton instance.
     }
 
