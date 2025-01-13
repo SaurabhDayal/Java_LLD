@@ -16,31 +16,27 @@ public class PrototypeMain {
                 new Car("car_brand", "car_model", "car_color", 300),
                 new Bus("bus_brand", "bus_model", "bus_color", 8)
         );
-
         List<Vehicle> copyList = new ArrayList<>();
         for (Vehicle vehicle : vehicles) {
             copyList.add(vehicle.clone());
         }
-
         copyList.forEach(System.out::println);
-
         System.out.println("==========================================");
 
-        VehicleCache registry = new VehicleCache();
+        VehicleCache registry = new VehicleCache(); // prototype registry
         registry.put(vehicles);
-        
-        Vehicle clonedVehicle = registry.get("car_brand car_model");
-        if (clonedVehicle != null) {
-            System.out.println(clonedVehicle);
-        } else {
-            System.out.println("Vehicle not found in the registry.");
-        }
 
-        clonedVehicle = registry.get("Mercedes Setra");
+        // Use the utility method to check and print
+        printClonedVehicle(registry, "car_brand car_model");
+        printClonedVehicle(registry, "Mercedes Setra");
+    }
+
+    private static void printClonedVehicle(VehicleCache registry, String key) {
+        Vehicle clonedVehicle = registry.get(key);
         if (clonedVehicle != null) {
             System.out.println(clonedVehicle);
         } else {
-            System.out.println("Vehicle not found in the registry.");
+            System.out.println("Vehicle not found in the registry for key: " + key);
         }
     }
 }

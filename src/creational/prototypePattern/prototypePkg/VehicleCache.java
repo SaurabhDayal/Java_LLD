@@ -17,7 +17,11 @@ public class VehicleCache {
     }
 
     public Vehicle get(String key) {
-        return cache.get(key).clone();
+        Vehicle vehicle = cache.get(key);
+        if (vehicle == null) {
+            return null;
+        }
+        return vehicle.clone();
     }
 
     public void put(List<Vehicle> vehicles) {
