@@ -3,9 +3,6 @@ package creational.abstractFactoryPattern.factoryPkg;
 import creational.abstractFactoryPattern.productsPkg.Burger;
 import creational.abstractFactoryPattern.productsPkg.Pizza;
 
-/***
- * now A abstract factory
- */
 public abstract class Restaurant {
 
     public void orderBurger() {
@@ -20,7 +17,9 @@ public abstract class Restaurant {
         pizza.bake();
     }
 
+    // Abstract factory method to be implemented for creating specific Burger types
     public abstract Burger createBurger();
 
+    // Abstract factory method to be implemented for creating specific Pizza types
     public abstract Pizza createPizza();
 }

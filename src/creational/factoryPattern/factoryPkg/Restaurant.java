@@ -10,5 +10,6 @@ public abstract class Restaurant {
         burger.prepare();
     }
 
+    // Factory method to be implemented by subclasses to create specific Burger types
     protected abstract Burger createBurger();
 }
