@@ -27,7 +27,13 @@ public class ThrottlingMiddleware extends Middleware {
         // If requests exceed the limit, display an error and stop the thread.
         if (request > requestPerMinute) {
             System.out.println("Request limit exceeded!");
-            Thread.currentThread().stop(); // This is unsafe and deprecated; use alternative thread handling.
+            Thread.currentThread().interrupt();
+
+            // Check if the thread has been interrupted, and exit if necessary.
+            if (Thread.currentThread().isInterrupted()) {
+                System.out.println("Terminating the program...");
+                System.exit(0); // Terminate the program.
+            }
         }
 
         // Pass the request to the next middleware in the chain.
