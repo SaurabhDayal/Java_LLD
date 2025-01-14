@@ -12,29 +12,12 @@ import java.io.InputStreamReader;
 
 public class ChainOfResponsibilityMain {
 
-
     private static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     private static Server server;
 
-    private static void init() {
-        server = new Server();
-        server.register("admin@", "admin");
-        server.register("user@", "user");
-
-        // All checks are linked. Client can build various chains using the same components.
-        Middleware middleware = Middleware.link(
-                new ThrottlingMiddleware(2),
-                new UserExistsMiddleware(server),
-                new RoleCheckMiddleware()
-        );
-
-        // Server gets a chain from client code.
-        server.setMiddleware(middleware);
-    }
-
     public static void main(String[] args) throws IOException {
 
-        init();
+        init(); // Initialize the server and middleware chain.
 
         boolean success;
         do {
@@ -42,8 +25,26 @@ public class ChainOfResponsibilityMain {
             String email = reader.readLine();
             System.out.print("Input password: ");
             String password = reader.readLine();
+            // Attempting to log in with the provided email and password.
             success = server.logIn(email, password);
-        } while (!success);
+        } while (!success); // Repeat until successful login.
     }
 
+    private static void init() {
+
+        server = new Server();
+        // Registering users with email and password in the server.
+        server.register("admin@", "admin");
+        server.register("user@", "user");
+
+        // Setting up the middleware chain.
+        Middleware middleware = Middleware.link(
+                new ThrottlingMiddleware(2), // Limit the number of requests per minute.
+                new UserExistsMiddleware(server), // Check if the user exists in the server.
+                new RoleCheckMiddleware() // Verify the role of the user (e.g., admin or regular user).
+        );
+
+        // Assigning the middleware chain to the server.
+        server.setMiddleware(middleware);
+    }
 }

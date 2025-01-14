@@ -6,38 +6,38 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Server {
+    
+    // A map to store registered users with their email as the key and password as the value.
     private Map<String, String> users = new HashMap<>();
+    // Middleware chain that handles request validation.
     private Middleware middleware;
 
-    /**
-     * Client passes a chain of object to server. This improves flexibility and
-     * makes testing the server class easier.
-     */
+    // Sets the middleware chain for the server.
     public void setMiddleware(Middleware middleware) {
         this.middleware = middleware;
     }
 
-    /**
-     * Server gets email and password from client and sends the authorization
-     * request to the chain.
-     */
+    // Handles user login by passing email and password through the middleware chain.
     public boolean logIn(String email, String password) {
-        if (middleware.check(email, password)) {
+        if (middleware.check(email, password)) { // Checks the chain of responsibilities.
             System.out.println("Authorization have been successful!");
-            // Do something useful here for authorized users.
+            // Perform operations for authenticated users.
             return true;
         }
-        return false;
+        return false; // Authorization failed.
     }
 
+    // Registers a new user with the provided email and password.
     public void register(String email, String password) {
         users.put(email, password);
     }
 
+    // Checks if a user exists with the given email.
     public boolean hasEmail(String email) {
         return users.containsKey(email);
     }
 
+    // Validates if the given password matches the one registered for the email.
     public boolean isValidPassword(String email, String password) {
         return users.get(email).equals(password);
     }
