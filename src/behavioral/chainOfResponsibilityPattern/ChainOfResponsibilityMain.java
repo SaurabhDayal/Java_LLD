@@ -12,25 +12,28 @@ import java.io.InputStreamReader;
 
 public class ChainOfResponsibilityMain {
 
-    private static final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+    private static BufferedReader reader;
     private static Server server;
 
     public static void main(String[] args) throws IOException {
 
-        init(); // Initialize the server and middleware chain.
+        initServer();                                                  // Initialize the server and middleware chain.
+        reader = new BufferedReader(new InputStreamReader(System.in)); // Setup buffered reader for reading user input
 
         boolean success;
         do {
+            // Get email and password input from the user
             System.out.print("Enter email: ");
-            String email = reader.readLine();
+            String email = reader.readLine().trim(); // Remove whitespace and newline characters.
             System.out.print("Input password: ");
-            String password = reader.readLine();
+            String password = reader.readLine().trim(); // Remove whitespace and newline characters.
+
             // Attempting to log in with the provided email and password.
             success = server.logIn(email, password);
         } while (!success); // Repeat until successful login.
     }
 
-    private static void init() {
+    private static void initServer() {
 
         server = new Server();
         // Registering users with email and password in the server.

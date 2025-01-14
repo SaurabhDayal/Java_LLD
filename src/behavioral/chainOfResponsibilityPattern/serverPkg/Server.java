@@ -6,11 +6,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Server {
-    
-    // A map to store registered users with their email as the key and password as the value.
-    private Map<String, String> users = new HashMap<>();
-    // Middleware chain that handles request validation.
-    private Middleware middleware;
+
+    private Map<String, String> users;  // Map to store registered users (email -> password).
+    private Middleware middleware;      // Middleware chain to handle authentication.
+
+    // Constructor to initialize the server instance with an empty user map.
+    public Server() {
+        this.users = new HashMap<>(); // Explicitly initialize the user map.
+    }
 
     // Sets the middleware chain for the server.
     public void setMiddleware(Middleware middleware) {
