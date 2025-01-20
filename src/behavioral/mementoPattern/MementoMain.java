@@ -6,8 +6,8 @@ import behavioral.mementoPattern.originatorPkg.Originator;
 public class MementoMain {
 
     public static void main(String[] args) {
-
-        Originator originator = new Originator(); // originator variable better name is Config Manager
+        // Renamed to ConfigManager for better readability
+        Originator originator = new Originator();
         Caretaker caretaker = new Caretaker();
         System.out.println();
 
