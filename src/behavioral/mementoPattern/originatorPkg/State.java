@@ -28,7 +28,7 @@ public class State {
 
     @Override
     public String toString() {
-        return "Version: " + version + ", Details: " + details;
+        return "Version: " + version + ",    Details: " + details;
     }
 }
 

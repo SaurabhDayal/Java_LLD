@@ -7,31 +7,31 @@ public class MementoMain {
 
     public static void main(String[] args) {
 
-        Originator configManager = new Originator();
+        Originator originator = new Originator(); // originator variable better name is Config Manager
         Caretaker caretaker = new Caretaker();
         System.out.println();
 
         // Set and save the first state
-        configManager.setState(1, "Initial configuration");
-        System.out.println("Current State: " + configManager.getState());
-        caretaker.saveState(configManager);
+        originator.setState(1, "Initial configuration");
+        System.out.println("Current State \n\t" + originator.getState());
+        caretaker.saveState(originator);
 
         // Set and save the second state
-        configManager.setState(2, "Added new feature");
-        System.out.println("Current State: " + configManager.getState());
-        caretaker.saveState(configManager);
+        originator.setState(2, "Added new feature");
+        System.out.println("Current State \n\t" + originator.getState());
+        caretaker.saveState(originator);
 
         // Set the third state
-        configManager.setState(3, "Updated configuration");
-        System.out.println("Current State: " + configManager.getState());
+        originator.setState(3, "Updated configuration");
+        System.out.println("Current State \n\t" + originator.getState());
         System.out.println();
 
         // Undo last change
-        caretaker.undo(configManager);
-        System.out.println("After Undo 1: " + configManager.getState());
+        caretaker.undo(originator);
+        System.out.println("After Undo 1 \n\t" + originator.getState());
 
         // Undo second change
-        caretaker.undo(configManager);
-        System.out.println("After Undo 2: " + configManager.getState());
+        caretaker.undo(originator);
+        System.out.println("After Undo 2 \n\t" + originator.getState());
     }
 }
