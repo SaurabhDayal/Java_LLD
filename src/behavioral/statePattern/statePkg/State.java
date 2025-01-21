@@ -1,6 +1,5 @@
 package behavioral.statePattern.statePkg;
 
-
 import behavioral.statePattern.vendingMachinePkg.VendingMachine;
 
 public interface State {

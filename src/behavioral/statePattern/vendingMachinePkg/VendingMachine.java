@@ -5,6 +5,7 @@ import behavioral.statePattern.statePkg.IdleState;
 import behavioral.statePattern.statePkg.State;
 
 public class VendingMachine {
+    
     private State currentState;
     private Item currentProduct;
     private int balance;

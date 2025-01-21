@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Inventory {
+
     private List<Item> items;
 
     public Inventory() {
@@ -35,7 +36,7 @@ public class Inventory {
             item.reduceQuantity(quantity);
         }
     }
-    
+
     public boolean isEmpty() {
         return items.stream().allMatch(item -> item.getQuantity() <= 0);
     }

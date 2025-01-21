@@ -2,6 +2,7 @@ package behavioral.statePattern.vendingMachinePkg;
 
 // Item Class representing a product in the vending machine with itemCode
 public class Item {
+    
     private String itemCode;
     private ItemType type;
     private int price;
