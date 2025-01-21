@@ -1,4 +1,4 @@
-package behavioral.iteratorPattern.iteratorsPkg;
+package behavioral.iteratorPattern.iteratorPkg;
 
 import behavioral.iteratorPattern.profilePkg.Profile;
 

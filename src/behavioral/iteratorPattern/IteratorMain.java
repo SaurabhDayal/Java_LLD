@@ -1,8 +1,8 @@
 package behavioral.iteratorPattern;
 
-import behavioral.iteratorPattern.aggregatorPkg.Facebook;
-import behavioral.iteratorPattern.aggregatorPkg.LinkedIn;
-import behavioral.iteratorPattern.aggregatorPkg.SocialNetwork;
+import behavioral.iteratorPattern.IterablePkg.Facebook;
+import behavioral.iteratorPattern.IterablePkg.LinkedIn;
+import behavioral.iteratorPattern.IterablePkg.SocialNetwork;
 import behavioral.iteratorPattern.profilePkg.Profile;
 import behavioral.iteratorPattern.spammerPkg.SocialSpammer;
 

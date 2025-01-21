@@ -1,6 +1,6 @@
-package behavioral.iteratorPattern.aggregatorPkg;
+package behavioral.iteratorPattern.IterablePkg;
 
-import behavioral.iteratorPattern.iteratorsPkg.ProfileIterator;
+import behavioral.iteratorPattern.iteratorPkg.ProfileIterator;
 
 // Iterable Collection
 public interface SocialNetwork {

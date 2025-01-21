@@ -1,7 +1,7 @@
-package behavioral.iteratorPattern.iteratorsPkg;
+package behavioral.iteratorPattern.iteratorPkg;
 
 
-import behavioral.iteratorPattern.aggregatorPkg.LinkedIn;
+import behavioral.iteratorPattern.IterablePkg.LinkedIn;
 import behavioral.iteratorPattern.profilePkg.Profile;
 
 import java.util.ArrayList;
