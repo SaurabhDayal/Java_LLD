@@ -9,41 +9,47 @@ import behavioral.observerPattern.observerPkg.SMSObserver;
 public class ObserverMain {
     public static void main(String[] args) {
 
-        // Create the weather station and news station (Observables aka Publishers)
+        // Create Observables aka Publishers
         WeatherStation weatherStation = new WeatherStation();
         NewsStation newsStation = new NewsStation();
         System.out.println();
 
-        // Create observers with dynamic constructor injection for different stations
+        // create "example1@example.com" EMAIL weather station subscriber
         Observer weatherEmailObserver = new EmailObserver("example1@example.com", weatherStation);
-        Observer weatherSmsObserver = new SMSObserver("123-456-7890", weatherStation);
+        weatherStation.registerObserver(weatherEmailObserver); // Add email observer to weather station
 
+        // create "example1@example.com" EMAIL news station subscriber
         Observer newsEmailObserver = new EmailObserver("example1@example.com", newsStation);
+        newsStation.registerObserver(newsEmailObserver);       // Add email observer to news station
+
+        // create "123-456-7890" SMS weather station subscribers
+        Observer weatherSmsObserver = new SMSObserver("123-456-7890", weatherStation);
+        weatherStation.registerObserver(weatherSmsObserver);   // Add SMS observer to weather station
+
+        // create "123-456-7890" SMS news station subscribers
         Observer newsSmsObserver = new SMSObserver("123-456-7890", newsStation);
+        newsStation.registerObserver(newsSmsObserver);         // Add SMS observer to news station
 
-        // Register weather observers to the weather station
-        weatherStation.registerObserver(weatherEmailObserver);
-        weatherStation.registerObserver(weatherSmsObserver);
-
-        // Register news observers to the news station
-        newsStation.registerObserver(newsEmailObserver);
-        newsStation.registerObserver(newsSmsObserver);
+        // ---------------------------------------------------------------------------------------//
 
         // Simulate a weather update
-        weatherStation.setWeatherUpdate("Sunny");
+        weatherStation.setWeatherUpdate("Sunny");              // Notify all observers of weather station about weather change
         System.out.println();
 
         // Simulate a news update
-        newsStation.setNewsUpdate("Breaking News: Market Crash!");
+        newsStation.setNewsUpdate("Breaking News: Market Crash!"); // Notify all observers of news station about news update
         System.out.println();
 
-        // Remove SMS observer and update again for both stations
-        weatherStation.removeObserver(weatherSmsObserver);
-        newsStation.removeObserver(newsSmsObserver);
+        // Remove "123-456-7890" SMS Observer/Subscriber
+        weatherStation.removeObserver(weatherSmsObserver);     // Remove SMS observer from weather station
+        newsStation.removeObserver(newsSmsObserver);           // Remove SMS observer from news station
 
-        weatherStation.setWeatherUpdate("Rainy");
+        // Simulate a weather update
+        weatherStation.setWeatherUpdate("Rainy");              // Notify remaining observers of weather station about weather change
         System.out.println();
 
-        newsStation.setNewsUpdate("Sports: Team A won the game!");
+        // Simulate a news update
+        newsStation.setNewsUpdate("Sports: Team A won the game!"); // Notify remaining observers of news station about news update
+        System.out.println();
     }
 }

@@ -1,6 +1,6 @@
 package behavioral.observerPattern.observerPkg;
 
-// Subscriber << interface >>
+// Subscriber
 public interface Observer {
     void update(String weatherUpdate);
 }
