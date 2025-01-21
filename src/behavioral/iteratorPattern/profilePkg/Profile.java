@@ -16,19 +16,24 @@ public class Profile {
         this.email = email;
         this.name = name;
 
-        // Parse contact list from a set of "friend:email@gmail.com" pairs.
         for (String contact : contacts) {
+
+            String contactType = "friend";
+            String contactEmail;
+
             String[] parts = contact.split(":");
-            String contactType = "friend", contactEmail;
-            if (parts.length == 1) {
+
+            if (parts.length == 1) { // assuming friend type for non-specified relation contact
                 contactEmail = parts[0];
             } else {
                 contactType = parts[0];
                 contactEmail = parts[1];
             }
+
             if (!this.contacts.containsKey(contactType)) {
                 this.contacts.put(contactType, new ArrayList<>());
             }
+
             this.contacts.get(contactType).add(contactEmail);
         }
     }

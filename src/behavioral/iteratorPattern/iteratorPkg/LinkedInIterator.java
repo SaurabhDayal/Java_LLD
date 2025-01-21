@@ -13,6 +13,7 @@ public class LinkedInIterator implements ProfileIterator {
     private LinkedIn linkedIn;
     private String type;
     private String email;
+
     private int currentPosition = 0;
     private List<String> emails = new ArrayList<>();
     private List<Profile> contacts = new ArrayList<>();
@@ -25,7 +26,7 @@ public class LinkedInIterator implements ProfileIterator {
 
     private void lazyLoad() {
         if (emails.isEmpty()) {
-            List<String> profiles = linkedIn.requestRelatedContactsFromLinkedInAPI(this.email, this.type);
+            List<String> profiles = linkedIn.requestRelatedContactsFromLinkedInAPI(this.email, this.type); // actually fetching only email
             for (String profile : profiles) {
                 this.emails.add(profile);
                 this.contacts.add(null);
