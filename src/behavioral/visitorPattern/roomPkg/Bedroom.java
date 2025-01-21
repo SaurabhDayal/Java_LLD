@@ -2,6 +2,7 @@ package behavioral.visitorPattern.roomPkg;
 
 import behavioral.visitorPattern.visitorPkg.RoomVisitor;
 
+// Concrete Element
 public class Bedroom implements Room {
     private String name;
 

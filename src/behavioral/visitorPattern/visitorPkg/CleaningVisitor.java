@@ -4,6 +4,7 @@ import behavioral.visitorPattern.roomPkg.Bedroom;
 import behavioral.visitorPattern.roomPkg.Kitchen;
 import behavioral.visitorPattern.roomPkg.LivingRoom;
 
+// Concrete Visitor
 public class CleaningVisitor implements RoomVisitor {
     @Override
     public void visit(Bedroom bedroom) {

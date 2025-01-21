@@ -4,6 +4,7 @@ import behavioral.visitorPattern.roomPkg.Bedroom;
 import behavioral.visitorPattern.roomPkg.Kitchen;
 import behavioral.visitorPattern.roomPkg.LivingRoom;
 
+// Visitor
 public interface RoomVisitor {
     void visit(Bedroom bedroom);
 

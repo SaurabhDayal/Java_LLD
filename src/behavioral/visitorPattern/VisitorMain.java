@@ -8,23 +8,26 @@ import behavioral.visitorPattern.visitorPkg.CleaningVisitor;
 import behavioral.visitorPattern.visitorPkg.InspectionVisitor;
 import behavioral.visitorPattern.visitorPkg.RoomVisitor;
 
+// Double Dispatch
 public class VisitorMain {
     public static void main(String[] args) {
-        // Create room objects
+
+        // Create room objects on which we need to add operations
         Room bedroom = new Bedroom("Master Bedroom");
         Room kitchen = new Kitchen("Main Kitchen");
         Room livingRoom = new LivingRoom("Family Living Room");
 
-        // Create visitors
+        // Create visitors which host all the operations
         RoomVisitor cleaningVisitor = new CleaningVisitor();
         RoomVisitor inspectionVisitor = new InspectionVisitor();
 
-        // Perform operations on rooms
+        // Perform cleaning operations on rooms
         System.out.println("Cleaning Rooms:");
         bedroom.accept(cleaningVisitor);
         kitchen.accept(cleaningVisitor);
         livingRoom.accept(cleaningVisitor);
 
+        // Perform inspection operations on rooms
         System.out.println("\nInspecting Rooms:");
         bedroom.accept(inspectionVisitor);
         kitchen.accept(inspectionVisitor);
