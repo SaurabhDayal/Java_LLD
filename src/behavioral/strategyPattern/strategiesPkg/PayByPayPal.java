@@ -8,7 +8,7 @@ import java.util.Map;
 
 
 public class PayByPayPal implements PayStrategy {
-    
+
     private static final Map<String, String> DATA_BASE = new HashMap<>();
     private final BufferedReader READER = new BufferedReader(new InputStreamReader(System.in));
     private String email;
@@ -20,17 +20,19 @@ public class PayByPayPal implements PayStrategy {
         DATA_BASE.put("john@amazon.eu", "qwerty");     // email -> password
     }
 
-    /**
-     * Collect customer's data.
-     */
     @Override
     public void collectPaymentDetails() {
         try {
             while (!signedIn) {
+
                 System.out.print("Enter the user's email: ");
                 email = READER.readLine();
+                email = email.trim();
+
                 System.out.print("Enter the password: ");
                 password = READER.readLine();
+                password = password.trim();
+
                 if (verify()) {
                     System.out.println("Data verification has been successful.");
                 } else {
@@ -47,9 +49,6 @@ public class PayByPayPal implements PayStrategy {
         return signedIn;
     }
 
-    /**
-     * Save customer data for future shopping attempts.
-     */
     @Override
     public boolean pay(int paymentAmount) {
         if (signedIn) {

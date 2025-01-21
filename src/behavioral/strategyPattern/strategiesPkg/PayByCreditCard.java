@@ -12,24 +12,28 @@ public class PayByCreditCard implements PayStrategy {
     @Override
     public void collectPaymentDetails() {
         try {
+
             System.out.print("Enter the card number: ");
             String number = READER.readLine();
+            number = number.trim();
+
             System.out.print("Enter the card expiration date 'mm/yy': ");
             String date = READER.readLine();
+            date = date.trim();
+
             System.out.print("Enter the CVV code: ");
             String cvv = READER.readLine();
+            cvv = cvv.trim();
+
             card = new CreditCard(number, date, cvv);
 
-            // Validate credit card number...
+            // You can add additional validation logic here (e.g., check if the card details are valid)
 
         } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
 
-    /**
-     * After card validation we can charge customer's credit card.
-     */
     @Override
     public boolean pay(int paymentAmount) {
         if (cardIsPresent()) {

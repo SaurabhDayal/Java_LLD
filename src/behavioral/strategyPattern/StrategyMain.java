@@ -32,26 +32,32 @@ public class StrategyMain {
             int cost;
             String continueChoice;
 
+            // Product selection loop
             do {
                 System.out.print("Please, select a product:" + "\n" +
                         "1 - Mother board" + "\n" +
                         "2 - CPU" + "\n" +
                         "3 - HDD" + "\n" +
                         "4 - Memory" + "\n");
-                int choice = Integer.parseInt(reader.readLine());
+
+                int choice = Integer.parseInt(reader.readLine().trim());
                 cost = priceOnProducts.get(choice);
+
                 System.out.print("Count: ");
-                int count = Integer.parseInt(reader.readLine());
+                int count = Integer.parseInt(reader.readLine().trim());
+
                 order.setTotalCost(cost * count);
+
                 System.out.print("Do you wish to continue selecting products? Y/N: ");
-                continueChoice = reader.readLine();
+                continueChoice = reader.readLine().trim();
+
             } while (continueChoice.equalsIgnoreCase("Y"));
 
             if (strategy == null) {
                 System.out.println("Please, select a payment method:" + "\n" +
                         "1 - PalPay" + "\n" +
                         "2 - Credit Card");
-                String paymentMethod = reader.readLine();
+                String paymentMethod = reader.readLine().trim();
 
                 // Client creates different strategies based on input from user, application configuration, etc.
                 if (paymentMethod.equals("1")) {
@@ -66,7 +72,7 @@ public class StrategyMain {
             order.processOrder(strategy);
 
             System.out.print("Pay " + order.getTotalCost() + " units or Continue shopping? P/C: ");
-            String proceed = reader.readLine();
+            String proceed = reader.readLine().trim();
 
             if (proceed.equalsIgnoreCase("P")) {
 
