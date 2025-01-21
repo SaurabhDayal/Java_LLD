@@ -1,9 +1,8 @@
 package behavioral.strategyPattern.strategiesPkg;
 
-/**
- * Dummy credit card class.
- */
+
 public class CreditCard {
+    
     private int amount;
     private String number;
     private String date;

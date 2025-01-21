@@ -11,10 +11,8 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * World first console e-commerce application.
- */
 public class StrategyMain {
+
     private static Map<Integer, Integer> priceOnProducts = new HashMap<>();
     private static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     private static Order order = new Order();
@@ -30,9 +28,10 @@ public class StrategyMain {
     public static void main(String[] args) throws IOException {
 
         while (!order.isClosed()) {
-            int cost;
 
+            int cost;
             String continueChoice;
+
             do {
                 System.out.print("Please, select a product:" + "\n" +
                         "1 - Mother board" + "\n" +

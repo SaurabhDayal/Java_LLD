@@ -4,16 +4,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-/**
- * Concrete strategy. Implements credit card payment method.
- */
 public class PayByCreditCard implements PayStrategy {
+
     private final BufferedReader READER = new BufferedReader(new InputStreamReader(System.in));
     private CreditCard card;
 
-    /**
-     * Collect credit card data.
-     */
     @Override
     public void collectPaymentDetails() {
         try {

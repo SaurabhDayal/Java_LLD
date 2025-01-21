@@ -8,6 +8,7 @@ import behavioral.strategyPattern.strategiesPkg.PayStrategy;
  * to strategy object. It can be used to save order to database.
  */
 public class Order {
+    
     private int totalCost = 0;
     private boolean isClosed = false;
 
