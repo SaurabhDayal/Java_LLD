@@ -9,9 +9,10 @@ import behavioral.observerPattern.observerPkg.SMSObserver;
 public class ObserverMain {
     public static void main(String[] args) {
 
-        // Create the weather station and news station (Observables)
+        // Create the weather station and news station (Observables aka Publishers)
         WeatherStation weatherStation = new WeatherStation();
         NewsStation newsStation = new NewsStation();
+        System.out.println();
 
         // Create observers with dynamic constructor injection for different stations
         Observer weatherEmailObserver = new EmailObserver("example1@example.com", weatherStation);

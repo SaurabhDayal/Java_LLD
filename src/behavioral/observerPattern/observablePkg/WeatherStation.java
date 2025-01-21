@@ -1,12 +1,14 @@
 package behavioral.observerPattern.observablePkg;
 
 import behavioral.observerPattern.observerPkg.Observer;
+
 import java.util.ArrayList;
 import java.util.List;
 
-// Concrete Subject Class
+// Concrete Publisher Class
 public class WeatherStation implements Observable {
-    private List<Observer> observers = new ArrayList<>();
+
+    private final List<Observer> observers = new ArrayList<>();
     private String weatherUpdate;
     private final String name = "Weather";  // Observable name
 
