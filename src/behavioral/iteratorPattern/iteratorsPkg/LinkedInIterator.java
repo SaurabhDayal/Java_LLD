@@ -7,6 +7,7 @@ import behavioral.iteratorPattern.profilePkg.Profile;
 import java.util.ArrayList;
 import java.util.List;
 
+// Concrete Iterator
 public class LinkedInIterator implements ProfileIterator {
 
     private LinkedIn linkedIn;

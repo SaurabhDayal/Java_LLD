@@ -7,6 +7,7 @@ import behavioral.iteratorPattern.profilePkg.Profile;
 import java.util.ArrayList;
 import java.util.List;
 
+// Concrete Iterator
 public class FacebookIterator implements ProfileIterator {
 
     private Facebook facebook;

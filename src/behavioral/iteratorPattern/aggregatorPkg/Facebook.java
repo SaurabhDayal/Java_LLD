@@ -8,6 +8,7 @@ import behavioral.iteratorPattern.profilePkg.Profile;
 import java.util.ArrayList;
 import java.util.List;
 
+// Concrete Iterable Collection
 public class Facebook implements SocialNetwork {
 
     private List<Profile> profiles;
