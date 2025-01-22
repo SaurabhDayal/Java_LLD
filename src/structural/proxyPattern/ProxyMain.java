@@ -5,15 +5,14 @@ import structural.proxyPattern.proxyPkg.YouTubeCacheProxy;
 import structural.proxyPattern.someCoolMediaLibraryPkg.ThirdPartyYouTubeClass;
 
 public class ProxyMain {
-    public static void main(String[] args) {
 
+    public static void main(String[] args) {
         YouTubeDownloader naiveDownloader = new YouTubeDownloader(new ThirdPartyYouTubeClass());
         YouTubeDownloader smartDownloader = new YouTubeDownloader(new YouTubeCacheProxy());
 
         long naive = test(naiveDownloader);
         long smart = test(smartDownloader);
         System.out.print("Time saved by caching proxy: " + (naive - smart) + "ms");
-
     }
 
     private static long test(YouTubeDownloader downloader) {
