@@ -6,19 +6,22 @@ import structural.proxyPattern.someCoolMediaLibraryPkg.Video;
 
 import java.util.HashMap;
 
+// Proxy class
 public class YouTubeCacheProxy implements ThirdPartyYouTubeLib {
-    private ThirdPartyYouTubeLib youtubeService;
+
+    private ThirdPartyYouTubeLib service;
+
     private HashMap<String, Video> cachePopular = new HashMap<String, Video>();
     private HashMap<String, Video> cacheAll = new HashMap<String, Video>();
 
     public YouTubeCacheProxy() {
-        this.youtubeService = new ThirdPartyYouTubeClass();
+        this.service = new ThirdPartyYouTubeClass();
     }
 
     @Override
     public HashMap<String, Video> popularVideos() {
         if (cachePopular.isEmpty()) {
-            cachePopular = youtubeService.popularVideos();
+            cachePopular = service.popularVideos();
         } else {
             System.out.println("Retrieved list from cache.");
         }
@@ -29,7 +32,7 @@ public class YouTubeCacheProxy implements ThirdPartyYouTubeLib {
     public Video getVideo(String videoId) {
         Video video = cacheAll.get(videoId);
         if (video == null) {
-            video = youtubeService.getVideo(videoId);
+            video = service.getVideo(videoId);
             cacheAll.put(videoId, video);
         } else {
             System.out.println("Retrieved video '" + videoId + "' from cache.");

@@ -2,6 +2,7 @@ package structural.proxyPattern.someCoolMediaLibraryPkg;
 
 import java.util.HashMap;
 
+// Service class
 public class ThirdPartyYouTubeClass implements ThirdPartyYouTubeLib {
 
     @Override
@@ -64,5 +65,4 @@ public class ThirdPartyYouTubeClass implements ThirdPartyYouTubeLib {
         System.out.print("Done!" + "\n");
         return video;
     }
-
 }

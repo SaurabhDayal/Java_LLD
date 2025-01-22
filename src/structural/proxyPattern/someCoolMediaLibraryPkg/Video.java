@@ -1,6 +1,7 @@
 package structural.proxyPattern.someCoolMediaLibraryPkg;
 
 public class Video {
+    
     public String id;
     public String title;
     public String data;

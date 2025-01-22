@@ -5,8 +5,8 @@ import structural.proxyPattern.proxyPkg.YouTubeCacheProxy;
 import structural.proxyPattern.someCoolMediaLibraryPkg.ThirdPartyYouTubeClass;
 
 public class ProxyMain {
-
     public static void main(String[] args) {
+
         YouTubeDownloader naiveDownloader = new YouTubeDownloader(new ThirdPartyYouTubeClass());
         YouTubeDownloader smartDownloader = new YouTubeDownloader(new YouTubeCacheProxy());
 
@@ -17,6 +17,7 @@ public class ProxyMain {
     }
 
     private static long test(YouTubeDownloader downloader) {
+
         long startTime = System.currentTimeMillis();
 
         // User behavior in our app:
@@ -24,12 +25,14 @@ public class ProxyMain {
         downloader.renderVideoPage("catzzzzzzzzz");
         downloader.renderPopularVideos();
         downloader.renderVideoPage("dancesvideoo");
+
         // Users might visit the same page quite often.
         downloader.renderVideoPage("catzzzzzzzzz");
         downloader.renderVideoPage("someothervid");
 
         long estimatedTime = System.currentTimeMillis() - startTime;
         System.out.print("Time elapsed: " + estimatedTime + "ms\n");
+
         return estimatedTime;
     }
 }
