@@ -20,13 +20,13 @@ public class BridgeMain {
     public static void testDevice(DeviceImplementor deviceImplementor) {
         System.out.println("Tests with basic remote.");
         BasicRemote basicRemote = new BasicRemote(deviceImplementor);
-        basicRemote.power();
+        basicRemote.power();  // this will ON the device
         deviceImplementor.printStatus();
 
         System.out.println("Tests with advanced remote.");
         AdvancedRemote advancedRemote = new AdvancedRemote(deviceImplementor);
-        advancedRemote.power();
-        advancedRemote.mute();
+        advancedRemote.mute();  // this will MUTE the device
+        advancedRemote.power(); // this will OFF the same device
         deviceImplementor.printStatus();
     }
 }
