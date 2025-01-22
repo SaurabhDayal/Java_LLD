@@ -3,6 +3,7 @@ package structural.flyweightPattern.factoryPkg;
 import java.util.HashMap;
 import java.util.Map;
 
+// Flyweight Factory class
 public class BookFactory {
 
     private static final Map<String, BookType> bookTypes = new HashMap<>();

@@ -6,6 +6,7 @@ import structural.flyweightPattern.factoryPkg.BookType;
 import java.util.ArrayList;
 import java.util.List;
 
+//
 public class Store {
 
     private final List<Book> books = new ArrayList<>();
