@@ -2,6 +2,7 @@ package structural.flyweightPattern.contextPkg;
 
 import structural.flyweightPattern.factoryPkg.BookType;
 
+// Context class
 public class Book {
 
     private final String name;
@@ -22,5 +23,4 @@ public class Book {
                 ", type=" + type +
                 '}';
     }
-
 }
