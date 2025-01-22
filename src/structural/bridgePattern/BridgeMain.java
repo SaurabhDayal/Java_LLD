@@ -6,10 +6,8 @@ import structural.bridgePattern.devicesPkg.Tv;
 import structural.bridgePattern.remotesPkg.AdvancedRemote;
 import structural.bridgePattern.remotesPkg.BasicRemote;
 
-// Bridge is a structural design pattern that lets you split
-// a large class or a set of closely related classes into two separate
-// hierarchies—abstraction and implementation—which
-// can be developed independently of each other.
+// Bridge pattern decouples an abstraction from its implementation
+// so that the two can vary independently.
 public class BridgeMain {
     public static void main(String[] args) {
         System.out.println();
