@@ -1,4 +1,4 @@
-package structural.facadePattern.thirdPartyPkg;
+package structural.facadePattern.subSystemPkg;
 
 public class EthereumService extends CryptoService {
 

@@ -1,7 +1,8 @@
 package structural.facadePattern.facadePkg;
 
-import structural.facadePattern.thirdPartyPkg.*;
+import structural.facadePattern.subSystemPkg.*;
 
+// Facade class
 public class BuyCryptoFacade {
 
     public void buyCryptocurrency(double amount, String currency) {
