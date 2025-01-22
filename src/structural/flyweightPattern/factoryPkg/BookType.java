@@ -1,6 +1,6 @@
 package structural.flyweightPattern.factoryPkg;
 
-// Flyweight class
+// Flyweight class - for intrinsic part
 public class BookType {
 
     private final String type;

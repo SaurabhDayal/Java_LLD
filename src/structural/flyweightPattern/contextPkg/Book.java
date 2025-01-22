@@ -2,7 +2,7 @@ package structural.flyweightPattern.contextPkg;
 
 import structural.flyweightPattern.factoryPkg.BookType;
 
-// Context class
+// Context class - for extrinsic part
 public class Book {
 
     private final String name;
