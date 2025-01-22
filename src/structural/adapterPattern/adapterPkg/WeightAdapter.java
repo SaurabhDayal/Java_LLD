@@ -4,16 +4,14 @@ import structural.adapterPattern.legacyPkg.OldWeighingMachine;
 
 public class WeightAdapter implements NewWeighingMachine {
 
-    private OldWeighingMachine oldWeighingMachine;
+    private final OldWeighingMachine adaptee;
 
-    public WeightAdapter(OldWeighingMachine oldWeighingMachine) {
-        this.oldWeighingMachine = oldWeighingMachine;
+    public WeightAdapter(OldWeighingMachine adaptee) {
+        this.adaptee = adaptee;
     }
 
     @Override
     public double getWeightInPounds() {
-
-        double weightInKilograms = oldWeighingMachine.getWeightInKilograms();
-        return weightInKilograms * 2.20462;
+        return adaptee.getWeightInKilograms() * 2.20462;
     }
 }
