@@ -1,6 +1,8 @@
 package structural.bridgePattern.devicesPkg;
 
+// Concrete Implementation
 public class Tv implements DeviceImplementor {
+    
     private boolean on = false;
     private int volume = 30;
     private int channel = 1;

@@ -1,5 +1,6 @@
 package structural.bridgePattern.devicesPkg;
 
+// Implementation aka Implementor
 public interface DeviceImplementor {
     boolean isEnabled();
 

@@ -1,6 +1,6 @@
 package structural.bridgePattern.remotesPkg;
 
-
+// Abstraction (Interface)
 public interface Remote {
     void power();
 

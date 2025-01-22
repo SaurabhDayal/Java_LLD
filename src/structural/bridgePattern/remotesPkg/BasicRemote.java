@@ -1,8 +1,8 @@
 package structural.bridgePattern.remotesPkg;
 
-
 import structural.bridgePattern.devicesPkg.DeviceImplementor;
 
+// Abstraction Class
 public class BasicRemote implements Remote {
 
     protected DeviceImplementor deviceImplementor;
