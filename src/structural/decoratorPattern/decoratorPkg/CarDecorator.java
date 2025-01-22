@@ -2,7 +2,9 @@ package structural.decoratorPattern.decoratorPkg;
 
 import structural.decoratorPattern.componentPkg.Car;
 
+// Base Decorator
 public abstract class CarDecorator implements Car {
+    
     protected Car decoratedCar;
 
     public CarDecorator(Car decoratedCar) {

@@ -2,6 +2,7 @@ package structural.decoratorPattern.decoratorPkg;
 
 import structural.decoratorPattern.componentPkg.Car;
 
+// Concrete Decorator
 public class SunroofDecorator extends CarDecorator {
     public SunroofDecorator(Car decoratedCar) {
         super(decoratedCar);

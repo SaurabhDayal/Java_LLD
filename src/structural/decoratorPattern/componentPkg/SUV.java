@@ -1,5 +1,6 @@
 package structural.decoratorPattern.componentPkg;
 
+// Concrete Component
 public class SUV implements Car {
     @Override
     public String getDescription() {
