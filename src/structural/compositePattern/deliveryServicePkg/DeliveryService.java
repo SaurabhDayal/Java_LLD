@@ -17,5 +17,4 @@ public class DeliveryService {
     public double calculateOrderPrice() {
         return box.calculatePrice();
     }
-
 }

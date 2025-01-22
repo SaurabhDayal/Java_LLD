@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+// Concrete COMPOSITE class
 public class CompositeBox implements Box {
 
     private final List<Box> children = new ArrayList<>();
@@ -14,7 +15,10 @@ public class CompositeBox implements Box {
 
     @Override
     public double calculatePrice() {
-        return children.stream().mapToDouble(Box::calculatePrice).sum();
+        double total = 0.0;
+        for (Box child : children) {
+            total += child.calculatePrice();
+        }
+        return total;
     }
-
 }
