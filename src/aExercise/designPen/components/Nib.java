@@ -3,9 +3,9 @@ package aExercise.designPen.components;
 // Class for Tip/Nib representation
 public class Nib {
     private double size; // Tip size in mm
-    private String type; // Fine, Medium, Broad
+    private NibType type; // Fine, Medium, Broad (using Enum)
 
-    public Nib(double size, String type) {
+    public Nib(double size, NibType type) {
         this.size = size;
         this.type = type;
     }
@@ -14,7 +14,7 @@ public class Nib {
         return size;
     }
 
-    public String getType() {
+    public NibType getType() {
         return type;
     }
 }

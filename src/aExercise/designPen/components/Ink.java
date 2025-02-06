@@ -2,9 +2,9 @@ package aExercise.designPen.components;
 
 public class Ink {
     private String color;
-    private String type; // Gel, Ballpoint, Fountain, etc.
+    private PenType type; // Gel, Ballpoint, Fountain, etc.
 
-    public Ink(String color, String type) {
+    public Ink(String color, PenType type) {
         this.color = color;
         this.type = type;
     }
@@ -13,7 +13,7 @@ public class Ink {
         return color;
     }
 
-    public String getType() {
+    public PenType getType() {
         return type;
     }
 }
