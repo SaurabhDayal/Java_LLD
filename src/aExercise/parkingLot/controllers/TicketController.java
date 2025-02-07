@@ -1,8 +1,8 @@
-package org.example.parkinglot.controllers;
+package aExercise.parkingLot.controllers;
 
-import org.example.parkinglot.dtos.*;
-import org.example.parkinglot.models.Ticket;
-import org.example.parkinglot.services.TicketService;
+import aExercise.parkingLot.dtos.*;
+import aExercise.parkingLot.models.Ticket;
+import aExercise.parkingLot.services.TicketService;
 
 public class TicketController {
     private TicketService ticketService;
@@ -15,7 +15,7 @@ public class TicketController {
         IssueTicketResponseDto responseDto = new IssueTicketResponseDto();
 
         try {
-            Ticket ticket =  ticketService.issueTicket(
+            Ticket ticket = ticketService.issueTicket(
                     requestDto.getVehicleNumber(),
                     requestDto.getOwnerName(),
                     requestDto.getGateId(),

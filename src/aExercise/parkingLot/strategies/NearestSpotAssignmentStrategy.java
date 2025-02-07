@@ -1,8 +1,8 @@
-package org.example.parkinglot.strategies;
+package aExercise.parkingLot.strategies;
 
-import org.example.parkinglot.models.ParkingLot;
-import org.example.parkinglot.models.ParkingSpot;
-import org.example.parkinglot.models.Vehicle;
+import aExercise.parkingLot.models.ParkingLot;
+import aExercise.parkingLot.models.ParkingSpot;
+import aExercise.parkingLot.models.Vehicle;
 
 public class NearestSpotAssignmentStrategy implements ParkingSpotAssignmentStrategy {
     @Override

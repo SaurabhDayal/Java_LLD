@@ -1,4 +1,4 @@
-package org.example.parkinglot.models;
+package aExercise.parkingLot.models;
 
 public class Gate extends BaseModel {
     private int gateNumber;

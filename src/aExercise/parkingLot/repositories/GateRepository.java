@@ -1,6 +1,6 @@
-package org.example.parkinglot.repositories;
+package aExercise.parkingLot.repositories;
 
-import org.example.parkinglot.models.Gate;
+import aExercise.parkingLot.models.Gate;
 
 import java.util.HashMap;
 import java.util.Optional;

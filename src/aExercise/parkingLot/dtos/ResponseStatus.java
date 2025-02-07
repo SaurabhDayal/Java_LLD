@@ -1,4 +1,4 @@
-package org.example.parkinglot.dtos;
+package aExercise.parkingLot.dtos;
 
 public enum ResponseStatus {
     SUCCESS,

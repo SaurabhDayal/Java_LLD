@@ -1,7 +1,6 @@
-package org.example.parkinglot.repositories;
+package aExercise.parkingLot.repositories;
 
-import org.example.parkinglot.models.Operator;
-import org.example.parkinglot.models.Vehicle;
+import aExercise.parkingLot.models.Vehicle;
 
 import java.util.Optional;
 

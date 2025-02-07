@@ -1,6 +1,4 @@
-package org.example.parkinglot.dtos;
-
-import org.example.parkinglot.models.VehicleType;
+package aExercise.parkingLot.dtos;
 
 public class IssueTicketRequestDto {
     private String vehicleNumber;

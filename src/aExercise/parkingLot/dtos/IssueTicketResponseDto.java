@@ -1,6 +1,6 @@
-package org.example.parkinglot.dtos;
+package aExercise.parkingLot.dtos;
 
-import org.example.parkinglot.models.Ticket;
+import aExercise.parkingLot.models.Ticket;
 
 public class IssueTicketResponseDto {
     private Ticket ticket;

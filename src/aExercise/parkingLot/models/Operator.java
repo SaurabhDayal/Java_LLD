@@ -1,4 +1,4 @@
-package org.example.parkinglot.models;
+package aExercise.parkingLot.models;
 
 public class Operator extends BaseModel {
     private String name;

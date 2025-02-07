@@ -1,4 +1,4 @@
-package org.example.parkinglot.exceptions;
+package aExercise.parkingLot.exceptions;
 
 public class GateNotFoundException extends Exception {
     public GateNotFoundException(String message) {

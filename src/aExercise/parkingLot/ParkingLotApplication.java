@@ -1,26 +1,27 @@
-package org.example.parkinglot;
+package aExercise.parkingLot;
 
-import org.example.parkinglot.controllers.TicketController;
-import org.example.parkinglot.dtos.IssueTicketRequestDto;
-import org.example.parkinglot.dtos.IssueTicketResponseDto;
-import org.example.parkinglot.factories.ParkingSpotAssignmentStrategyFactory;
-import org.example.parkinglot.models.ParkingSpotStrategyType;
-import org.example.parkinglot.models.Ticket;
-import org.example.parkinglot.repositories.GateRepository;
-import org.example.parkinglot.repositories.VehicleRepository;
-import org.example.parkinglot.services.TicketService;
-import org.example.parkinglot.strategies.ParkingSpotAssignmentStrategy;
+import aExercise.parkingLot.controllers.TicketController;
+import aExercise.parkingLot.dtos.IssueTicketRequestDto;
+import aExercise.parkingLot.dtos.IssueTicketResponseDto;
+import aExercise.parkingLot.factories.ParkingSpotAssignmentStrategyFactory;
+import aExercise.parkingLot.models.ParkingSpotStrategyType;
+import aExercise.parkingLot.models.Ticket;
+import aExercise.parkingLot.repositories.GateRepository;
+import aExercise.parkingLot.repositories.VehicleRepository;
+import aExercise.parkingLot.services.TicketService;
+import aExercise.parkingLot.strategies.ParkingSpotAssignmentStrategy;
 
 public class ParkingLotApplication {
     public static void main(String[] args) {
+
         GateRepository gateRepository = new GateRepository();
+
         VehicleRepository vehicleRepository = new VehicleRepository();
+
         ParkingSpotAssignmentStrategy parkingSpotAssignmentStrategy =
                 ParkingSpotAssignmentStrategyFactory.getParkingLotStrategy(ParkingSpotStrategyType.NEAREST);
 
-        TicketService ticketService = new TicketService(gateRepository,
-                                                        vehicleRepository,
-                                                        parkingSpotAssignmentStrategy);
+        TicketService ticketService = new TicketService(gateRepository, vehicleRepository, parkingSpotAssignmentStrategy);
 
         TicketController ticketController = new TicketController(ticketService);
 

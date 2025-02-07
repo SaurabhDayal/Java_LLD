@@ -1,13 +1,13 @@
-package org.example.parkinglot.services;
+package aExercise.parkingLot.services;
 
-import org.example.parkinglot.exceptions.GateNotFoundException;
-import org.example.parkinglot.models.Gate;
-import org.example.parkinglot.models.ParkingLot;
-import org.example.parkinglot.models.Ticket;
-import org.example.parkinglot.models.Vehicle;
-import org.example.parkinglot.repositories.GateRepository;
-import org.example.parkinglot.repositories.VehicleRepository;
-import org.example.parkinglot.strategies.ParkingSpotAssignmentStrategy;
+import aExercise.parkingLot.exceptions.GateNotFoundException;
+import aExercise.parkingLot.models.Gate;
+import aExercise.parkingLot.models.ParkingLot;
+import aExercise.parkingLot.models.Ticket;
+import aExercise.parkingLot.models.Vehicle;
+import aExercise.parkingLot.repositories.GateRepository;
+import aExercise.parkingLot.repositories.VehicleRepository;
+import aExercise.parkingLot.strategies.ParkingSpotAssignmentStrategy;
 
 import java.util.Date;
 import java.util.Optional;

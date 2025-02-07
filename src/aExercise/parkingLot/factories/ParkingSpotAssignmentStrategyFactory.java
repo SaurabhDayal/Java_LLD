@@ -1,8 +1,8 @@
-package org.example.parkinglot.factories;
+package aExercise.parkingLot.factories;
 
-import org.example.parkinglot.models.ParkingSpotStrategyType;
-import org.example.parkinglot.strategies.NearestSpotAssignmentStrategy;
-import org.example.parkinglot.strategies.ParkingSpotAssignmentStrategy;
+import aExercise.parkingLot.models.ParkingSpotStrategyType;
+import aExercise.parkingLot.strategies.NearestSpotAssignmentStrategy;
+import aExercise.parkingLot.strategies.ParkingSpotAssignmentStrategy;
 
 public class ParkingSpotAssignmentStrategyFactory {
     public static ParkingSpotAssignmentStrategy getParkingLotStrategy(ParkingSpotStrategyType
