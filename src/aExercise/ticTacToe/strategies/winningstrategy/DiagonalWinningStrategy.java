@@ -16,30 +16,22 @@ public class DiagonalWinningStrategy implements WinningStrategy {
         int row = move.getCell().getRow();
         int col = move.getCell().getCol();
         Character aChar = move.getPlayer().getSymbol().getaChar();
+        int boardSize = board.getDimension();  // Store dimension once for efficiency
 
-        //Condition for left diagonal -> row == col
+        // Left diagonal condition (row == col)
         if (row == col) {
-            if (!leftDiagonalMap.containsKey(aChar)) {
-                leftDiagonalMap.put(aChar, 0);
+            leftDiagonalMap.put(aChar, leftDiagonalMap.getOrDefault(aChar, 0) + 1);
+            if (leftDiagonalMap.get(aChar) == boardSize) {
+                return true;
             }
-            leftDiagonalMap.put(aChar, leftDiagonalMap.get(aChar) + 1);
         }
 
-        //Condition for right diagonal -> row + col == N-1
-        if (row + col == board.getDimension() - 1) {
-            if (!rightDiagonalMap.containsKey(aChar)) {
-                rightDiagonalMap.put(aChar, 0);
+        // Right diagonal condition (row + col == boardSize - 1)
+        if (row + col == boardSize - 1) {
+            rightDiagonalMap.put(aChar, rightDiagonalMap.getOrDefault(aChar, 0) + 1);
+            if (rightDiagonalMap.get(aChar) == boardSize) {
+                return true;
             }
-            rightDiagonalMap.put(aChar, rightDiagonalMap.get(aChar) + 1);
-        }
-
-        if (row == col && leftDiagonalMap.get(aChar) == board.getDimension()) {
-            return true;
-        }
-
-        if (row + col == board.getDimension() - 1 &&
-                rightDiagonalMap.get(aChar) == board.getDimension()) {
-            return true;
         }
 
         return false;

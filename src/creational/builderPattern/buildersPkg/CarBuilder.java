@@ -8,7 +8,6 @@ import creational.builderPattern.componentsPkg.Transmission;
 import creational.builderPattern.componentsPkg.TripComputer;
 
 public class CarBuilder implements Builder {
-
     private CarType type;
     private int seats;
     private Engine engine;
@@ -16,6 +15,7 @@ public class CarBuilder implements Builder {
     private TripComputer tripComputer;
     private GPSNavigator gpsNavigator;
 
+    @Override
     public void setCarType(CarType type) {
         this.type = type;
     }
