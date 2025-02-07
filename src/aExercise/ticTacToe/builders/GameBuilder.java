@@ -21,6 +21,16 @@ public class GameBuilder {
         this.winningStrategies = new ArrayList<>();
     }
 
+    public Game build() {
+        validations();
+        return new Game(dimension, players, winningStrategies);
+    }
+
+    private void validations() {
+        validateBotCount();
+        validateUniqueSymbols();
+    }
+
     private void validateBotCount() {
         int count = 0;
         for (Player player : players) {
@@ -42,16 +52,6 @@ public class GameBuilder {
         if (symbolSet.size() != dimension - 1) {
             throw new RuntimeException("Every player should have a unique symbol");
         }
-    }
-
-    private void validations() {
-        validateBotCount();
-        validateUniqueSymbols();
-    }
-
-    public Game build() {
-        validations();
-        return new Game(dimension, players, winningStrategies);
     }
 
     public GameBuilder setDimension(int dimension) {

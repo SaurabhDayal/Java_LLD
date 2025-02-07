@@ -7,7 +7,7 @@ import aExercise.ticTacToe.strategies.botplayingstrategy.HardBotPlayingStrategy;
 import aExercise.ticTacToe.strategies.botplayingstrategy.MediumBotPlayingStrategy;
 
 public class BotPlayingStrategyFactory {
-    public static BotPlayingStrategy getBotPlayingStrategyFactory(BotDifficultyLevel botDifficultyLevel) {
+    public static BotPlayingStrategy getBotPlayingStrategy(BotDifficultyLevel botDifficultyLevel) {
         if (botDifficultyLevel.equals(BotDifficultyLevel.EASY)) {
             return new EasyBotPlayingStrategy();
         } else if (botDifficultyLevel.equals(BotDifficultyLevel.MEDIUM)) {

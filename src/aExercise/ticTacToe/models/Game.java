@@ -24,30 +24,6 @@ public class Game {
         this.winningStrategies = winningStrategies;
     }
 
-    public Board getBoard() {
-        return board;
-    }
-
-    public List<Player> getPlayers() {
-        return players;
-    }
-
-    public List<Move> getMoves() {
-        return moves;
-    }
-
-    public Player getWinner() {
-        return winner;
-    }
-
-    public GameState getGameState() {
-        return gameState;
-    }
-
-    public void printBoard() {
-        board.printBoard();
-    }
-
     private boolean validateMove(Move move) {
         int row = move.getCell().getRow();
         int col = move.getCell().getCol();
@@ -95,5 +71,29 @@ public class Game {
             }
         }
         return false;
+    }
+
+    public Board getBoard() {
+        return board;
+    }
+
+    public List<Player> getPlayers() {
+        return players;
+    }
+
+    public List<Move> getMoves() {
+        return moves;
+    }
+
+    public Player getWinner() {
+        return winner;
+    }
+
+    public GameState getGameState() {
+        return gameState;
+    }
+
+    public void printBoard() {
+        board.printBoard();
     }
 }
