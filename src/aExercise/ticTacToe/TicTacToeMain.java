@@ -13,46 +13,45 @@ import java.util.List;
 import java.util.Scanner;
 
 public class TicTacToeMain {
+    private static final Scanner scanner = new Scanner(System.in);
+    private static final GameController gameController = new GameController();
+
     public static void main(String[] args) throws InvalidMoveException {
         System.out.println("GAME STARTS");
-        Scanner scanner = new Scanner(System.in);
-        GameController gameController = new GameController();
 
-        //int dimension = scanner.nextInt();
-        int dimension = 3;
+        // Initialize the game
+        Game game = init();
 
-        //Take players information in the input.
+        // Start the game loop
+        playGame(game);
+    }
+
+    private static Game init() {
+        int dimension = 3; // Fixed dimension (can be changed to scanner input if needed)
+
+        // Initialize players
         List<Player> players = new ArrayList<>();
-        players.add(
-                new Player(new Symbol('X'), "Anand", PlayerType.HUMAN)
-        );
+        players.add(new Player(new Symbol('X'), "Anand", PlayerType.HUMAN));
+        players.add(new Bot(new Symbol('O'), "Scaler", PlayerType.BOT, BotDifficultyLevel.EASY));
 
-        players.add(
-                new Bot(new Symbol('O'), "Scaler", PlayerType.BOT, BotDifficultyLevel.EASY)
-        );
-
+        // Define winning strategies
         List<WinningStrategy> winningStrategies = List.of(
                 new RowWinningStrategy(),
                 new ColWinningStrategy(),
                 new DiagonalWinningStrategy()
         );
 
-        Game game = gameController.startGame(dimension, players, winningStrategies);
+        return gameController.startGame(dimension, players, winningStrategies);
+    }
 
-        //gameController.printBoard(game);
-        //Let's play the game.
-
+    private static void playGame(Game game) throws InvalidMoveException {
         while (gameController.gameState(game).equals(GameState.IN_PROGRESS)) {
-            //1. Show the board.
-            //2. make a move.
-
             gameController.printBoard(game);
 
-            System.out.println("Do you want to undo ? y/n");
+            System.out.println("Do you want to undo? (y/n)");
             String isUndo = scanner.next();
 
             if (isUndo.equalsIgnoreCase("y")) {
-                //make an undo operation
                 gameController.undo(game);
                 continue;
             }
@@ -61,6 +60,10 @@ public class TicTacToeMain {
         }
 
         gameController.printBoard(game);
+        displayResult(game);
+    }
+
+    private static void displayResult(Game game) {
         if (gameController.gameState(game).equals(GameState.ENDED)) {
             System.out.println(gameController.getWinner(game).getName() + " has won the game.");
         } else {
