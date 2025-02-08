@@ -52,7 +52,7 @@ public class Game {
         cell.setCellState(CellState.FILLED);
         cell.setPlayer(currentPlayer);
 
-        moves.add(new Move(currentPlayer, cell));
+        moves.add(new Move(currentPlayer, cell)); // this cell variable is actual board cell
 
         nextMovePlayerIndex = (nextMovePlayerIndex + 1) % players.size();
 
