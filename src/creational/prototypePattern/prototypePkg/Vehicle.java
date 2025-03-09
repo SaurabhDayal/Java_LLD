@@ -1,6 +1,5 @@
 package creational.prototypePattern.prototypePkg;
 
-
 public abstract class Vehicle {
 
     private final String brand;
@@ -20,8 +19,7 @@ public abstract class Vehicle {
     }
 
     public abstract Vehicle clone();
-
-
+    
     public String getBrand() {
         return brand;
     }

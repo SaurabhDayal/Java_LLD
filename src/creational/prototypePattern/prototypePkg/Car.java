@@ -1,6 +1,5 @@
 package creational.prototypePattern.prototypePkg;
 
-
 public class Car extends Vehicle {
 
     private final int topSpeed;

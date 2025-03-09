@@ -11,24 +11,29 @@ import java.util.List;
 public class PrototypeMain {
 
     public static void main(String[] args) {
+
         // Create a list of vehicles
         List<Vehicle> vehicles = List.of(
                 new Car("car_brand", "car_model", "car_color", 300),
                 new Bus("bus_brand", "bus_model", "bus_color", 8)
         );
+
         // Clone each vehicle and store in a separate list
         List<Vehicle> copyList = new ArrayList<>();
         for (Vehicle vehicle : vehicles) {
             copyList.add(vehicle.clone());
         }
+
         // Print all cloned vehicles
         copyList.forEach(System.out::println);
         System.out.println("==========================================");
 
         // Create a registry (VehicleCache) to store prototypes of vehicles
         VehicleCache registry = new VehicleCache();
+
         // Add the original list of vehicles to the registry
         registry.put(vehicles);
+
         // Retrieve a vehicle by its key from the registry and print
         printClonedVehicle(registry, "car_brand car_model"); // Key exists
         printClonedVehicle(registry, "Mercedes Setra"); // Key does not exist
