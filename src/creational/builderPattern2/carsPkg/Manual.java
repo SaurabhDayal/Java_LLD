@@ -42,34 +42,34 @@ public class Manual {
         private TripComputer tripComputer;
         private GPSNavigator gpsNavigator;
 
-        @Override
-        public void setCarType(CarType carType) {
+        public ManualBuilder setCarType(CarType carType) {
             this.carType = carType;
+            return this;
         }
 
-        @Override
-        public void setSeats(int seats) {
+        public ManualBuilder setSeats(int seats) {
             this.seats = seats;
+            return this;
         }
 
-        @Override
-        public void setEngine(Engine engine) {
+        public ManualBuilder setEngine(Engine engine) {
             this.engine = engine;
+            return this;
         }
 
-        @Override
-        public void setTransmission(Transmission transmission) {
+        public ManualBuilder setTransmission(Transmission transmission) {
             this.transmission = transmission;
+            return this;
         }
 
-        @Override
-        public void setTripComputer(TripComputer tripComputer) {
+        public ManualBuilder setTripComputer(TripComputer tripComputer) {
             this.tripComputer = tripComputer;
+            return this;
         }
 
-        @Override
-        public void setGPSNavigator(GPSNavigator gpsNavigator) {
+        public ManualBuilder setGPSNavigator(GPSNavigator gpsNavigator) {
             this.gpsNavigator = gpsNavigator;
+            return this;
         }
 
         public Manual build() {

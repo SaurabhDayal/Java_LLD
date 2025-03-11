@@ -7,15 +7,15 @@ import creational.builderPattern2.componentsPkg.Transmission;
 import creational.builderPattern2.componentsPkg.TripComputer;
 
 public interface Builder {
-    void setCarType(CarType type);
+    Builder setCarType(CarType type);
 
-    void setSeats(int seats);
+    Builder setSeats(int seats);
 
-    void setEngine(Engine engine);
+    Builder setEngine(Engine engine);
 
-    void setTransmission(Transmission transmission);
+    Builder setTransmission(Transmission transmission);
 
-    void setTripComputer(TripComputer tripComputer);
+    Builder setTripComputer(TripComputer tripComputer);
 
-    void setGPSNavigator(GPSNavigator gpsNavigator);
+    Builder setGPSNavigator(GPSNavigator gpsNavigator);
 }
