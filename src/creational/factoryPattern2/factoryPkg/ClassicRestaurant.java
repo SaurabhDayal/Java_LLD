@@ -1,7 +1,7 @@
-package creational.factoryPattern.factoryPkg;
+package creational.factoryPattern2.factoryPkg;
 
-import creational.factoryPattern.productsPkg.Burger;
-import creational.factoryPattern.productsPkg.ClassicBurger;
+import creational.factoryPattern2.productsPkg.Burger;
+import creational.factoryPattern2.productsPkg.ClassicBurger;
 
 public class ClassicRestaurant extends Restaurant {
 

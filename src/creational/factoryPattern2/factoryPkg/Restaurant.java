@@ -1,6 +1,6 @@
-package creational.factoryPattern.factoryPkg;
+package creational.factoryPattern2.factoryPkg;
 
-import creational.factoryPattern.productsPkg.Burger;
+import creational.factoryPattern2.productsPkg.Burger;
 
 public abstract class Restaurant {
 

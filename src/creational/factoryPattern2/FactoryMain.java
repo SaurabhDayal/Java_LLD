@@ -1,8 +1,8 @@
-package creational.factoryPattern;
+package creational.factoryPattern2;
 
-import creational.factoryPattern.factoryPkg.ClassicRestaurant;
-import creational.factoryPattern.factoryPkg.OrientalRestaurant;
-import creational.factoryPattern.factoryPkg.Restaurant;
+import creational.factoryPattern2.factoryPkg.ClassicRestaurant;
+import creational.factoryPattern2.factoryPkg.OrientalRestaurant;
+import creational.factoryPattern2.factoryPkg.Restaurant;
 
 public class FactoryMain {
     public static void main(String[] args) {
