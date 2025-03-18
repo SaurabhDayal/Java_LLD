@@ -1,4 +1,4 @@
-package creational.factoryPattern2.productsPkg;
+package creational.factoryPattern.productsPkg;
 
 public interface Burger {
     void prepare();

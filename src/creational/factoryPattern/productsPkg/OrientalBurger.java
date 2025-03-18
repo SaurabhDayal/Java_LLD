@@ -1,4 +1,4 @@
-package creational.factoryPattern1.productsPkg;
+package creational.factoryPattern.productsPkg;
 
 public class OrientalBurger implements Burger {
 
