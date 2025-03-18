@@ -4,6 +4,7 @@ import creational.factoryPattern1.factoryPkg.ClassicRestaurant;
 import creational.factoryPattern1.factoryPkg.OrientalRestaurant;
 import creational.factoryPattern1.factoryPkg.Restaurant;
 
+// simple factory pattern - TODO
 public class FactoryMain {
     public static void main(String[] args) {
 
