@@ -7,12 +7,14 @@ import aRateLimiter.sliding_window_log_04.SlidingWindowLogRateLimiter;
 import aRateLimiter.token_bucket_01.TokenBucketRateLimiter;
 
 import java.util.Map;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.function.Supplier;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        Random random = new Random(); // Random instance for generating sleep durations
 
         // Map for selecting strategies dynamically
         Map<Integer, Supplier<RateLimiter>> rateLimiterStrategies = Map.of(
@@ -49,11 +51,12 @@ public class Main {
         RateLimiter rateLimiter = rateLimiterSupplier.get();
         System.out.println("\nTesting selected strategy...\n");
 
-        // Simulate 15 requests with a 500ms delay
-        for (int i = 0; i < 15; i++) {
+        // Simulate 25 requests with randomized delays between 50ms and 500ms
+        for (int i = 0; i < 25; i++) {
             System.out.println("Request " + (i + 1) + " allowed? " + rateLimiter.allowRequest());
             try {
-                Thread.sleep(100);
+                int sleepTime = 50 + random.nextInt(201); // Random sleep time between 50ms and 500ms
+                Thread.sleep(sleepTime);
             } catch (InterruptedException ignored) {
             }
         }
