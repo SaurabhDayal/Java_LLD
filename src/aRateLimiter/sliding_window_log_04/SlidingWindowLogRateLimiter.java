@@ -29,10 +29,12 @@ public class SlidingWindowLogRateLimiter implements RateLimiter {
         // If the number of requests in the window is less than the limit, allow the request
         if (timestamps.size() < limit) {
             timestamps.add(now); // Add the current timestamp to the queue
-            return true; // Allow the request
+            System.out.println("Accepted a request - Hitting the server API"); // ✅ API request is sent here
+            return true;
         }
 
         // If the number of requests in the window exceeds the limit, deny the request
+        System.out.println("Dropped a request - Returning 429 Too Many Requests"); // 🚫 API is NOT hit, request is rejected
         return false;
     }
 }

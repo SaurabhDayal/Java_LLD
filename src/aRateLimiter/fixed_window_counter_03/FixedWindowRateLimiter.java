@@ -12,10 +12,10 @@ public class FixedWindowRateLimiter implements RateLimiter {
 
     // Constructor to initialize the rate limiter with a limit and window size
     public FixedWindowRateLimiter(int limit, long windowSizeMillis) {
-        this.limit = limit;                            // Set the limit for the rate limiter
-        this.windowSizeMillis = windowSizeMillis;      // Set the window size in milliseconds
-        this.windowStart = System.currentTimeMillis(); // Set the window start to the current time
-        this.count = new AtomicInteger(0);   // Initialize the counter to 0
+        this.limit = limit;
+        this.windowSizeMillis = windowSizeMillis;
+        this.windowStart = System.currentTimeMillis();
+        this.count = new AtomicInteger(0);
     }
 
     // Method to check if a request is allowed based on the current count and window
@@ -31,10 +31,12 @@ public class FixedWindowRateLimiter implements RateLimiter {
 
         // Increment the counter and check if the request is within the allowed limit
         if (count.incrementAndGet() <= limit) {
-            return true; // If the counter is within the limit, allow the request
+            System.out.println("Accepted a request - Hitting the server API"); // ✅ API request is sent here
+            return true;
         }
 
         // If the limit is exceeded, deny the request
+        System.out.println("Dropped a request - Returning 429 Too Many Requests"); // 🚫 API is NOT hit, request is rejected
         return false;
     }
 }
