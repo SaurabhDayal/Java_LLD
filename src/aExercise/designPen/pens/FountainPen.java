@@ -3,9 +3,10 @@ package aExercise.designPen.pens;
 import aExercise.designPen.components.Ink;
 import aExercise.designPen.components.Nib;
 import aExercise.designPen.components.PenType;
+import aExercise.designPen.interfaces.InkRefillable;
 
 // Concrete implementation of FountainPen
-public class FountainPen extends Pen {
+public class FountainPen extends Pen implements InkRefillable {
     private Ink ink;  // Direct ink storage
     private Nib nib;  // Nib (tip) of the pen
 
@@ -20,6 +21,7 @@ public class FountainPen extends Pen {
         System.out.println("Writing with Fountain Pen (" + nib.getSize() + "mm, " + nib.getType() + " nib) using " + ink.getColor() + " ink: " + text);
     }
 
+    @Override
     public void refillInk(Ink newInk) {
         this.ink = newInk;
         System.out.println("Fountain Pen refilled with " + newInk.getColor() + " ink.");
