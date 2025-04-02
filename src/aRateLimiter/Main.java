@@ -19,7 +19,7 @@ public class Main {
         // Map for selecting strategies dynamically
         Map<Integer, Supplier<RateLimiter>> rateLimiterStrategies = Map.of(
                 1, () -> new TokenBucketRateLimiter(10, 5),
-                2, () -> new LeakyBucketRateLimiter(5, 1000),
+                2, () -> new LeakyBucketRateLimiter(5, 500),
                 3, () -> new FixedWindowRateLimiter(5, 1000),
                 4, () -> new SlidingWindowLogRateLimiter(5, 1000),
                 5, () -> new SlidingWindowCounterRateLimiter(5, 1000)
