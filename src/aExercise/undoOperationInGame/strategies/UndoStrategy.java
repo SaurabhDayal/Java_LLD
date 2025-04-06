@@ -1,6 +1,6 @@
-package aExercise.undoOperationGame.strategies;
+package aExercise.undoOperationInGame.strategies;
 
-import aExercise.undoOperationGame.model.TicTacToe;
+import aExercise.undoOperationInGame.model.TicTacToe;
 
 public interface UndoStrategy {
     void makeMove(TicTacToe game, int row, int col);

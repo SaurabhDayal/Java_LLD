@@ -1,7 +1,7 @@
-package aExercise.undoOperationGame.strategies;
+package aExercise.undoOperationInGame.strategies;
 
-import aExercise.undoOperationGame.model.Move;
-import aExercise.undoOperationGame.model.TicTacToe;
+import aExercise.undoOperationInGame.model.Move;
+import aExercise.undoOperationInGame.model.TicTacToe;
 
 public class StackUndoStrategy implements UndoStrategy {
 

@@ -1,7 +1,7 @@
-package aExercise.undoOperationGame.strategies;
+package aExercise.undoOperationInGame.strategies;
 
-import aExercise.undoOperationGame.model.GameState;
-import aExercise.undoOperationGame.model.TicTacToe;
+import aExercise.undoOperationInGame.model.GameState;
+import aExercise.undoOperationInGame.model.TicTacToe;
 
 public class VersioningUndoStrategy implements UndoStrategy {
 

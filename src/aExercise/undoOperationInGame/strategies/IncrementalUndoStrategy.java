@@ -1,7 +1,7 @@
-package aExercise.undoOperationGame.strategies;
+package aExercise.undoOperationInGame.strategies;
 
-import aExercise.undoOperationGame.model.Delta;
-import aExercise.undoOperationGame.model.TicTacToe;
+import aExercise.undoOperationInGame.model.Delta;
+import aExercise.undoOperationInGame.model.TicTacToe;
 
 public class IncrementalUndoStrategy implements UndoStrategy {
 

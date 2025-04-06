@@ -1,7 +1,7 @@
-package aExercise.undoOperationGame;
+package aExercise.undoOperationInGame;
 
-import aExercise.undoOperationGame.model.TicTacToe;
-import aExercise.undoOperationGame.strategies.*;
+import aExercise.undoOperationInGame.model.TicTacToe;
+import aExercise.undoOperationInGame.strategies.*;
 
 import java.util.Scanner;
 

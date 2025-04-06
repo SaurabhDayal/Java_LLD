@@ -1,4 +1,4 @@
-package aExercise.undoOperationGame.model;
+package aExercise.undoOperationInGame.model;
 
 public class Move {
     public int row;

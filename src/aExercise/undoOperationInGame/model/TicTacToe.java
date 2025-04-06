@@ -1,6 +1,6 @@
-package aExercise.undoOperationGame.model;
+package aExercise.undoOperationInGame.model;
 
-import aExercise.undoOperationGame.strategies.UndoStrategy;
+import aExercise.undoOperationInGame.strategies.UndoStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
