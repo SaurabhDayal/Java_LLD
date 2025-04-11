@@ -3,7 +3,7 @@ package aExercise.undoOperationInGame.strategies;
 import aExercise.undoOperationInGame.model.GameState;
 import aExercise.undoOperationInGame.model.TicTacToe;
 
-public class SnapshotUndoStrategy implements UndoStrategy {
+public class SnapshotStrategy implements ReversibleMoveStrategy {
 
     @Override
     public void makeMove(TicTacToe game, int row, int col) {

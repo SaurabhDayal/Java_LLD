@@ -35,14 +35,14 @@ public class Main {
         System.out.print("Enter choice (1-4): ");
 
         int choice = scanner.nextInt(); // Read user input
-        UndoStrategy strategy = switch (choice) {
-            case 1 -> new StackUndoStrategy(); // Stack-based undo
-            case 2 -> new SnapshotUndoStrategy(); // Snapshot-based undo
-            case 3 -> new IncrementalUndoStrategy(); // Incremental undo
-            case 4 -> new VersioningUndoStrategy(); // Versioning undo
+        ReversibleMoveStrategy strategy = switch (choice) {
+            case 1 -> new StackStrategy(); // Stack-based undo
+            case 2 -> new SnapshotStrategy(); // Snapshot-based undo
+            case 3 -> new IncrementalStrategy(); // Incremental undo
+            case 4 -> new VersioningStrategy(); // Versioning undo
             default -> {
                 System.out.println("Invalid choice, defaulting to Stack Undo.");
-                yield new StackUndoStrategy();
+                yield new StackStrategy();
             }
         };
 

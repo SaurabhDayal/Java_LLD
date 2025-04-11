@@ -1,6 +1,6 @@
 package aExercise.undoOperationInGame.model;
 
-import aExercise.undoOperationInGame.strategies.UndoStrategy;
+import aExercise.undoOperationInGame.strategies.ReversibleMoveStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,12 +36,12 @@ public class TicTacToe {
     public List<GameState> versionHistory;
 
     // The strategy currently in use
-    public UndoStrategy undoStrategy;
+    public ReversibleMoveStrategy reversibleMoveStrategy;
 
     // =========================
     // Constructor
     // =========================
-    public TicTacToe(UndoStrategy strategy) {
+    public TicTacToe(ReversibleMoveStrategy strategy) {
         // Initialize the board with empty values
         board = new String[3][3];
         for (int i = 0; i < 3; i++) {
@@ -62,7 +62,7 @@ public class TicTacToe {
         versionHistory = new ArrayList<>(); // Versioning-Based Undo
         versionHistory.add(new GameState(board)); // Store initial empty board state
 
-        undoStrategy = strategy; // Set the chosen undo strategy
+        reversibleMoveStrategy = strategy; // Set the chosen undo strategy
     }
 
     // =========================
@@ -71,12 +71,12 @@ public class TicTacToe {
 
     // Makes a move using the selected undo strategy
     public void makeMove(int row, int col) {
-        undoStrategy.makeMove(this, row, col);
+        reversibleMoveStrategy.makeMove(this, row, col);
     }
 
     // Undo the last move using the selected undo strategy
     public void undo() {
-        undoStrategy.undo(this);
+        reversibleMoveStrategy.undo(this);
     }
 
     // =========================
