@@ -1,4 +1,4 @@
-package aExercise.ticTacToe.strategies.botplayingstrategy;
+package aExercise.ticTacToe.strategies.botplayingStrategy;
 
 import aExercise.ticTacToe.models.Board;
 import aExercise.ticTacToe.models.Cell;

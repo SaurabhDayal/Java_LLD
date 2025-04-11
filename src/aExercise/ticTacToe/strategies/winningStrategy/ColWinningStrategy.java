@@ -1,4 +1,4 @@
-package aExercise.ticTacToe.strategies.winningstrategy;
+package aExercise.ticTacToe.strategies.winningStrategy;
 
 import aExercise.ticTacToe.models.Board;
 import aExercise.ticTacToe.models.Move;
@@ -31,5 +31,20 @@ public class ColWinningStrategy implements WinningStrategy {
         }
 
         return false;
+    }
+
+    @Override
+    public void handleUndo(Board board, Move move) {
+        int col = move.getCell().getCol();
+        Character aChar = move.getPlayer().getSymbol().getaChar();
+
+        if (colMaps.containsKey(col)) {
+            Map<Character, Integer> colMap = colMaps.get(col);
+            colMap.put(aChar, colMap.getOrDefault(aChar, 1) - 1);
+
+            if (colMap.get(aChar) <= 0) {
+                colMap.remove(aChar);
+            }
+        }
     }
 }

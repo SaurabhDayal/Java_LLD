@@ -1,4 +1,4 @@
-package aExercise.ticTacToe.strategies.winningstrategy;
+package aExercise.ticTacToe.strategies.winningStrategy;
 
 import aExercise.ticTacToe.models.Board;
 import aExercise.ticTacToe.models.Move;
@@ -35,5 +35,27 @@ public class DiagonalWinningStrategy implements WinningStrategy {
         }
 
         return false;
+    }
+
+    @Override
+    public void handleUndo(Board board, Move move) {
+        int row = move.getCell().getRow();
+        int col = move.getCell().getCol();
+        Character aChar = move.getPlayer().getSymbol().getaChar();
+        int boardSize = board.getDimension();
+
+        if (row == col && leftDiagonalMap.containsKey(aChar)) {
+            leftDiagonalMap.put(aChar, leftDiagonalMap.getOrDefault(aChar, 1) - 1);
+            if (leftDiagonalMap.get(aChar) <= 0) {
+                leftDiagonalMap.remove(aChar);
+            }
+        }
+
+        if (row + col == boardSize - 1 && rightDiagonalMap.containsKey(aChar)) {
+            rightDiagonalMap.put(aChar, rightDiagonalMap.getOrDefault(aChar, 1) - 1);
+            if (rightDiagonalMap.get(aChar) <= 0) {
+                rightDiagonalMap.remove(aChar);
+            }
+        }
     }
 }

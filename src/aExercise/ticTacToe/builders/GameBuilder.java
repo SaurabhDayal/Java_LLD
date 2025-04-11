@@ -3,7 +3,8 @@ package aExercise.ticTacToe.builders;
 import aExercise.ticTacToe.models.Game;
 import aExercise.ticTacToe.models.Player;
 import aExercise.ticTacToe.models.PlayerType;
-import aExercise.ticTacToe.strategies.winningstrategy.WinningStrategy;
+import aExercise.ticTacToe.strategies.reversibleMoveStrategy.ReversibleMoveStrategy;
+import aExercise.ticTacToe.strategies.winningStrategy.WinningStrategy;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -14,16 +15,18 @@ public class GameBuilder {
     private int dimension;
     private List<Player> players;
     private List<WinningStrategy> winningStrategies;
+    private ReversibleMoveStrategy reversibleMoveStrategy;
 
     public GameBuilder() {
         this.players = new ArrayList<>();
         this.dimension = 0;
         this.winningStrategies = new ArrayList<>();
+        this.reversibleMoveStrategy = null;
     }
 
     public Game build() {
         validations();
-        return new Game(dimension, players, winningStrategies);
+        return new Game(dimension, players, winningStrategies, reversibleMoveStrategy);
     }
 
     private void validations() {
@@ -66,6 +69,11 @@ public class GameBuilder {
 
     public GameBuilder setWinningStrategies(List<WinningStrategy> winningStrategies) {
         this.winningStrategies = winningStrategies;
+        return this;
+    }
+
+    public GameBuilder setReversibleMoveStrategy(ReversibleMoveStrategy reversibleMoveStrategy) {
+        this.reversibleMoveStrategy = reversibleMoveStrategy;
         return this;
     }
 }

@@ -5,17 +5,19 @@ import aExercise.ticTacToe.exception.InvalidMoveException;
 import aExercise.ticTacToe.models.Game;
 import aExercise.ticTacToe.models.GameState;
 import aExercise.ticTacToe.models.Player;
-import aExercise.ticTacToe.strategies.winningstrategy.WinningStrategy;
+import aExercise.ticTacToe.strategies.reversibleMoveStrategy.ReversibleMoveStrategy;
+import aExercise.ticTacToe.strategies.winningStrategy.WinningStrategy;
 
 import java.util.List;
 
 public class GameController {
 
-    public Game startGame(int dimension, List<Player> players, List<WinningStrategy> winningStrategies) {
+    public Game startGame(int dimension, List<Player> players, List<WinningStrategy> winningStrategies, ReversibleMoveStrategy reversibleMoveStrategy) {
         return new GameBuilder() // Use GameBuilder directly
                 .setDimension(dimension)
                 .setPlayers(players)
                 .setWinningStrategies(winningStrategies)
+                .setReversibleMoveStrategy(reversibleMoveStrategy)
                 .build();
     }
 
@@ -35,7 +37,7 @@ public class GameController {
         game.printBoard();
     }
 
-    public void undo(Game game) {
-        // TODO: Implement undo logic
+    public void undo(Game game) throws InvalidMoveException {
+        game.undoMove();
     }
 }

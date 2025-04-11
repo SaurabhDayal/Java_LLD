@@ -3,10 +3,12 @@ package aExercise.ticTacToe;
 import aExercise.ticTacToe.controllers.GameController;
 import aExercise.ticTacToe.exception.InvalidMoveException;
 import aExercise.ticTacToe.models.*;
-import aExercise.ticTacToe.strategies.winningstrategy.ColWinningStrategy;
-import aExercise.ticTacToe.strategies.winningstrategy.DiagonalWinningStrategy;
-import aExercise.ticTacToe.strategies.winningstrategy.RowWinningStrategy;
-import aExercise.ticTacToe.strategies.winningstrategy.WinningStrategy;
+import aExercise.ticTacToe.strategies.reversibleMoveStrategy.ReversibleMoveStrategy;
+import aExercise.ticTacToe.strategies.reversibleMoveStrategy.SnapshotStrategy;
+import aExercise.ticTacToe.strategies.winningStrategy.ColWinningStrategy;
+import aExercise.ticTacToe.strategies.winningStrategy.DiagonalWinningStrategy;
+import aExercise.ticTacToe.strategies.winningStrategy.RowWinningStrategy;
+import aExercise.ticTacToe.strategies.winningStrategy.WinningStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +43,10 @@ public class TicTacToeMain {
                 new DiagonalWinningStrategy()
         );
 
-        return gameController.startGame(dimension, players, winningStrategies);
+//        ReversibleMoveStrategy reversibleMoveStrategy = new StackStrategy();
+        ReversibleMoveStrategy reversibleMoveStrategy = new SnapshotStrategy();
+
+        return gameController.startGame(dimension, players, winningStrategies, reversibleMoveStrategy);
     }
 
     private static void playGame(Game game) throws InvalidMoveException {
