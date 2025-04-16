@@ -40,10 +40,15 @@ public class ColWinningStrategy implements WinningStrategy {
 
         if (colMaps.containsKey(col)) {
             Map<Character, Integer> colMap = colMaps.get(col);
-            colMap.put(aChar, colMap.getOrDefault(aChar, 1) - 1);
 
-            if (colMap.get(aChar) <= 0) {
-                colMap.remove(aChar);
+            if (colMap.containsKey(aChar)) {
+                int count = colMap.get(aChar) - 1;
+
+                if (count < 1) {
+                    colMap.remove(aChar);
+                } else {
+                    colMap.put(aChar, count);
+                }
             }
         }
     }

@@ -35,10 +35,15 @@ public class RowWinningStrategy implements WinningStrategy {
 
         if (rowMaps.containsKey(row)) {
             Map<Character, Integer> currRowMap = rowMaps.get(row);
-            currRowMap.put(aChar, currRowMap.getOrDefault(aChar, 1) - 1);
 
-            if (currRowMap.get(aChar) <= 0) {
-                currRowMap.remove(aChar);
+            if (currRowMap.containsKey(aChar)) {
+                int count = currRowMap.get(aChar) - 1;
+
+                if (count < 1) {
+                    currRowMap.remove(aChar);
+                } else {
+                    currRowMap.put(aChar, count);
+                }
             }
         }
     }

@@ -1,10 +1,10 @@
 package aExercise.ticTacToe.factories;
 
 import aExercise.ticTacToe.models.BotDifficultyLevel;
-import aExercise.ticTacToe.strategies.botplayingStrategy.BotPlayingStrategy;
-import aExercise.ticTacToe.strategies.botplayingStrategy.EasyBotPlayingStrategy;
-import aExercise.ticTacToe.strategies.botplayingStrategy.HardBotPlayingStrategy;
-import aExercise.ticTacToe.strategies.botplayingStrategy.MediumBotPlayingStrategy;
+import aExercise.ticTacToe.strategies.botPlayingStrategy.BotPlayingStrategy;
+import aExercise.ticTacToe.strategies.botPlayingStrategy.EasyBotPlayingStrategy;
+import aExercise.ticTacToe.strategies.botPlayingStrategy.HardBotPlayingStrategy;
+import aExercise.ticTacToe.strategies.botPlayingStrategy.MediumBotPlayingStrategy;
 
 public class BotPlayingStrategyFactory {
     public static BotPlayingStrategy getBotPlayingStrategy(BotDifficultyLevel botDifficultyLevel) {

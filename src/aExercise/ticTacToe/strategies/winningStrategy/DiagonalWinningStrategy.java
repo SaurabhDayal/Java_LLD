@@ -45,16 +45,20 @@ public class DiagonalWinningStrategy implements WinningStrategy {
         int boardSize = board.getDimension();
 
         if (row == col && leftDiagonalMap.containsKey(aChar)) {
-            leftDiagonalMap.put(aChar, leftDiagonalMap.getOrDefault(aChar, 1) - 1);
-            if (leftDiagonalMap.get(aChar) <= 0) {
+            int count = leftDiagonalMap.get(aChar) - 1;
+            if (count <= 0) {
                 leftDiagonalMap.remove(aChar);
+            } else {
+                leftDiagonalMap.put(aChar, count);
             }
         }
 
         if (row + col == boardSize - 1 && rightDiagonalMap.containsKey(aChar)) {
-            rightDiagonalMap.put(aChar, rightDiagonalMap.getOrDefault(aChar, 1) - 1);
-            if (rightDiagonalMap.get(aChar) <= 0) {
+            int count = rightDiagonalMap.get(aChar) - 1;
+            if (count <= 0) {
                 rightDiagonalMap.remove(aChar);
+            } else {
+                rightDiagonalMap.put(aChar, count);
             }
         }
     }
