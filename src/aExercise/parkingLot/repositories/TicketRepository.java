@@ -20,6 +20,10 @@ public class TicketRepository {
 
         // Assign an ID to the ticket before saving it
         ticket.setId(idCounter++);
+
+        // Ensure ticket number is unique
+        ticket.setNumber("TICKET-" + ticket.getId());
+
         ticketsById.put(ticket.getId(), ticket);
         ticketsByNumber.put(ticket.getNumber(), ticket);
         return ticket;

@@ -5,6 +5,7 @@ public class IssueTicketRequestDto {
     private String ownerName;
     private Long gateId;
     private Long operatorId;
+    private String vehicleType;  // Added field for vehicle type
 
     public String getVehicleNumber() {
         return vehicleNumber;
@@ -36,5 +37,13 @@ public class IssueTicketRequestDto {
 
     public void setOperatorId(Long operatorId) {
         this.operatorId = operatorId;
+    }
+
+    public String getVehicleType() {
+        return vehicleType;
+    }
+
+    public void setVehicleType(String vehicleType) {
+        this.vehicleType = vehicleType;
     }
 }

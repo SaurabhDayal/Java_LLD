@@ -11,6 +11,7 @@ public class Bill extends BaseModel {
     private Operator operator;
     private BillStatus billStatus;
     private List<Payment> payments;
+    private Gate gate; // Added gate reference
 
     public Bill() {
         // Initialize payments list to avoid NullPointerException
@@ -63,6 +64,15 @@ public class Bill extends BaseModel {
 
     public void setPayments(List<Payment> payments) {
         this.payments = payments;
+    }
+
+    // Getter and Setter for Gate
+    public Gate getGate() {
+        return gate;
+    }
+
+    public void setGate(Gate gate) {
+        this.gate = gate;
     }
 
     // Method to add a payment to the bill

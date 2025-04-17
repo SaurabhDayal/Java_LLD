@@ -23,7 +23,9 @@ public class BillController {
                     requestDto.getAmount(),
                     requestDto.getPaymentStatus(),
                     requestDto.getPaymentMode(),
-                    requestDto.getReferenceNumber()
+                    requestDto.getReferenceNumber(),
+                    requestDto.getGateId(),
+                    requestDto.getOperatorId()
             );
 
             responseDto.setBill(bill);

@@ -16,7 +16,7 @@ public class ParkingLotRepository {
     }
 
     // Add a ParkingLot to the repository
-    public ParkingLot addParkingLot(ParkingLot parkingLot) {
+    public ParkingLot save(ParkingLot parkingLot) {
         // If the parking lot doesn't have an ID, assign a new unique ID
         if (parkingLot.getId() == null) {
             parkingLot.setId(idCounter++);

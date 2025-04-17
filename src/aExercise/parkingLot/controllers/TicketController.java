@@ -19,7 +19,8 @@ public class TicketController {
                     requestDto.getVehicleNumber(),
                     requestDto.getOwnerName(),
                     requestDto.getGateId(),
-                    requestDto.getOperatorId()
+                    requestDto.getOperatorId(),
+                    requestDto.getVehicleType()
             );
 
             responseDto.setTicket(ticket);

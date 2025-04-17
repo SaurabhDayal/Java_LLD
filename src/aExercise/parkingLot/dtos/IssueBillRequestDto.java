@@ -6,8 +6,10 @@ public class IssueBillRequestDto {
     private String paymentStatus;
     private String paymentMode;
     private String referenceNumber;
+    private Long gateId; // Added gateId
+    private Long operatorId;
 
-    // Getters and Setters
+    // Getters and setters
     public Long getTicketId() {
         return ticketId;
     }
@@ -32,6 +34,14 @@ public class IssueBillRequestDto {
         this.paymentStatus = paymentStatus;
     }
 
+    public Long getOperatorId() {
+        return operatorId;
+    }
+
+    public void setOperatorId(Long operatorId) {
+        this.operatorId = operatorId;
+    }
+
     public String getPaymentMode() {
         return paymentMode;
     }
@@ -46,5 +56,13 @@ public class IssueBillRequestDto {
 
     public void setReferenceNumber(String referenceNumber) {
         this.referenceNumber = referenceNumber;
+    }
+
+    public Long getGateId() {
+        return gateId;
+    }
+
+    public void setGateId(Long gateId) {
+        this.gateId = gateId;
     }
 }
