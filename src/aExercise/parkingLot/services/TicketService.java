@@ -6,26 +6,27 @@ import aExercise.parkingLot.models.ParkingLot;
 import aExercise.parkingLot.models.Ticket;
 import aExercise.parkingLot.models.Vehicle;
 import aExercise.parkingLot.repositories.GateRepository;
+import aExercise.parkingLot.repositories.TicketRepository;
 import aExercise.parkingLot.repositories.VehicleRepository;
 import aExercise.parkingLot.strategies.ParkingSpotAssignmentStrategy;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Optional;
 
 public class TicketService {
-    private GateRepository gateRepository;
-    private VehicleRepository vehicleRepository;
-    private ParkingSpotAssignmentStrategy parkingSpotAssignmentStrategy;
-    private HashMap<Long, Ticket> ticketStorage = new HashMap<>();
-    private Long ticketIdCounter = 1L;
+    private final GateRepository gateRepository;
+    private final VehicleRepository vehicleRepository;
+    private final ParkingSpotAssignmentStrategy parkingSpotAssignmentStrategy;
+    private final TicketRepository ticketRepository;
 
     public TicketService(GateRepository gateRepository,
                          VehicleRepository vehicleRepository,
-                         ParkingSpotAssignmentStrategy parkingSpotAssignmentStrategy) {
+                         ParkingSpotAssignmentStrategy parkingSpotAssignmentStrategy,
+                         TicketRepository ticketRepository) {
         this.gateRepository = gateRepository;
         this.vehicleRepository = vehicleRepository;
         this.parkingSpotAssignmentStrategy = parkingSpotAssignmentStrategy;
+        this.ticketRepository = ticketRepository;
     }
 
     public Ticket issueTicket(String vehicleNumber,
@@ -36,9 +37,8 @@ public class TicketService {
         Ticket ticket = new Ticket();
         ticket.setEntryTime(new Date());
 
-        // Get the Gate object
+        // Gate validation
         Optional<Gate> optionalGate = gateRepository.findByGateId(gateId);
-
         if (optionalGate.isEmpty()) {
             throw new GateNotFoundException("Invalid gate id passed");
         }
@@ -47,39 +47,32 @@ public class TicketService {
         ticket.setGate(gate);
         ticket.setOperator(gate.getOperator());
 
-        // Check for existing vehicle or create a new one
+        // Vehicle check or creation
         Optional<Vehicle> optionalVehicle = vehicleRepository.findByVehicleNumber(vehicleNumber);
-        Vehicle vehicle = null;
-        if (optionalVehicle.isEmpty()) {
-            // Vehicle is not present in the DB, create and save
-            vehicle = new Vehicle();
-            vehicle.setNumber(vehicleNumber);
-            vehicle.setOwnerName(ownerName);
-            vehicle = vehicleRepository.save(vehicle); // Save the vehicle in the repository
-        } else {
-            vehicle = optionalVehicle.get();
-        }
+        Vehicle vehicle = optionalVehicle.orElseGet(() -> {
+            Vehicle newVehicle = new Vehicle();
+            newVehicle.setNumber(vehicleNumber);
+            newVehicle.setOwnerName(ownerName);
+            return vehicleRepository.save(newVehicle);
+        });
+
         ticket.setVehicle(vehicle);
 
-        // Assign a parking spot based on strategy
+        // Assign parking spot
         ParkingLot parkingLot = gate.getParkingLot();
         ticket.setParkingSpot(parkingSpotAssignmentStrategy.assignParkingSpot(parkingLot, vehicle));
 
-        // Assign ticket ID and store the ticket
-        ticket.setId(ticketIdCounter++);
-        ticketStorage.put(ticket.getId(), ticket);
+        // Save ticket in repository
+        Ticket savedTicket = ticketRepository.save(ticket);
 
-        return ticket;
+        return savedTicket;
     }
 
     public boolean deleteTicket(Long ticketId) {
-        if (!ticketStorage.containsKey(ticketId)) {
-            return false;
-        }
-        ticketStorage.remove(ticketId);
-        return true;
+        return ticketRepository.deleteById(ticketId);
     }
 }
+
 
 /*
 Object Relation Mapping (ORM) -> Hibernate (Java + SpringBoot)

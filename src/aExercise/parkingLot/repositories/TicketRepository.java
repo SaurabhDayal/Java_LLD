@@ -36,7 +36,7 @@ public class TicketRepository {
     }
 
     // Delete a Ticket by its ID
-    public boolean delete(Long ticketId) {
+    public boolean deleteById(Long ticketId) {
         if (ticketsById.containsKey(ticketId)) {
             Ticket ticket = ticketsById.remove(ticketId);
             ticketsByNumber.remove(ticket.getNumber());
