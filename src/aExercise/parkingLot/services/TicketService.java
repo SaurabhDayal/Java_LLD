@@ -2,6 +2,7 @@ package aExercise.parkingLot.services;
 
 import aExercise.parkingLot.exceptions.GateNotFoundException;
 import aExercise.parkingLot.exceptions.OperatorNotFoundException;
+import aExercise.parkingLot.exceptions.ParkingSpotNotAvailableException;
 import aExercise.parkingLot.models.*;
 import aExercise.parkingLot.repositories.GateRepository;
 import aExercise.parkingLot.repositories.OperatorRepository;
@@ -34,7 +35,7 @@ public class TicketService {
                               String ownerName,
                               Long gateId,
                               Long operatorId,
-                              String vehicleType) throws GateNotFoundException {
+                              String vehicleType) throws GateNotFoundException, OperatorNotFoundException {
 
         Ticket ticket = new Ticket();
         ticket.setEntryTime(new Date());
@@ -69,9 +70,17 @@ public class TicketService {
 
         ticket.setVehicle(vehicle);
 
-        // Assign parking spot
+        // Assign parking spot and handle no availability
         ParkingLot parkingLot = gate.getParkingLot();
-        ticket.setParkingSpot(parkingSpotAssignmentStrategy.assignParkingSpot(parkingLot, vehicle));
+        ParkingSpot assignedSpot = null;
+        try {
+            assignedSpot = parkingSpotAssignmentStrategy.assignParkingSpot(parkingLot, vehicle);
+        } catch (ParkingSpotNotAvailableException e) {
+            System.out.println("Error: " + e.getMessage());
+            // Handle the exception (either recover or notify)
+            return null;  // Return null or another value depending on your recovery strategy
+        }
+        ticket.setParkingSpot(assignedSpot);
 
         // Generate and set a unique ticket number
         ticket.setNumber("TICKET-" + ticket.getId());
@@ -81,6 +90,7 @@ public class TicketService {
 
         return savedTicket;
     }
+
 
     public boolean deleteTicket(Long ticketId) {
         Optional<Ticket> ticket = ticketRepository.findById(ticketId);

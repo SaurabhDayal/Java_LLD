@@ -1,5 +1,6 @@
 package aExercise.parkingLot.strategies;
 
+import aExercise.parkingLot.exceptions.ParkingSpotNotAvailableException;
 import aExercise.parkingLot.models.*;
 
 import java.util.List;
@@ -24,7 +25,7 @@ public class NearestSpotAssignmentStrategy implements ParkingSpotAssignmentStrat
             }
         }
 
-        // If no available spots, return null
-        return null;
+        // If no available spots, throw a custom exception
+        throw new ParkingSpotNotAvailableException("No parking spots available for the vehicle type: " + vehicle.getVehicleType());
     }
 }

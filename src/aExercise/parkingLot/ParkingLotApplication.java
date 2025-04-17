@@ -20,12 +20,12 @@ public class ParkingLotApplication {
 
     private static TicketController ticketController;
     private static BillController billController;
-    private static GateRepository gateRepository;
+
     private static VehicleRepository vehicleRepository;
+    private static GateRepository gateRepository;
     private static TicketRepository ticketRepository;
     private static BillRepository billRepository;
     private static OperatorRepository operatorRepository;
-    private static ParkingLotRepository parkingLotRepository;
 
     public static void main(String[] args) {
         init();
@@ -36,6 +36,7 @@ public class ParkingLotApplication {
         ticketRequestDto.setOperatorId(1L);
         ticketRequestDto.setOwnerName("Shivam");
         ticketRequestDto.setVehicleNumber("KA01X1111");
+//        ticketRequestDto.setVehicleType(String.valueOf(VehicleType.SUV)); // todo: change to SEDAN for working case
         ticketRequestDto.setVehicleType(String.valueOf(VehicleType.SEDAN));
 
         IssueTicketResponseDto ticketResponseDto = ticketController.issueTicket(ticketRequestDto);
@@ -48,6 +49,7 @@ public class ParkingLotApplication {
             System.out.println("- Gate ID: " + ticket.getGate().getId());
             System.out.println("- Operator: " + ticket.getOperator().getName());  // Corrected: Print ticket operator name
             System.out.println("- Entry Time: " + ticket.getEntryTime());
+            System.out.println("- ParkingSpot: " + ticket.getParkingSpot().getSpotNumber());
         } else {
             System.out.println("Ticket issuing failed.");
             return;
@@ -86,8 +88,8 @@ public class ParkingLotApplication {
     }
 
     private static void init() {
-        gateRepository = new GateRepository();
         vehicleRepository = new VehicleRepository();
+        gateRepository = new GateRepository();
         ticketRepository = new TicketRepository();
         billRepository = new BillRepository();
         operatorRepository = new OperatorRepository();
@@ -162,5 +164,4 @@ public class ParkingLotApplication {
         ticketController = new TicketController(ticketService);
         billController = new BillController(billService);
     }
-
 }
