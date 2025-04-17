@@ -1,15 +1,18 @@
 package aExercise.parkingLot.dtos;
 
-public class DeleteTicketResponseDto {
-    private boolean success;
+import aExercise.parkingLot.models.Bill;
+
+public class IssueBillResponseDto {
+    private Bill bill;
     private ResponseStatus responseStatus;
 
-    public boolean isSuccess() {
-        return success;
+    // Getters and Setters
+    public Bill getBill() {
+        return bill;
     }
 
-    public void setSuccess(boolean success) {
-        this.success = success;
+    public void setBill(Bill bill) {
+        this.bill = bill;
     }
 
     public ResponseStatus getResponseStatus() {

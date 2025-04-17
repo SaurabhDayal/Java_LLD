@@ -32,6 +32,18 @@ public class TicketController {
     }
 
     public DeleteTicketResponseDto deleteTicket(DeleteTicketRequestDto requestDto) {
-        return null;
+        DeleteTicketResponseDto responseDto = new DeleteTicketResponseDto();
+
+        try {
+            boolean deleted = ticketService.deleteTicket(requestDto.getTicketId());
+
+            responseDto.setSuccess(deleted);
+            responseDto.setResponseStatus(deleted ? ResponseStatus.SUCCESS : ResponseStatus.FAILURE);
+        } catch (Exception e) {
+            responseDto.setSuccess(false);
+            responseDto.setResponseStatus(ResponseStatus.FAILURE);
+        }
+
+        return responseDto;
     }
 }

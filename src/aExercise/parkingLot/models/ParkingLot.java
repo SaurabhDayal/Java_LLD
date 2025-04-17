@@ -3,10 +3,19 @@ package aExercise.parkingLot.models;
 import java.util.List;
 
 public class ParkingLot extends BaseModel {
+    private String name;
     private List<ParkingFloor> parkingFloors;
     private List<Gate> gates;
     private List<VehicleType> supportedVehicleTypes;
     private ParkingLotStatus parkingLotStatus;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public List<ParkingFloor> getParkingFloors() {
         return parkingFloors;

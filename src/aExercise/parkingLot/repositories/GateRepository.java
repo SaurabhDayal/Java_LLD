@@ -6,12 +6,22 @@ import java.util.HashMap;
 import java.util.Optional;
 
 public class GateRepository {
-    //Gate Table
-    private HashMap<Long, Gate> gates = new HashMap<>();
+    // In-memory storage for Gates
+    private HashMap<Long, Gate> gatesById = new HashMap<>();
+    private Long idCounter = 1L;  // ID counter for Gates
 
-    //CRUD operations on Gate table.
-    //select * from gates where id =
+    // Find a Gate by ID
     public Optional<Gate> findByGateId(Long id) {
-        return Optional.of(gates.get(id));
+        return Optional.ofNullable(gatesById.get(id));
+    }
+
+    // Add a Gate
+    public Gate addGate(Gate gate) {
+        // If gate does not already have an ID, assign a new unique ID
+        if (gate.getId() == null) {
+            gate.setId(idCounter++);
+        }
+        gatesById.put(gate.getId(), gate);
+        return gate;
     }
 }
