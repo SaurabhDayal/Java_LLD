@@ -16,6 +16,9 @@ import aExercise.parkingLot.strategies.ParkingSpotAssignmentStrategy;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+In Memory Database using repo layer to store data
+ */
 public class ParkingLotApplication {
 
     private static TicketController ticketController;
