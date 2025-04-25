@@ -1,7 +1,7 @@
 package aRateLimiter;
 
 import aRateLimiter.fixed_window_counter_03.FixedWindowRateLimiter;
-import aRateLimiter.leaking_bucket_02.LeakyBucketRateLimiter;
+import aRateLimiter.leaky_bucket_02.LeakyBucketRateLimiter;
 import aRateLimiter.sliding_window_counter_05.SlidingWindowCounterRateLimiter;
 import aRateLimiter.sliding_window_log_04.SlidingWindowLogRateLimiter;
 import aRateLimiter.token_bucket_01.TokenBucketRateLimiter;

@@ -1,4 +1,4 @@
-package aRateLimiter.leaking_bucket_02;
+package aRateLimiter.leaky_bucket_02;
 
 import java.util.LinkedList;
 import java.util.Queue;
