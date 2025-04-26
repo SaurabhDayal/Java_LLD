@@ -1,13 +1,13 @@
 package aRateLimiter.sliding_window_counter_05;
 
-import aRateLimiter.RateLimiter;
-
+import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class SlidingWindowCounterRateLimiter implements RateLimiter {
+public class SlidingWindowCounterRateLimiter {
     private final int limit; // The maximum number of requests allowed in the sliding window
     private final long windowSizeMillis; // The duration of the sliding window in milliseconds
     private final ConcurrentHashMap<Long, Integer> counter = new ConcurrentHashMap<>(); // Map to track request counts per time window
+    private final Random random = new Random(); // Random object for simulating random delays
 
     // Constructor to initialize the rate limiter with a limit and window size
     public SlidingWindowCounterRateLimiter(int limit, long windowSizeMillis) {
@@ -16,7 +16,6 @@ public class SlidingWindowCounterRateLimiter implements RateLimiter {
     }
 
     // Method to check if a request is allowed based on the sliding window counter logic
-    @Override
     public synchronized boolean allowRequest() {
         long now = System.currentTimeMillis(); // Get the current timestamp in milliseconds
 
@@ -54,5 +53,21 @@ public class SlidingWindowCounterRateLimiter implements RateLimiter {
         counter.keySet().removeIf(windowKey ->
                 (now - windowKey * windowSizeMillis) > windowSizeMillis // Remove if window is older than allowed timeframe
         );
+    }
+
+    // Main method for testing the Sliding Window Counter Rate Limiter
+    public static void main(String[] args) {
+        SlidingWindowCounterRateLimiter rateLimiter = new SlidingWindowCounterRateLimiter(5, 1000); // Limit: 5 requests, Window Size: 1 second
+        System.out.println("Testing Sliding Window Counter Rate Limiter...\n");
+
+        for (int i = 0; i < 25; i++) {
+            System.out.println("Request " + (i + 1) + " allowed? " + rateLimiter.allowRequest());
+            try {
+                // Simulate a random delay between 50ms and 500ms
+                int sleepTime = 50 + new Random().nextInt(201); // Random sleep time between 50ms and 250ms
+                Thread.sleep(sleepTime); // Sleep for the random delay
+            } catch (InterruptedException ignored) {
+            }
+        }
     }
 }
