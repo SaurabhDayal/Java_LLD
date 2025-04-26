@@ -15,6 +15,7 @@ public class SlidingWindowCounterRateLimiter {
         this.counter = new ConcurrentHashMap<>();
     }
 
+    // Method to allow or reject requests based on the sliding window
     public synchronized boolean allowRequest() {
         long now = System.currentTimeMillis(); // Get the current timestamp in milliseconds
 
@@ -30,32 +31,46 @@ public class SlidingWindowCounterRateLimiter {
         int previousCount = counter.get(windowKey - 1);
 
         // Compute a weighted count to smooth the transition between windows
-        double previousWindowWeight = (double) (now % windowSizeMillis) / windowSizeMillis; // Percentage of time passed in current window
-        double weightedCount = (previousCount * previousWindowWeight) + currentCount;
+        double currentWindowWeight = (double) (now % windowSizeMillis) / windowSizeMillis;
+        double previousWindowWeight = 1 - currentWindowWeight; // Weight for the previous window
 
-        // If the weighted request count is below the limit, allow the request and update the counter
-        if (weightedCount < limit) {
-            counter.put(windowKey, currentCount + 1); // Increment request count for the current window
-            removeOldEntries(now); // Remove outdated window entries
+        // Calculate the weighted previous count
+        double weightedPreviousCount = previousCount * previousWindowWeight;
+
+        // Total request count is the weighted previous count plus the current count
+        double totalCount = weightedPreviousCount + currentCount;
+
+        // If the total count is below the limit, allow the request
+        if (totalCount < limit) {
+            counter.put(windowKey, currentCount + 1); // Increment the current window counter
+            removeOldEntries(now); // Clean up outdated window entries
             System.out.println("✅ Accepted a request - Hitting the server API");
             return true;
         }
 
-        // If the limit is exceeded, reject the request
+        // If the request exceeds the limit, reject it
         removeOldEntries(now); // Clean up old entries
         System.out.println("🚫 Dropped a request - Returning 429 Too Many Requests");
         return false;
     }
-    
-    private void removeOldEntries(long now) {
-        counter.keySet().removeIf(windowKey ->
-                (now - windowKey * windowSizeMillis) > windowSizeMillis // Remove if window is older than allowed timeframe
-        );
-    }
 
+    // Method to remove old window entries from the counter map
+    private void removeOldEntries(long now) {
+        // Determine the current window bucket by dividing the current time by window size
+        long currentWindowKey = now / windowSizeMillis;
+
+        // Iterate through the counter map and remove windows older than the current window
+        for (Long key : counter.keySet()) {
+            // If the key is older than the current window, remove it
+            if (key < currentWindowKey - 1) {
+                counter.remove(key);
+            }
+        }
+    }
+    
     public static void main(String[] args) {
         SlidingWindowCounterRateLimiter rateLimiter = new SlidingWindowCounterRateLimiter(5, 1000); // Limit: 5 requests, Window Size: 1 second
-        Random random = new Random(); // Moved Random inside main
+        Random random = new Random();
         System.out.println("Testing Sliding Window Counter Rate Limiter...\n");
 
         for (int i = 0; i < 25; i++) {
