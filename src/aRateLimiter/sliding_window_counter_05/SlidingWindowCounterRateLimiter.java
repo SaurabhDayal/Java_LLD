@@ -4,18 +4,17 @@ import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class SlidingWindowCounterRateLimiter {
-    private final int limit; // The maximum number of requests allowed in the sliding window
-    private final long windowSizeMillis; // The duration of the sliding window in milliseconds
-    private final ConcurrentHashMap<Long, Integer> counter = new ConcurrentHashMap<>(); // Map to track request counts per time window
-    private final Random random = new Random(); // Random object for simulating random delays
+    private final int limit;                                // The maximum number of requests allowed in the sliding window
+    private final long windowSizeMillis;                    // The duration of the sliding window in milliseconds
+    private final ConcurrentHashMap<Long, Integer> counter; // Map to track request counts per time window
 
     // Constructor to initialize the rate limiter with a limit and window size
     public SlidingWindowCounterRateLimiter(int limit, long windowSizeMillis) {
-        this.limit = limit; // Set the request limit
-        this.windowSizeMillis = windowSizeMillis; // Set the window size duration
+        this.limit = limit;
+        this.windowSizeMillis = windowSizeMillis;
+        this.counter = new ConcurrentHashMap<>();
     }
 
-    // Method to check if a request is allowed based on the sliding window counter logic
     public synchronized boolean allowRequest() {
         long now = System.currentTimeMillis(); // Get the current timestamp in milliseconds
 
@@ -38,34 +37,33 @@ public class SlidingWindowCounterRateLimiter {
         if (weightedCount < limit) {
             counter.put(windowKey, currentCount + 1); // Increment request count for the current window
             removeOldEntries(now); // Remove outdated window entries
-            System.out.println("Accepted a request - Hitting the server API"); // ✅ API request is sent here
+            System.out.println("✅ Accepted a request - Hitting the server API");
             return true;
         }
 
         // If the limit is exceeded, reject the request
         removeOldEntries(now); // Clean up old entries
-        System.out.println("Dropped a request - Returning 429 Too Many Requests"); // 🚫 API is NOT hit, request is rejected
+        System.out.println("🚫 Dropped a request - Returning 429 Too Many Requests");
         return false;
     }
-
-    // Method to remove outdated window entries from the counter map
+    
     private void removeOldEntries(long now) {
         counter.keySet().removeIf(windowKey ->
                 (now - windowKey * windowSizeMillis) > windowSizeMillis // Remove if window is older than allowed timeframe
         );
     }
 
-    // Main method for testing the Sliding Window Counter Rate Limiter
     public static void main(String[] args) {
         SlidingWindowCounterRateLimiter rateLimiter = new SlidingWindowCounterRateLimiter(5, 1000); // Limit: 5 requests, Window Size: 1 second
+        Random random = new Random(); // Moved Random inside main
         System.out.println("Testing Sliding Window Counter Rate Limiter...\n");
 
         for (int i = 0; i < 25; i++) {
             System.out.println("Request " + (i + 1) + " allowed? " + rateLimiter.allowRequest());
             try {
-                // Simulate a random delay between 50ms and 500ms
-                int sleepTime = 50 + new Random().nextInt(201); // Random sleep time between 50ms and 250ms
-                Thread.sleep(sleepTime); // Sleep for the random delay
+                // Simulate a random delay between 50ms and 250ms
+                int sleepTime = 50 + random.nextInt(201);
+                Thread.sleep(sleepTime);
             } catch (InterruptedException ignored) {
             }
         }

@@ -2,70 +2,70 @@ package aRateLimiter.leaky_bucket_02;
 
 import java.util.LinkedList;
 import java.util.Queue;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.Random;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class LeakyBucketRateLimiter {
-    private final int capacity;                           // Maximum number of requests the bucket can hold
-    private final long leakRateMillis;                    // Time interval (in milliseconds) for leaking requests
-    private final Queue<Long> queue = new LinkedList<>(); // Queue to store request timestamps
-    private final Timer leakTimer;                        // Timer to schedule leaking requests at fixed intervals
+    private final int capacity;                            // Maximum number of requests the bucket can hold
+    private final long leakRateMillis;                     // Time interval (in milliseconds) for leaking requests
+    private final Queue<Long> bucket = new LinkedList<>(); // Bucket to store incoming request timestamps
+    private final ScheduledExecutorService scheduler;      // Scheduler to periodically leak requests
 
-    // Constructor initializes the bucket with a fixed capacity and leak rate
+    // Constructor initializes the leaky bucket with given capacity and leak rate
     public LeakyBucketRateLimiter(int capacity, long leakRateMillis) {
         this.capacity = capacity;
         this.leakRateMillis = leakRateMillis;
 
-        // Start a timer to leak requests at fixed intervals
-        this.leakTimer = new Timer(true); // Daemon thread (runs in the background)
-        this.leakTimer.scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
-                leakRequest(); // Leak (process) a request at every interval
-            }
-        }, leakRateMillis, leakRateMillis);
+        // Start the leak scheduler to leak requests at fixed intervals
+        this.scheduler = Executors.newSingleThreadScheduledExecutor();
+        this.scheduler.scheduleAtFixedRate(this::leakRequest,
+                leakRateMillis, leakRateMillis, TimeUnit.MILLISECONDS);
     }
 
-    // Leaks (removes) a request from the bucket at fixed intervals (simulating request processing)
+    // Method to leak (process) a request from the bucket
     private synchronized void leakRequest() {
-        if (!queue.isEmpty()) {
-            queue.poll(); // Remove the oldest request from the queue (simulating sending request to server)
-            System.out.println("Leaked a request - Hitting the server API"); // ✅ API request is sent here
+        if (!bucket.isEmpty()) {
+            bucket.poll(); // Remove the oldest request from the bucket
+            System.out.println("✅ Leaked a request - Hitting the server API");
         }
     }
 
-    // Method to check if a request can be added to the bucket
+    // Method to check if a new request can be accepted into the bucket
     public synchronized boolean allowRequest() {
-        if (queue.size() < capacity) {
-            // Bucket is not full, accept the request
-            queue.add(System.currentTimeMillis()); // Add request timestamp to the queue
-            System.out.println("Accepted a request - Waiting to be processed"); // ✅ Request is added but not sent yet
+        if (bucket.size() < capacity) {
+            bucket.add(System.currentTimeMillis()); // Add the request timestamp into the bucket
+            System.out.println("✅ Accepted a request - Waiting to be processed");
             return true;
         }
-
-        // Bucket is full, reject the request
-        System.out.println("Dropped a request - Returning 429 Too Many Requests"); // 🚫 API is NOT hit, request is rejected
+        System.out.println("🚫 Dropped a request - Returning 429 Too Many Requests");
         return false;
     }
 
-    // Stops the leak timer when no longer needed
+    // Stops the leak scheduler when no longer needed
     public void stop() {
-        leakTimer.cancel();
+        scheduler.shutdown();
+        System.out.println("\n🛑 Leak thread stopped.");
     }
 
-    // Main method for testing the Leaky Bucket Rate Limiter
+    // Main method to test the Leaky Bucket Rate Limiter
     public static void main(String[] args) {
         LeakyBucketRateLimiter rateLimiter = new LeakyBucketRateLimiter(5, 1000); // Capacity: 5 requests, Leak Rate: 1 second
-        System.out.println("Testing Leaky Bucket Rate Limiter...\n");
+        Random random = new Random(); // Moved Random inside main
+        System.out.println("Testing Leaky Bucket Rate Limiter with ScheduledExecutorService...\n");
 
+        // Simulating 25 requests
         for (int i = 0; i < 25; i++) {
             System.out.println("Request " + (i + 1) + " allowed? " + rateLimiter.allowRequest());
             try {
-                Thread.sleep(200); // Sleep for 200ms between requests
+                // Sleep for random time between 50ms and 250ms
+                int sleepTimeMillis = 50 + random.nextInt(201);
+                Thread.sleep(sleepTimeMillis);
             } catch (InterruptedException ignored) {
             }
         }
 
-        rateLimiter.stop(); // Stop the leak timer when done
+        rateLimiter.stop(); // Stop the leak scheduler once testing is done
     }
 }

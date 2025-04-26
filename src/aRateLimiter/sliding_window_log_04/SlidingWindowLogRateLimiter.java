@@ -8,7 +8,6 @@ public class SlidingWindowLogRateLimiter {
     private final int limit;                                   // The maximum number of requests allowed in the sliding window
     private final long windowSizeMillis;                       // The duration of the sliding window in milliseconds
     private final Queue<Long> timestamps = new LinkedList<>(); // Queue to store timestamps of incoming requests
-    private final Random random = new Random();                // Random object for simulating random delays
 
     // Constructor to initialize the rate limiter with a limit and window size
     public SlidingWindowLogRateLimiter(int limit, long windowSizeMillis) {
@@ -28,26 +27,27 @@ public class SlidingWindowLogRateLimiter {
         // If the number of requests in the window is less than the limit, allow the request
         if (timestamps.size() < limit) {
             timestamps.add(now); // Add the current timestamp to the queue
-            System.out.println("Accepted a request - Hitting the server API"); // ✅ API request is sent here
+            System.out.println("✅ Accepted a request - Hitting the server API");
             return true;
         }
 
         // If the number of requests in the window exceeds the limit, deny the request
-        System.out.println("Dropped a request - Returning 429 Too Many Requests"); // 🚫 API is NOT hit, request is rejected
+        System.out.println("🚫 Dropped a request - Returning 429 Too Many Requests");
         return false;
     }
 
     // Main method for testing the Sliding Window Log Rate Limiter
     public static void main(String[] args) {
-        SlidingWindowLogRateLimiter rateLimiter = new SlidingWindowLogRateLimiter(5, 1000); // Limit: 5 requests, Window Size: 1 second
+        SlidingWindowLogRateLimiter rateLimiter = new SlidingWindowLogRateLimiter(5, 1000); // 5 requests per 1 second
+        Random random = new Random(); // Moved Random object inside main method
         System.out.println("Testing Sliding Window Log Rate Limiter...\n");
 
         for (int i = 0; i < 25; i++) {
             System.out.println("Request " + (i + 1) + " allowed? " + rateLimiter.allowRequest());
             try {
-                // Simulate random delays between 50ms and 250ms (just like the Go code)
-                int sleepTime = 50 + rateLimiter.random.nextInt(201); // Random sleep time between 50ms and 250ms
-                Thread.sleep(sleepTime); // Sleep for the random delay
+                // Sleep for a random time between 50ms and 250ms
+                int sleepTimeMillis = 50 + random.nextInt(201); // Random between 50 and 250
+                Thread.sleep(sleepTimeMillis);
             } catch (InterruptedException ignored) {
             }
         }
