@@ -1,5 +1,6 @@
 package aMachineCoding.vendingMachine.states;
 
+import aMachineCoding.vendingMachine.exceptions.InsufficientBalanceException;
 import aMachineCoding.vendingMachine.exceptions.InvalidOperationException;
 import aMachineCoding.vendingMachine.models.Item;
 import aMachineCoding.vendingMachine.models.VendingMachine;
@@ -18,24 +19,29 @@ public class SelectionState implements State {
 
     @Override
     public void selectItem(String itemCode) throws InvalidOperationException {
-        throw new InvalidOperationException("An item is already selected. Dispense the item or cancel the transaction.");
+        Item item = vendingMachine.getInventory().findItemByCode(itemCode);
+        if (item == null) {
+            throw new InvalidOperationException("Invalid item code.");
+        }
+        if (!item.isAvailable()) {
+            throw new InvalidOperationException("Item out of stock.");
+        }
+        if (vendingMachine.getBalance() < item.getPrice()) {
+            throw new InsufficientBalanceException("Insert more coins to purchase this item.");
+        }
+        vendingMachine.setCurrentItem(item);
+        System.out.println(item.getType() + " selected.");
     }
 
     @Override
     public void dispenseItem() throws Exception {
         Item item = vendingMachine.getCurrentItem();
         if (item != null) {
-            System.out.println("Dispensing: " + item.getType());
-            vendingMachine.dispenseCurrentProduct();
-            vendingMachine.resetBalance();
-            vendingMachine.resetSelectedProduct();
+            vendingMachine.changeState(vendingMachine.getDispenseState());
+            vendingMachine.dispenseItem();
         } else {
-            System.out.println("No item selected to dispense.");
+            throw new InvalidOperationException("No item selected to dispense.");
         }
-        if (vendingMachine.isEmpty()) {
-            System.out.println("The vending machine is out of stock.");
-        }
-        vendingMachine.changeState(vendingMachine.getIdleState());
     }
 
     @Override
