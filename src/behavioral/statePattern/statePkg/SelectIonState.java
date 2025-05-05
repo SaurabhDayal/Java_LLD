@@ -4,7 +4,7 @@ package behavioral.statePattern.statePkg;
 import behavioral.statePattern.vendingMachinePkg.Item;
 import behavioral.statePattern.vendingMachinePkg.VendingMachine;
 
-public class SelectItemState implements State {
+public class SelectIonState implements State {
 
     @Override
     public void insertCoin(VendingMachine vendingMachine, int amount) {

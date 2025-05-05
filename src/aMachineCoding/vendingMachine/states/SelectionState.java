@@ -3,10 +3,10 @@ package aMachineCoding.vendingMachine.states;
 import aMachineCoding.vendingMachine.models.Item;
 import aMachineCoding.vendingMachine.models.VendingMachine;
 
-public class SelectItemState implements State {
+public class SelectionState implements State {
     private final VendingMachine vendingMachine;
 
-    public SelectItemState(VendingMachine vendingMachine) {
+    public SelectionState(VendingMachine vendingMachine) {
         this.vendingMachine = vendingMachine;
     }
 

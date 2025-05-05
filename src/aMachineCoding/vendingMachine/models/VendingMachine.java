@@ -23,7 +23,7 @@ public class VendingMachine {
         idleState = new IdleState(this);
         insertCoinState = new InsertCoinState(this);
         dispenseState = new DispenseState(this);
-        selectionState = new SelectItemState(this);
+        selectionState = new SelectionState(this);
 
         currentState = idleState;
     }
@@ -50,7 +50,7 @@ public class VendingMachine {
     public State getSelectionState() {
         return selectionState;
     }
-    
+
     public void addCoin(int amount) {
         balance += amount;
     }

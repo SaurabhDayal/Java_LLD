@@ -18,7 +18,7 @@ public class InsertCoinState implements State {
         if (item != null && item.isAvailable() && vendingMachine.getBalance() >= item.getPrice()) {
             vendingMachine.setCurrentProduct(item);
             System.out.println(item.getType() + " selected.");
-            vendingMachine.changeState(new SelectItemState());
+            vendingMachine.changeState(new SelectIonState());
         } else {
             System.out.println("Not enough money or item out of stock.");
         }
