@@ -1,5 +1,7 @@
 package aMachineCoding.vendingMachine.states;
 
+import aMachineCoding.vendingMachine.exceptions.InvalidOperationException;
+import aMachineCoding.vendingMachine.exceptions.NoTransactionException;
 import aMachineCoding.vendingMachine.models.VendingMachine;
 
 public class IdleState implements State {
@@ -10,24 +12,24 @@ public class IdleState implements State {
     }
 
     @Override
-    public void insertCoin(int amount) {
+    public void insertCoin(int amount) throws Exception {
+        vendingMachine.changeState(vendingMachine.getInsertCoinState());
         vendingMachine.addCoin(amount);
         System.out.println(amount + " coin inserted. Current balance: " + vendingMachine.getBalance());
-        vendingMachine.changeState(vendingMachine.getInsertCoinState());
     }
 
     @Override
-    public void selectItem(String itemCode) {
-        System.out.println("Insert coins first before selecting an item.");
+    public void selectItem(String itemCode) throws InvalidOperationException {
+        throw new InvalidOperationException("Insert coins first before selecting an item.");
     }
 
     @Override
-    public void dispenseItem() {
-        System.out.println("You need to insert coins and select an item first.");
+    public void dispenseItem() throws InvalidOperationException {
+        throw new InvalidOperationException("You need to insert coins and select an item first.");
     }
 
     @Override
-    public void cancelTransaction() {
-        System.out.println("No transaction to cancel.");
+    public void cancelTransaction() throws NoTransactionException {
+        throw new NoTransactionException();
     }
 }

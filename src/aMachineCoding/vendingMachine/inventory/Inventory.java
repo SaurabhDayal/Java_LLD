@@ -11,9 +11,9 @@ public class Inventory {
 
     public Inventory() {
         items = new ArrayList<>();
-        items.add(new Item("C1", ItemType.COKE, 25, 5));
-        items.add(new Item("J1", ItemType.JUICE, 35, 3));
-        items.add(new Item("P1", ItemType.PEPSI, 45, 4));
+        items.add(new Item("coke", ItemType.COKE, 25, 5));
+        items.add(new Item("juice", ItemType.JUICE, 35, 3));
+        items.add(new Item("pepsi", ItemType.PEPSI, 45, 4));
     }
 
     public Item findItemByCode(String itemCode) {
@@ -23,11 +23,6 @@ public class Inventory {
             }
         }
         return null;
-    }
-
-    public boolean isProductAvailable(String itemCode) {
-        Item item = findItemByCode(itemCode);
-        return item != null && item.isAvailable();
     }
 
     public void reduceQuantity(String itemCode, int quantity) {

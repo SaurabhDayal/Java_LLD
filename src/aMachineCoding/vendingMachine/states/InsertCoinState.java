@@ -1,5 +1,7 @@
 package aMachineCoding.vendingMachine.states;
 
+import aMachineCoding.vendingMachine.exceptions.InsufficientBalanceException;
+import aMachineCoding.vendingMachine.exceptions.InvalidOperationException;
 import aMachineCoding.vendingMachine.models.Item;
 import aMachineCoding.vendingMachine.models.VendingMachine;
 
@@ -11,30 +13,41 @@ public class InsertCoinState implements State {
     }
 
     @Override
-    public void insertCoin(int amount) {
+    public void insertCoin(int amount) throws Exception {
         vendingMachine.addCoin(amount);
         System.out.println(amount + " coin inserted. Current balance: " + vendingMachine.getBalance());
     }
 
     @Override
-    public void selectItem(String itemCode) {
-        Item item = vendingMachine.inventory.findItemByCode(itemCode);
-        if (item != null && item.isAvailable() && vendingMachine.getBalance() >= item.getPrice()) {
-            vendingMachine.setCurrentProduct(item);
-            System.out.println(item.getType() + " selected.");
-            vendingMachine.changeState(vendingMachine.getSelectionState());
-        } else {
-            System.out.println("Not enough money or item out of stock.");
+    public void selectItem(String itemCode) throws Exception {
+
+        vendingMachine.changeState(vendingMachine.getSelectionState());
+
+        Item item = vendingMachine.getInventory().findItemByCode(itemCode);
+
+        if (item == null) {
+            throw new InvalidOperationException("Invalid item code.");
         }
+
+        if (!item.isAvailable()) {
+            throw new InvalidOperationException("Item out of stock.");
+        }
+
+        if (vendingMachine.getBalance() < item.getPrice()) {
+            throw new InsufficientBalanceException("Insert more coins to purchase this item.");
+        }
+
+        vendingMachine.setCurrentItem(item);
+        System.out.println(item.getType() + " selected.");
     }
 
     @Override
-    public void dispenseItem() {
-        System.out.println("Select an item first.");
+    public void dispenseItem() throws InvalidOperationException {
+        throw new InvalidOperationException("Select an item first before dispensing.");
     }
 
     @Override
-    public void cancelTransaction() {
+    public void cancelTransaction() throws Exception {
         vendingMachine.refund();
         vendingMachine.changeState(vendingMachine.getIdleState());
     }

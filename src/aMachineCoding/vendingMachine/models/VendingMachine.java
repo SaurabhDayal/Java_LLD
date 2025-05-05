@@ -13,8 +13,9 @@ public class VendingMachine {
     private final State selectionState;
 
     private State currentState;
-    private Item currentProduct;
+    private Item currentItem;
     private int balance;
+
     public Inventory inventory;
 
     private VendingMachine() {
@@ -39,6 +40,10 @@ public class VendingMachine {
         return dispenseState;
     }
 
+    public Inventory getInventory() {
+        return inventory;
+    }
+
     public State getIdleState() {
         return idleState;
     }
@@ -59,16 +64,12 @@ public class VendingMachine {
         return balance;
     }
 
-    public int getRequiredAmount() {
-        return (currentProduct == null) ? 0 : currentProduct.getPrice();
-    }
-
     public void resetBalance() {
         balance = 0;
     }
 
     public void resetSelectedProduct() {
-        currentProduct = null;
+        currentItem = null;
     }
 
     public void changeState(State newState) {
@@ -107,21 +108,17 @@ public class VendingMachine {
         }
     }
 
-    public boolean isProductAvailable(String itemCode) {
-        return inventory.isProductAvailable(itemCode);
+    public void setCurrentItem(Item product) {
+        this.currentItem = product;
     }
 
-    public void setCurrentProduct(Item product) {
-        this.currentProduct = product;
-    }
-
-    public Item getCurrentProduct() {
-        return currentProduct;
+    public Item getCurrentItem() {
+        return currentItem;
     }
 
     public void dispenseCurrentProduct() {
-        if (currentProduct != null) {
-            inventory.reduceQuantity(currentProduct.getItemCode(), 1);
+        if (currentItem != null) {
+            inventory.reduceQuantity(currentItem.getItemCode(), 1);
         }
     }
 
