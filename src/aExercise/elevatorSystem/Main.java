@@ -1,15 +1,15 @@
-package aScalerModule_08_LLD_3.assign_03.elevatorSystem;
+package aExercise.elevatorSystem;
 
-import aScalerModule_08_LLD_3.assign_03.elevatorSystem.enums.Direction;
-import aScalerModule_08_LLD_3.assign_03.elevatorSystem.enums.DispatchStrategyType;
-import aScalerModule_08_LLD_3.assign_03.elevatorSystem.enums.ElevatorID;
-import aScalerModule_08_LLD_3.assign_03.elevatorSystem.enums.FloorNumber;
-import aScalerModule_08_LLD_3.assign_03.elevatorSystem.factories.DispatcherFactory;
-import aScalerModule_08_LLD_3.assign_03.elevatorSystem.listeners.FloorReachedListener;
-import aScalerModule_08_LLD_3.assign_03.elevatorSystem.models.Elevator;
-import aScalerModule_08_LLD_3.assign_03.elevatorSystem.models.ElevatorSystem;
-import aScalerModule_08_LLD_3.assign_03.elevatorSystem.models.Request;
-import aScalerModule_08_LLD_3.assign_03.elevatorSystem.strategies.ElevatorDispatcher;
+import aExercise.elevatorSystem.enums.Direction;
+import aExercise.elevatorSystem.enums.DispatchStrategyType;
+import aExercise.elevatorSystem.enums.ElevatorID;
+import aExercise.elevatorSystem.enums.FloorNumber;
+import aExercise.elevatorSystem.factories.DispatcherFactory;
+import aExercise.elevatorSystem.listeners.FloorReachedListener;
+import aExercise.elevatorSystem.models.Elevator;
+import aExercise.elevatorSystem.models.ElevatorSystem;
+import aExercise.elevatorSystem.models.Request;
+import aExercise.elevatorSystem.strategies.ElevatorDispatcher;
 
 /*
     Elevator Class Diagram

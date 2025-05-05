@@ -1,4 +1,4 @@
-package aScalerModule_08_LLD_3.assign_03.elevatorSystem.enums;
+package aExercise.elevatorSystem.enums;
 
 public enum DispatchStrategyType {
     FIRST_COME_FIRST_SERVE,

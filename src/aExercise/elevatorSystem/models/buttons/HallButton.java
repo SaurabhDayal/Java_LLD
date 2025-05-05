@@ -1,7 +1,6 @@
-package aScalerModule_08_LLD_3.assign_03.elevatorSystem.models.buttons;
+package aExercise.elevatorSystem.models.buttons;
 
-
-import aScalerModule_08_LLD_3.assign_03.elevatorSystem.enums.Direction;
+import aExercise.elevatorSystem.enums.Direction;
 
 public class HallButton implements Button {
     private boolean isPressed;

@@ -1,11 +1,11 @@
-package aScalerModule_08_LLD_3.assign_02.cardGame;
+package aExercise.cardGame;
 
-import aScalerModule_08_LLD_3.assign_02.cardGame.model.Game;
-import aScalerModule_08_LLD_3.assign_02.cardGame.model.Player;
-import aScalerModule_08_LLD_3.assign_02.cardGame.rules.BlackjackWinningRule;
-import aScalerModule_08_LLD_3.assign_02.cardGame.rules.WinningRule;
-import aScalerModule_08_LLD_3.assign_02.cardGame.scoring.BlackjackScoringStrategy;
-import aScalerModule_08_LLD_3.assign_02.cardGame.scoring.ScoringStrategy;
+import aExercise.cardGame.model.Game;
+import aExercise.cardGame.model.Player;
+import aExercise.cardGame.rules.BlackjackWinningRule;
+import aExercise.cardGame.rules.WinningRule;
+import aExercise.cardGame.scoring.BlackjackScoringStrategy;
+import aExercise.cardGame.scoring.ScoringStrategy;
 
 /*
 Design class diagram for a simple card game.

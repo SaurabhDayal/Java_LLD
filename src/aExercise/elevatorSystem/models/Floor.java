@@ -1,9 +1,10 @@
-package aScalerModule_08_LLD_3.assign_03.elevatorSystem.models;
+package aExercise.elevatorSystem.models;
 
-import aScalerModule_08_LLD_3.assign_03.elevatorSystem.enums.FloorNumber;
-import aScalerModule_08_LLD_3.assign_03.elevatorSystem.models.panels.OutsidePanel;
+import aExercise.elevatorSystem.enums.FloorNumber;
+import aExercise.elevatorSystem.models.panels.OutsidePanel;
 
-public class Floor {
+public class
+Floor {
     private final FloorNumber floorNumber;
     private final OutsidePanel outsidePanel;
 

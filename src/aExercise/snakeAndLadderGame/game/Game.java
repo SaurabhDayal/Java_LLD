@@ -1,10 +1,9 @@
-package aScalerModule_08_LLD_3.assign_02.snakeAndLadderGame.game;
+package aExercise.snakeAndLadderGame.game;
 
-
-import aScalerModule_08_LLD_3.assign_02.snakeAndLadderGame.dice.DiceStrategy;
-import aScalerModule_08_LLD_3.assign_02.snakeAndLadderGame.factory.GameElementFactory;
-import aScalerModule_08_LLD_3.assign_02.snakeAndLadderGame.models.Board;
-import aScalerModule_08_LLD_3.assign_02.snakeAndLadderGame.models.Player;
+import aExercise.snakeAndLadderGame.dice.DiceStrategy;
+import aExercise.snakeAndLadderGame.factory.GameElementFactory;
+import aExercise.snakeAndLadderGame.models.Board;
+import aExercise.snakeAndLadderGame.models.Player;
 
 import java.util.List;
 

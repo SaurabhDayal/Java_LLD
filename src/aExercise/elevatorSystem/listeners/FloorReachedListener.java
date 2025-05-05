@@ -1,7 +1,7 @@
-package aScalerModule_08_LLD_3.assign_03.elevatorSystem.listeners;
+package aExercise.elevatorSystem.listeners;
 
-import aScalerModule_08_LLD_3.assign_03.elevatorSystem.enums.FloorNumber;
-import aScalerModule_08_LLD_3.assign_03.elevatorSystem.models.Elevator;
+import aExercise.elevatorSystem.enums.FloorNumber;
+import aExercise.elevatorSystem.models.Elevator;
 
 public interface FloorReachedListener {
     void onFloorReached(Elevator elevator, FloorNumber floor);

@@ -1,7 +1,7 @@
-package aScalerModule_08_LLD_3.assign_02.snakeAndLadderGame.models;
+package aExercise.snakeAndLadderGame.models;
 
-import aScalerModule_08_LLD_3.assign_02.snakeAndLadderGame.element.GameElement;
-import aScalerModule_08_LLD_3.assign_02.snakeAndLadderGame.factory.GameElementFactory;
+import aExercise.snakeAndLadderGame.element.GameElement;
+import aExercise.snakeAndLadderGame.factory.GameElementFactory;
 
 import java.util.ArrayList;
 import java.util.List;

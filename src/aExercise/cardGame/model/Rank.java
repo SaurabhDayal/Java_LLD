@@ -1,4 +1,4 @@
-package aScalerModule_08_LLD_3.assign_02.cardGame.model;
+package aExercise.cardGame.model;
 
 public enum Rank {
     TWO(2), THREE(3), FOUR(4), FIVE(5), SIX(6),

@@ -1,7 +1,7 @@
-package aScalerModule_08_LLD_3.assign_03.elevatorSystem.models.panels;
+package aExercise.elevatorSystem.models.panels;
 
-import aScalerModule_08_LLD_3.assign_03.elevatorSystem.enums.FloorNumber;
-import aScalerModule_08_LLD_3.assign_03.elevatorSystem.models.buttons.ElevatorButton;
+import aExercise.elevatorSystem.enums.FloorNumber;
+import aExercise.elevatorSystem.models.buttons.ElevatorButton;
 
 import java.util.ArrayList;
 import java.util.List;

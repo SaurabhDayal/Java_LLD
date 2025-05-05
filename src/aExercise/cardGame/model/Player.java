@@ -1,6 +1,6 @@
-package aScalerModule_08_LLD_3.assign_02.cardGame.model;
+package aExercise.cardGame.model;
 
-import aScalerModule_08_LLD_3.assign_02.cardGame.scoring.ScoringStrategy;
+import aExercise.cardGame.scoring.ScoringStrategy;
 
 import java.util.ArrayList;
 import java.util.List;

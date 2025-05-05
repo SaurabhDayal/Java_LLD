@@ -1,7 +1,7 @@
-package aScalerModule_08_LLD_3.assign_03.elevatorSystem.models;
+package aExercise.elevatorSystem.models;
 
-import aScalerModule_08_LLD_3.assign_03.elevatorSystem.enums.Direction;
-import aScalerModule_08_LLD_3.assign_03.elevatorSystem.enums.FloorNumber;
+import aExercise.elevatorSystem.enums.Direction;
+import aExercise.elevatorSystem.enums.FloorNumber;
 
 public class Request {
     private FloorNumber floor;

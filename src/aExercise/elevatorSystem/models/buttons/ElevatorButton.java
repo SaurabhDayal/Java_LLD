@@ -1,6 +1,6 @@
-package aScalerModule_08_LLD_3.assign_03.elevatorSystem.models.buttons;
+package aExercise.elevatorSystem.models.buttons;
 
-import aScalerModule_08_LLD_3.assign_03.elevatorSystem.enums.FloorNumber;
+import aExercise.elevatorSystem.enums.FloorNumber;
 
 public class ElevatorButton implements Button {
     private boolean isPressed;

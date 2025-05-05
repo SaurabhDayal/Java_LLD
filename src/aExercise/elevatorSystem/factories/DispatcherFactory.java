@@ -1,7 +1,7 @@
-package aScalerModule_08_LLD_3.assign_03.elevatorSystem.factories;
+package aExercise.elevatorSystem.factories;
 
-import aScalerModule_08_LLD_3.assign_03.elevatorSystem.enums.DispatchStrategyType;
-import aScalerModule_08_LLD_3.assign_03.elevatorSystem.strategies.*;
+import aExercise.elevatorSystem.enums.DispatchStrategyType;
+import aExercise.elevatorSystem.strategies.*;
 
 public class DispatcherFactory {
 

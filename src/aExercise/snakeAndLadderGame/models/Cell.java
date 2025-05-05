@@ -1,6 +1,6 @@
-package aScalerModule_08_LLD_3.assign_02.snakeAndLadderGame.models;
+package aExercise.snakeAndLadderGame.models;
 
-import aScalerModule_08_LLD_3.assign_02.snakeAndLadderGame.element.GameElement;
+import aExercise.snakeAndLadderGame.element.GameElement;
 
 class Cell {
     private int position;

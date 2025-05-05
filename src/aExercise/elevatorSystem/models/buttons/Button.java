@@ -1,4 +1,4 @@
-package aScalerModule_08_LLD_3.assign_03.elevatorSystem.models.buttons;
+package aExercise.elevatorSystem.models.buttons;
 
 public interface Button {
     boolean isPressed();

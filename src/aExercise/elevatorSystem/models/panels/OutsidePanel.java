@@ -1,7 +1,7 @@
-package aScalerModule_08_LLD_3.assign_03.elevatorSystem.models.panels;
+package aExercise.elevatorSystem.models.panels;
 
-import aScalerModule_08_LLD_3.assign_03.elevatorSystem.enums.Direction;
-import aScalerModule_08_LLD_3.assign_03.elevatorSystem.models.buttons.HallButton;
+import aExercise.elevatorSystem.enums.Direction;
+import aExercise.elevatorSystem.models.buttons.HallButton;
 
 public class OutsidePanel implements Panel {
     private HallButton upButton;    // Button to request upward movement

@@ -1,11 +1,10 @@
-// Elevator.java
-package aScalerModule_08_LLD_3.assign_03.elevatorSystem.models;
+package aExercise.elevatorSystem.models;
 
-import aScalerModule_08_LLD_3.assign_03.elevatorSystem.enums.Direction;
-import aScalerModule_08_LLD_3.assign_03.elevatorSystem.enums.ElevatorID;
-import aScalerModule_08_LLD_3.assign_03.elevatorSystem.enums.ElevatorStatus;
-import aScalerModule_08_LLD_3.assign_03.elevatorSystem.enums.FloorNumber;
-import aScalerModule_08_LLD_3.assign_03.elevatorSystem.listeners.FloorReachedListener;
+import aExercise.elevatorSystem.enums.Direction;
+import aExercise.elevatorSystem.enums.ElevatorID;
+import aExercise.elevatorSystem.enums.ElevatorStatus;
+import aExercise.elevatorSystem.enums.FloorNumber;
+import aExercise.elevatorSystem.listeners.FloorReachedListener;
 
 import java.util.LinkedList;
 import java.util.Queue;

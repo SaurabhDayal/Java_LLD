@@ -1,6 +1,6 @@
-package aScalerModule_08_LLD_3.assign_02.cardGame.rules;
+package aExercise.cardGame.rules;
 
-import aScalerModule_08_LLD_3.assign_02.cardGame.model.Player;
+import aExercise.cardGame.model.Player;
 
 import java.util.List;
 

@@ -1,7 +1,7 @@
-package aScalerModule_08_LLD_3.assign_02.cardGame.scoring;
+package aExercise.cardGame.scoring;
 
-import aScalerModule_08_LLD_3.assign_02.cardGame.model.Card;
-import aScalerModule_08_LLD_3.assign_02.cardGame.model.Rank;
+import aExercise.cardGame.model.Card;
+import aExercise.cardGame.model.Rank;
 
 public class BlackjackScoringStrategy implements ScoringStrategy {
 

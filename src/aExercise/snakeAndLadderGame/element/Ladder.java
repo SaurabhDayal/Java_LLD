@@ -1,4 +1,4 @@
-package aScalerModule_08_LLD_3.assign_02.snakeAndLadderGame.element;
+package aExercise.snakeAndLadderGame.element;
 
 public class Ladder implements GameElement {
     private int bottom;
