@@ -1,6 +1,5 @@
 package aMachineCoding.vendingMachine.models;
 
-// Item Class representing a product in the vending machine with itemCode
 public class Item {
 
     private final String itemCode;

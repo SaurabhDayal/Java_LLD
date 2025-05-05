@@ -11,8 +11,6 @@ public class Inventory {
 
     public Inventory() {
         items = new ArrayList<>();
-
-        // Initialize inventory with default items
         items.add(new Item("C1", ItemType.COKE, 25, 5));
         items.add(new Item("J1", ItemType.JUICE, 35, 3));
         items.add(new Item("P1", ItemType.PEPSI, 45, 4));

@@ -35,10 +35,6 @@ public class VendingMachine {
         return instance;
     }
 
-    public static void setInstance(VendingMachine instance) {
-        VendingMachine.instance = instance;
-    }
-
     public State getDispenseState() {
         return dispenseState;
     }
@@ -54,27 +50,7 @@ public class VendingMachine {
     public State getSelectionState() {
         return selectionState;
     }
-
-    public State getCurrentState() {
-        return currentState;
-    }
-
-    public void setCurrentState(State currentState) {
-        this.currentState = currentState;
-    }
-
-    public void setBalance(int balance) {
-        this.balance = balance;
-    }
-
-    public Inventory getInventory() {
-        return inventory;
-    }
-
-    public void setInventory(Inventory inventory) {
-        this.inventory = inventory;
-    }
-
+    
     public void addCoin(int amount) {
         balance += amount;
     }
