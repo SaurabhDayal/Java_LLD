@@ -44,7 +44,7 @@ public class FixedWindowCounterRateLimiter {
         return false;
     }
 
-    // Main method for testing the Fixed Window Rate Limiter
+    // aMachineCoding.designFileSystem.Main method for testing the Fixed Window Rate Limiter
     public static void main(String[] args) {
         FixedWindowCounterRateLimiter rateLimiter = new FixedWindowCounterRateLimiter(5, 2000); // 5 requests per 2 seconds
         Random random = new Random(); // Create a Random object for generating random sleep times
