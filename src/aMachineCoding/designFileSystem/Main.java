@@ -1,17 +1,16 @@
 package aMachineCoding.designFileSystem;
 
-import aMachineCoding.designFileSystem.CoreClasses.FileSystem;
+import aMachineCoding.designFileSystem.fileSystem.FileSystem;
 
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        // Create a new file system instance
-        FileSystem fs = new FileSystem();
-        // Create a scanner to handle user input
-        Scanner scanner = new Scanner(System.in);
-        boolean isRunning = true; // Flag to control the program loop
-        // Display instructions for the user
+        FileSystem fs = new FileSystem(); // Initialize the file system
+        Scanner scanner = new Scanner(System.in); // Read user input from the console
+        boolean isRunning = true; // Main loop control flag
+
+        // Print available commands for user interaction
         System.out.println("File System Manager - Commands:");
         System.out.println("1. create <path> - Create a new path");
         System.out.println("2. write <path> <content> - Write content to a file");
@@ -19,43 +18,46 @@ public class Main {
         System.out.println("4. delete <path> - Delete a path");
         System.out.println("5. display - Show the entire file system structure");
         System.out.println("6. exit - Exit the program");
-        // aMachineCoding.designFileSystem.Main program loop to process commands
+
+        // Command execution loop
         while (isRunning) {
             System.out.print("nEnter command: ");
-            String input = scanner.nextLine().trim(); // Read and trim user input
-            String[] parts = input.split("\\s+", 3); // Split input into command, path, and possibly content
-            if (parts.length == 0)
-                continue; // Skip empty input
-            String command = parts[0].toLowerCase(); // Get the command
+            String input = scanner.nextLine().trim(); // Read a line of input
+            String[] parts = input.split("\\s+", 3); // Split into max 3 parts: command, path, content
+
+            if (parts.length == 0) continue; // Ignore empty lines
+
+            String command = parts[0].toLowerCase(); // Normalize command name
             try {
                 switch (command) {
                     case "create":
-                        // Create a new path
+                        // Syntax: create <path>
                         if (parts.length >= 2) {
-                            String path = parts[1]; // Extract path
-                            boolean isCreated = fs.createPath(path); // Attempt to create the path
+                            String path = parts[1];
+                            boolean isCreated = fs.createPath(path);
                             System.out.println(isCreated ? "Path created successfully" : "Failed to create path");
                         } else {
                             System.out.println("Usage: create <path>");
                         }
                         break;
+
                     case "write":
-                        // Write content to a file
+                        // Syntax: write <path> <content>
                         if (parts.length >= 3) {
-                            String path = parts[1]; // Extract path
-                            String content = parts[2]; // Extract content
-                            boolean isWritten = fs.setFileContent(path, content); // Attempt to write content
-                            System.out.println(
-                                    isWritten ? "Content written successfully" : "Failed to write content");
+                            String path = parts[1];
+                            String content = parts[2];
+                            boolean isWritten = fs.setFileContent(path, content);
+                            System.out.println(isWritten ? "Content written successfully" : "Failed to write content");
                         } else {
                             System.out.println("Usage: write <path> <content>");
                         }
                         break;
+
                     case "read":
-                        // Read content from a file
+                        // Syntax: read <path>
                         if (parts.length >= 2) {
-                            String path = parts[1]; // Extract path
-                            String content = fs.getFileContent(path); // Attempt to read content
+                            String path = parts[1];
+                            String content = fs.getFileContent(path);
                             if (content != null) {
                                 System.out.println("Content: " + content);
                             } else {
@@ -65,80 +67,68 @@ public class Main {
                             System.out.println("Usage: read <path>");
                         }
                         break;
+
                     case "delete":
-                        // Delete a specific path from the file system
+                        // Syntax: delete <path>
                         if (parts.length >= 2) {
-                            String path = parts[1]; // Extract path
-                            boolean isDeleted = fs.deletePath(path); // Attempt to delete the path
+                            String path = parts[1];
+                            boolean isDeleted = fs.deletePath(path);
                             System.out.println(isDeleted ? "Path deleted successfully" : "Failed to delete path");
                         } else {
                             System.out.println("Usage: delete <path>");
                         }
                         break;
+
                     case "display":
-                        // Display the entire file system structure
+                        // Syntax: display
                         System.out.println("nFile System Structure:");
                         fs.display();
                         break;
+
                     case "exit":
-                        // Exit the program
+                        // Syntax: exit
                         isRunning = false;
                         System.out.println("Exiting...");
                         break;
+
                     default:
-                        // Handle unknown commands
-                        System.out.println(
-                                "Unknown command. Available commands: create, write, read, delete, display, exit");
+                        // Fallback for unknown commands
+                        System.out.println("Unknown command. Available commands: create, write, read, delete, display, exit");
                 }
             } catch (Exception e) {
-                // Handle general exceptions
+                // Catch-all for unexpected runtime errors
                 System.out.println("Error: " + e.getMessage());
             }
         }
-        // Close the scanner to release system resources
-        scanner.close();
+        scanner.close(); // Release system resources
     }
 }
 
 /*
+How to Use the File System - Example Commands:
 
-File System Manager - Commands:
-1. create <path> - Create a new path
-2. write <path> <content> - Write content to a file
-3. read <path> - Read content from a file
-4. delete <path> - Delete a path
-5. display - Show the entire file system structure
-6. exit - Exit the program
-nEnter command: create
-Usage: create <path>
-nEnter command: create /docs
+1. Create a directory:
+   create /documents
 
-Path created successfully
-nEnter command: create /docs/notes
+2. Create nested directories:
+   create /documents/work/reports
 
-Path created successfully
-nEnter command: write /docs/notes "Meeting at 5 PM"
+3. Create a file:
+   create /documents/notes.txt
 
-Failed to write content
-nEnter command: write
+4. Write content to a file:
+   write /documents/notes.txt This is a test note.
 
-Usage: write <path> <content>
-nEnter command: write /docs/notes "Meeting at 5 PM"
+5. Read content from a file:
+   read /documents/notes.txt
 
-Failed to write content
-nEnter command: read /docs/notes
+6. Delete a file or directory:
+   delete /documents/notes.txt
+   delete /documents/work
 
-Failed to read content
+7. Display the file system:
+   display
 
-nEnter command: display
-display
-nFile System Structure:
-📁 / (1 items)
-  📁 docs (1 items)
-    📁 notes (0 items)
-
-nEnter command: exit
-exit
-Exiting...
-
+8. Exit the program:
+   exit
 */
