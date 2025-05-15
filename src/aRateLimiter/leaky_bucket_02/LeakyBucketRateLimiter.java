@@ -49,7 +49,7 @@ public class LeakyBucketRateLimiter {
         System.out.println("\n🛑 Leak thread stopped.");
     }
 
-    // aMachineCoding.designFileSystem.Main method to test the Leaky Bucket Rate Limiter
+    // aMachineCoding.designFileSystem.aMachineCoding.designRateLimiter.Main method to test the Leaky Bucket Rate Limiter
     public static void main(String[] args) {
         LeakyBucketRateLimiter rateLimiter = new LeakyBucketRateLimiter(5, 1000); // Capacity: 5 requests, Leak Rate: 1 second
         Random random = new Random(); // Moved Random inside main

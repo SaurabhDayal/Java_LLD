@@ -47,7 +47,7 @@ public class TokenBucketRateLimiter {
         System.out.println("🛑 Refill thread stopped.");
     }
 
-    // aMachineCoding.designFileSystem.Main method to test the Token Bucket Rate Limiter
+    // aMachineCoding.designFileSystem.aMachineCoding.designRateLimiter.Main method to test the Token Bucket Rate Limiter
     public static void main(String[] args) {
         TokenBucketRateLimiter rateLimiter = new TokenBucketRateLimiter(10, 5); // Capacity: 10 tokens, Refill Rate: 5 tokens/sec
         Random random = new Random();

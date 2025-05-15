@@ -36,7 +36,7 @@ public class SlidingWindowLogRateLimiter {
         return false;
     }
 
-    // aMachineCoding.designFileSystem.Main method for testing the Sliding Window Log Rate Limiter
+    // aMachineCoding.designFileSystem.aMachineCoding.designRateLimiter.Main method for testing the Sliding Window Log Rate Limiter
     public static void main(String[] args) {
         SlidingWindowLogRateLimiter rateLimiter = new SlidingWindowLogRateLimiter(5, 1000); // 5 requests per 1 second
         Random random = new Random(); // Moved Random object inside main method
