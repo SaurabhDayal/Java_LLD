@@ -13,6 +13,7 @@ public class VendingMachineMain {
         runTransaction(new int[]{30, 15}, "pepsi", true); // Dispense Pepsi
 
         System.out.println("\nEND INVENTORY STATUS");
+        System.out.println();
         vendingMachine.displayInventory();
         System.out.println("------------------------------");
     }
