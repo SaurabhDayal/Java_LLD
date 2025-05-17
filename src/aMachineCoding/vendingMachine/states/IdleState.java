@@ -15,7 +15,6 @@ public class IdleState implements State {
     public void insertCoin(int amount) throws Exception {
         vendingMachine.changeState(vendingMachine.getInsertCoinState());
         vendingMachine.insertCoin(amount);
-        System.out.println(amount + " coin inserted. Current balance: " + vendingMachine.getBalance());
     }
 
     @Override
