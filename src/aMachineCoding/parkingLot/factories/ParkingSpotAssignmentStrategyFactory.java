@@ -6,9 +6,12 @@ import aMachineCoding.parkingLot.strategies.ParkingSpotAssignmentStrategy;
 
 public class ParkingSpotAssignmentStrategyFactory {
     public static ParkingSpotAssignmentStrategy getParkingLotStrategy(ParkingSpotStrategyType parkingSpotStrategyType) {
-        if (parkingSpotStrategyType.equals(ParkingSpotStrategyType.NEAREST)) {
-            return new NearestSpotAssignmentStrategy();
+        switch (parkingSpotStrategyType) {
+            case NEAREST:
+                return new NearestSpotAssignmentStrategy();
+            // Add more cases here when more strategies are added
+            default:
+                return null;
         }
-        return null;
     }
 }

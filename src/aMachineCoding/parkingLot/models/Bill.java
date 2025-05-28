@@ -14,7 +14,7 @@ public class Bill extends BaseModel {
     private Gate gate; // Added gate reference
 
     public Bill() {
-        // Initialize payments list to avoid NullPointerException
+        // Initialize a payment list to avoid NullPointerException
         this.payments = new ArrayList<>();
     }
 
