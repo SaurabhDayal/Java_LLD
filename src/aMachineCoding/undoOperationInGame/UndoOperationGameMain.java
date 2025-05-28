@@ -6,22 +6,40 @@ import aMachineCoding.undoOperationInGame.strategies.*;
 import java.util.Scanner;
 
 /*
-If you analyze closely,
-Incremental Reversal (Rollback Strategy) is a variation of the Stack-Based Approach,
-and Versioning System is an extension of the State Snapshot (Memento Pattern).
-
 So, fundamentally, there are two core techniques for implementing undo operations:
 
-1️⃣ Move-Based Undo (Stack-Based Approach & Incremental Reversal)
-    - Uses a stack or delta tracking to store only small reversible changes.
-    - Efficient in terms of memory (does not store full states).
-    - Ideal for games with small, easily reversible moves.
+1️⃣ Move-Based Undo (Stack-Based & Incremental)
+    - Stores only the player's move or changes (lightweight).
+    - Examples: StackStrategy, IncrementalStrategy.
+    - Pros: Memory efficient, easy to reverse small changes quickly.
+    - Cons: For full game state reconstruction, may require replaying all moves from the start, which can be costly in complex games.
 
-2️⃣ State-Based Undo (Snapshot & Versioning System)
-    - Stores full snapshots or state history at each step.
-    - Requires more memory, but restoring a state is instant (O(1)).
-    - Useful for complex games where reconstructing state is difficult.
- */
+2️⃣ State-Based Undo (Snapshot & Versioning)
+    - Stores complete board state (snapshot) after or before each move (heavier).
+    - Examples: SnapshotStrategy, VersioningStrategy.
+    - Pros: Instant state restoration without replay; better suited for games with complex internal state or cascading effects.
+    - Cons: Higher memory consumption; requires efficient snapshot/copy mechanisms to minimize overhead.
+
+🔄 Undo/Redo Implementation Patterns:
+- Linear Undo:
+    * Simple Last-In-First-Out (LIFO) undo, using either a stack of moves (StackStrategy) or a stack/list of snapshots (SnapshotStrategy).
+    * Supports straightforward “undo last action” behavior.
+
+- Replay Undo:
+    * Rebuilds the game state from the beginning by replaying all moves except the last undone one.
+    * Useful when only moves are stored and state is expensive to save, but can be slow as the game progresses.
+
+- Versioned Undo/Redo:
+    * Maintains a timeline of saved states or moves allowing navigation backward and forward without deletion.
+    * Enables redo functionality and branching in complex editors or games.
+
+- Incremental Undo:
+    * Stores only the incremental differences (deltas) between states.
+    * More memory-efficient than full snapshots, and faster than replay in many cases.
+    * Requires precise tracking and careful application/reversion of changes.
+
+Choose the appropriate undo strategy based on your game’s complexity, memory constraints, and desired user experience.
+*/
 public class UndoOperationGameMain {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in); // Scanner for user input
@@ -47,7 +65,6 @@ public class UndoOperationGameMain {
         };
 
         // Assign the selected strategy based on user input
-
         TicTacToe game = new TicTacToe(strategy); // Initialize game with selected strategy
 
         game.makeMove(0, 0); // Player X moves at (0,0)
