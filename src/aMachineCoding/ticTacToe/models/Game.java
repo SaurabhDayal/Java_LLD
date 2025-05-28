@@ -10,18 +10,18 @@ import java.util.Stack;
 
 public class Game {
 
-    private Board board;
-    private List<Player> players;
-    private List<Move> moves;
+    private final Board board;
+    private final List<Player> players;
+    private final List<Move> moves;
     private Player winner;
     private GameState gameState;
     private int nextMovePlayerIndex;
 
-    private List<WinningStrategy> winningStrategies;
-    public ReversibleMoveStrategy reversibleMoveStrategy;
+    private final List<WinningStrategy> winningStrategies;
 
-    private Stack<Move> moveStack = new Stack<>();
-    private List<List<List<Cell>>> stateHistory = new ArrayList<>();
+    private final Stack<Move> moveStack = new Stack<>();
+    public ReversibleMoveStrategy reversibleMoveStrategy;
+    private final List<List<List<Cell>>> stateHistory = new ArrayList<>();
 
     public Game(int dimension, List<Player> players, List<WinningStrategy> winningStrategies, ReversibleMoveStrategy reversibleMoveStrategy) {
         this.board = new Board(dimension);
@@ -38,6 +38,7 @@ public class Game {
     // --------------------------------------
 
     public void makeMove() throws InvalidMoveException {
+
         Player currentPlayer = players.get(nextMovePlayerIndex);
         System.out.println("This is " + currentPlayer.getName() + "'s move.");
 
@@ -77,6 +78,7 @@ public class Game {
     }
 
     public void undoMove() throws InvalidMoveException {
+        
         if (moves.isEmpty()) {
             throw new InvalidMoveException("Cannot undo move, please make Move");
         }

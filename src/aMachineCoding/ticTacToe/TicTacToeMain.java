@@ -20,12 +20,8 @@ public class TicTacToeMain {
 
     public static void main(String[] args) throws InvalidMoveException {
         System.out.println("GAME STARTS");
-
-        // Initialize the game
-        Game game = init();
-
-        // Start the game loop
-        playGame(game);
+        Game game = init();         // Initialize the game
+        playGame(game);             // Start the game loop
     }
 
     private static Game init() {

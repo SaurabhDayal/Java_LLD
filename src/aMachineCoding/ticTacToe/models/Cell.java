@@ -1,13 +1,14 @@
 package aMachineCoding.ticTacToe.models;
 
 public class Cell {
+
     private int row;
     private int col;
     private CellState cellState;
     private Player player;
 
-    //If for any cell, player object is NULL then it means cell is empty.
-    //If player isn't NULL then cell is filled.
+    //If for any cell, a player object is NULL then it means cell is empty.
+    //If the player isn't NULL, then the cell is filled.
 
     public Cell(int row, int col) {
         this.row = row;

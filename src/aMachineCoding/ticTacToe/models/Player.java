@@ -3,12 +3,14 @@ package aMachineCoding.ticTacToe.models;
 import java.util.Scanner;
 
 public class Player {
+
     private Symbol symbol;
     private String name;
     private PlayerType playerType;
     private static Scanner scanner = new Scanner(System.in);
 
     public Player(Symbol symbol, String name, PlayerType playerType) {
+
         this.symbol = symbol;
         this.name = name;
         this.playerType = playerType;

@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Set;
 
 public class GameBuilder {
+
     private int dimension;
     private List<Player> players;
     private List<WinningStrategy> winningStrategies;

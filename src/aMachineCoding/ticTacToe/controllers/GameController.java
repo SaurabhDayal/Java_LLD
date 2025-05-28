@@ -12,7 +12,10 @@ import java.util.List;
 
 public class GameController {
 
-    public Game startGame(int dimension, List<Player> players, List<WinningStrategy> winningStrategies, ReversibleMoveStrategy reversibleMoveStrategy) {
+    public Game startGame(int dimension,
+                          List<Player> players,
+                          List<WinningStrategy> winningStrategies,
+                          ReversibleMoveStrategy reversibleMoveStrategy) {
         return new GameBuilder() // Use GameBuilder directly
                 .setDimension(dimension)
                 .setPlayers(players)
