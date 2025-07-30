@@ -8,64 +8,63 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public class LeakyBucketRateLimiter {
-    private final int capacity;                            // Maximum number of requests the bucket can hold
-    private final long leakRateMillis;                     // Time interval (in milliseconds) for leaking requests
-    private final Queue<Long> bucket = new LinkedList<>(); // Bucket to store incoming request timestamps
-    private final ScheduledExecutorService scheduler;      // Scheduler to periodically leak requests
+    private final int capacity;                            // Max requests the bucket can hold
+    private final long leakRate;                           // Leak interval in milliseconds
+    private final Queue<Long> bucket = new LinkedList<>(); // Queue acting as the bucket
+    private final ScheduledExecutorService ticker;         // Scheduler to simulate leak intervals
 
-    // Constructor initializes the leaky bucket with given capacity and leak rate
-    public LeakyBucketRateLimiter(int capacity, long leakRateMillis) {
+    public LeakyBucketRateLimiter(int capacity, long leakRate) {
         this.capacity = capacity;
-        this.leakRateMillis = leakRateMillis;
+        this.leakRate = leakRate;
 
-        // Start the leak scheduler to leak requests at fixed intervals
-        this.scheduler = Executors.newSingleThreadScheduledExecutor();
-        this.scheduler.scheduleAtFixedRate(this::leakRequest,
-                leakRateMillis, leakRateMillis, TimeUnit.MILLISECONDS);
+        this.ticker = Executors.newSingleThreadScheduledExecutor();
+        this.ticker.scheduleAtFixedRate(this::startLeaking,
+                leakRate, leakRate, TimeUnit.MILLISECONDS);
     }
 
-    // Method to leak (process) a request from the bucket
-    private synchronized void leakRequest() {
-        if (!bucket.isEmpty()) {
-            bucket.poll(); // Remove the oldest request from the bucket
-            System.out.println("✅ Leaked a request - Hitting the server API");
-        }
-    }
-
-    // Method to check if a new request can be accepted into the bucket
-    public synchronized boolean allowRequest() {
-        if (bucket.size() < capacity) {
-            bucket.add(System.currentTimeMillis()); // Add the request timestamp into the bucket
-            System.out.println("✅ Accepted a request - Waiting to be processed");
-            return true;
-        }
-        System.out.println("🚫 Dropped a request - Returning 429 Too Many Requests");
-        return false;
-    }
-
-    // Stops the leak scheduler when no longer needed
-    public void stop() {
-        scheduler.shutdown();
-        System.out.println("\n🛑 Leak thread stopped.");
-    }
-
-    // aMachineCoding.designFileSystem.aMachineCoding.designRateLimiter.Main method to test the Leaky Bucket Rate Limiter
     public static void main(String[] args) {
-        LeakyBucketRateLimiter rateLimiter = new LeakyBucketRateLimiter(5, 1000); // Capacity: 5 requests, Leak Rate: 1 second
-        Random random = new Random(); // Moved Random inside main
-        System.out.println("Testing Leaky Bucket Rate Limiter with ScheduledExecutorService...\n");
+        LeakyBucketRateLimiter lb = new LeakyBucketRateLimiter(5, 500); // 5-capacity bucket, leaks every 500ms
+        Random random = new Random();
 
-        // Simulating 25 requests
-        for (int i = 0; i < 25; i++) {
-            System.out.println("Request " + (i + 1) + " allowed? " + rateLimiter.allowRequest());
+        for (int i = 1; i <= 25; i++) {
             try {
-                // Sleep for random time between 50ms and 250ms
-                int sleepTimeMillis = 50 + random.nextInt(201);
-                Thread.sleep(sleepTimeMillis);
+                Thread.sleep(50 + random.nextInt(451)); // Random delay between 50–500 ms
             } catch (InterruptedException ignored) {
+            }
+
+            boolean accepted = lb.allow();
+            if (accepted) {
+                System.out.printf("Request %2d → ✅ Accepted request — queued in bucket%n", i);
+            } else {
+                System.out.printf("Request %2d → ❌ Dropped request — bucket full (429 Too Many Requests)%n", i);
             }
         }
 
-        rateLimiter.stop(); // Stop the leak scheduler once testing is done
+        try {
+            Thread.sleep(3000); // Allow time for leak thread to process
+        } catch (InterruptedException ignored) {
+        }
+
+        lb.stop();
+    }
+
+    private synchronized void startLeaking() {
+        if (!bucket.isEmpty()) {
+            bucket.poll(); // Leak one request from the bucket
+            System.out.println("🚰 Leaked request — hitting downstream API");
+        }
+    }
+
+    public synchronized boolean allow() {
+        if (bucket.size() < capacity) {
+            bucket.add(System.currentTimeMillis()); // Add timestamp to simulate tracking
+            return true;
+        }
+        return false;
+    }
+
+    public void stop() {
+        ticker.shutdown();
+        System.out.println("\n🛑 Leak thread stopped.");
     }
 }

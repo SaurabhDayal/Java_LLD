@@ -3,61 +3,62 @@ package aRateLimiter.fixed_window_counter_03;
 import java.util.Random;
 
 public class FixedWindowCounterRateLimiter {
-    private final int limit;              // Maximum number of requests allowed in the time window
-    private long currentWindowStart;      // Start time of the current window (aligned to window boundaries)
-    private final long windowSizeMillis;  // Duration of the time window in milliseconds
-    private int count;                    // Counter for requests in the current window
+    private final int limit;              // Max requests allowed in a time window
+    private final long windowSizeMillis;  // Window duration in ms
+    private long currentWindowStart;      // Start time of the current window
+    private int count;                    // Requests seen in current window
 
-    // Constructor to initialize the rate limiter with a limit and window size
     public FixedWindowCounterRateLimiter(int limit, long windowSizeMillis) {
         this.limit = limit;
-        this.currentWindowStart = alignToWindow(System.currentTimeMillis());
         this.windowSizeMillis = windowSizeMillis;
+        this.currentWindowStart = alignToWindow(System.currentTimeMillis());
         this.count = 0;
     }
 
-    // Align the given time to the start of its window
-    private long alignToWindow(long timeMillis) {
-        return (timeMillis / windowSizeMillis) * windowSizeMillis;
-    }
+    public static void main(String[] args) {
+        FixedWindowCounterRateLimiter rateLimiter = new FixedWindowCounterRateLimiter(5, 2000);
+        Random random = new Random();
 
-    // Check if a request is allowed based on the current window
-    public synchronized boolean allowRequest() {
-        long now = System.currentTimeMillis();
-        long alignedWindowStart = alignToWindow(now);
+        System.out.println("🧪 Testing Fixed Window Counter Rate Limiter...\n");
 
-        // If moved to a new window, reset the counter
-        if (alignedWindowStart != currentWindowStart) {
-            currentWindowStart = alignedWindowStart;
-            count = 0;
+        for (int i = 0; i < 25; i++) {
+            boolean allowed = rateLimiter.allowRequest();
+
+            if (allowed) {
+                System.out.printf("Request %2d → ✅ Accepted request — counted in current window%n", i + 1);
+            } else {
+                System.out.printf("Request %2d → ❌ Rejected request — window limit exceeded (429 Too Many Requests)%n", i + 1);
+            }
+
+            try {
+                Thread.sleep(50 + random.nextInt(451)); // 50–500ms
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
         }
 
-        // Allow request if within the limit
+        System.out.println("\n🛑 Fixed window rate limiter simulation complete.");
+    }
+
+    public synchronized boolean allowRequest() {
+        long now = System.currentTimeMillis();
+        long alignedWindow = alignToWindow(now);
+
+        if (alignedWindow != currentWindowStart) {
+            currentWindowStart = alignedWindow;
+            count = 0;
+            System.out.printf("⛽ New time window started — counter reset to 0 (window starting at %d)%n", currentWindowStart);
+        }
+
         if (count < limit) {
             count++;
-            System.out.println("✅ Accepted a request - Hitting the server API");
             return true;
         }
 
-        // Deny request if limit exceeded
-        System.out.println("🚫 Dropped a request - Returning 429 Too Many Requests");
         return false;
     }
 
-    // aMachineCoding.designFileSystem.aMachineCoding.designRateLimiter.Main method for testing the Fixed Window Rate Limiter
-    public static void main(String[] args) {
-        FixedWindowCounterRateLimiter rateLimiter = new FixedWindowCounterRateLimiter(5, 2000); // 5 requests per 2 seconds
-        Random random = new Random(); // Create a Random object for generating random sleep times
-        System.out.println("Testing Fixed Window Counter Rate Limiter...\n");
-
-        for (int i = 0; i < 25; i++) {
-            System.out.println("Request " + (i + 1) + " allowed? " + rateLimiter.allowRequest());
-            try {
-                // Sleep for a random time between 50ms and 500ms
-                int sleepTimeMillis = 50 + random.nextInt(451); // Random number between 50 and 500
-                Thread.sleep(sleepTimeMillis);
-            } catch (InterruptedException ignored) {
-            }
-        }
+    private long alignToWindow(long timeMillis) {
+        return (timeMillis / windowSizeMillis) * windowSizeMillis;
     }
 }
