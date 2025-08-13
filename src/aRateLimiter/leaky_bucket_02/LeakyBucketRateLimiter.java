@@ -18,8 +18,7 @@ public class LeakyBucketRateLimiter {
         this.leakRate = leakRate;
 
         this.ticker = Executors.newSingleThreadScheduledExecutor();
-        this.ticker.scheduleAtFixedRate(this::startLeaking,
-                leakRate, leakRate, TimeUnit.MILLISECONDS);
+        this.ticker.scheduleAtFixedRate(this::startLeaking, leakRate, leakRate, TimeUnit.MILLISECONDS);
     }
 
     public static void main(String[] args) {

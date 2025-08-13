@@ -44,6 +44,7 @@ public class FixedWindowCounterRateLimiter {
         long now = System.currentTimeMillis();
         long alignedWindow = alignToWindow(now);
 
+        // lazily reset
         if (alignedWindow != currentWindowStart) {
             currentWindowStart = alignedWindow;
             count = 0;
@@ -58,6 +59,9 @@ public class FixedWindowCounterRateLimiter {
         return false;
     }
 
+    // Your alignToWindow function’s job is to take any given timestamp
+    // and "snap" it to the start time of its containing fixed window,
+    // so the rate limiter knows which bucket of requests it belongs to.
     private long alignToWindow(long timeMillis) {
         return (timeMillis / windowSizeMillis) * windowSizeMillis;
     }

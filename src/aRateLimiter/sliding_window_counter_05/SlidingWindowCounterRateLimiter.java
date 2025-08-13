@@ -44,8 +44,8 @@ public class SlidingWindowCounterRateLimiter {
         int currentCount = counter.get(windowKey);
         int previousCount = counter.get(windowKey - 1);
 
-        double elapsedInWindow = (double) (now % windowSizeMillis) / windowSizeMillis;
-        double weightedPrevious = previousCount * (1 - elapsedInWindow);
+        double elapsedInWindowRatio = (double) (now % windowSizeMillis) / windowSizeMillis;
+        double weightedPrevious = previousCount * (1 - elapsedInWindowRatio);
         double totalCount = weightedPrevious + currentCount;
 
         if (totalCount < limit) {
@@ -60,6 +60,7 @@ public class SlidingWindowCounterRateLimiter {
         return false;
     }
 
+    // lazily cleanup
     private void removeOldEntries(long currentWindowKey) {
         for (Long key : counter.keySet()) {
             if (key < currentWindowKey - 1) {

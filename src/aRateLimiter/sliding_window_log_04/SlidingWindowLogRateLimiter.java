@@ -36,7 +36,7 @@ public class SlidingWindowLogRateLimiter {
     public synchronized boolean allowRequest() {
         long now = System.currentTimeMillis();
 
-        // Remove timestamps older than the start of the current window
+        // lazily Remove timestamps older than the start of the current window
         while (!timestamps.isEmpty() && timestamps.peek() < now - windowSizeMillis) {
             timestamps.poll();
         }
