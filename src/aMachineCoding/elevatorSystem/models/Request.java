@@ -4,8 +4,8 @@ import aMachineCoding.elevatorSystem.enums.Direction;
 import aMachineCoding.elevatorSystem.enums.FloorNumber;
 
 public class Request {
-    private FloorNumber floor;
-    private Direction direction;
+    private final FloorNumber floor;
+    private final Direction direction;
 
     public Request(FloorNumber floor, Direction direction) {
         this.floor = floor;

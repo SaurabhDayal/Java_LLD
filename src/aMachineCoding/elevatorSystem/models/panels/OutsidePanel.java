@@ -1,15 +1,18 @@
 package aMachineCoding.elevatorSystem.models.panels;
 
 import aMachineCoding.elevatorSystem.enums.Direction;
+import aMachineCoding.elevatorSystem.models.ElevatorSystem;
+import aMachineCoding.elevatorSystem.models.Floor;
+import aMachineCoding.elevatorSystem.models.Request;
 import aMachineCoding.elevatorSystem.models.buttons.HallButton;
 
 public class OutsidePanel implements Panel {
-    private HallButton upButton;    // Button to request upward movement
-    private HallButton downButton;  // Button to request downward movement
+    private final HallButton upButton;
+    private final HallButton downButton;
 
     public OutsidePanel() {
-        upButton = new HallButton(false, Direction.UP);
-        downButton = new HallButton(false, Direction.DOWN);
+        this.upButton = new HallButton(false, Direction.UP);
+        this.downButton = new HallButton(false, Direction.DOWN);
     }
 
     public HallButton getUpButton() {
@@ -20,11 +23,26 @@ public class OutsidePanel implements Panel {
         return downButton;
     }
 
-    public void pressUpButton() {
-        upButton.press();  // Just presses the button without returning anything
+    // Programmatically press hall buttons and trigger system request
+    public void pressUpButton(Floor floor, ElevatorSystem system) {
+        if (!upButton.isPressed()) {
+            upButton.press();
+            system.handleRequest(new Request(floor.getFloorNumber(), Direction.UP));
+        }
     }
 
-    public void pressDownButton() {
-        downButton.press();  // Same here
+    public void pressDownButton(Floor floor, ElevatorSystem system) {
+        if (!downButton.isPressed()) {
+            downButton.press();
+            system.handleRequest(new Request(floor.getFloorNumber(), Direction.DOWN));
+        }
+    }
+
+    public void resetUpButton() {
+        upButton.reset();
+    }
+
+    public void resetDownButton() {
+        downButton.reset();
     }
 }

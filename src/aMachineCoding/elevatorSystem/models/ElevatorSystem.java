@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ElevatorSystem {
+
     private final List<Elevator> elevators;
     private final int totalFloors;
     private final ElevatorDispatcher dispatchStrategy;
@@ -18,12 +19,10 @@ public class ElevatorSystem {
         this.totalFloors = FloorNumber.values().length;
         this.elevators = new ArrayList<>();
         this.dispatchStrategy = dispatchStrategy;
-
         for (ElevatorID elevatorId : ElevatorID.values()) {
             elevators.add(new Elevator(elevatorId));
         }
     }
-
 
     public void setFloorReachedListener(FloorReachedListener listener) {
         this.floorReachedListener = listener;

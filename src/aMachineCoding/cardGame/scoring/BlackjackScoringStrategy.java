@@ -8,16 +8,11 @@ public class BlackjackScoringStrategy implements ScoringStrategy {
     @Override
     public int evaluate(Card card) {
         Rank rank = card.getRank();
-        switch (rank) {
-            case JACK:
-            case QUEEN:
-            case KING:
-                return 10;
-            case ACE:
-                return 11; // Treat Ace as 11 for simplicity
-            default:
-                return rank.getValue(); // Correct and clean
-        }
+        return switch (rank) {
+            case JACK, QUEEN, KING -> 10;
+            case ACE -> 11; // Treat Ace as 11 for simplicity
+            default -> rank.getValue(); // Correct and clean
+        };
     }
 
 }

@@ -3,8 +3,7 @@ package aMachineCoding.elevatorSystem.models;
 import aMachineCoding.elevatorSystem.enums.FloorNumber;
 import aMachineCoding.elevatorSystem.models.panels.OutsidePanel;
 
-public class
-Floor {
+public class Floor {
     private final FloorNumber floorNumber;
     private final OutsidePanel outsidePanel;
 
@@ -19,5 +18,13 @@ Floor {
 
     public OutsidePanel getOutsidePanel() {
         return outsidePanel;
+    }
+
+    public void pressUp(ElevatorSystem system) {
+        outsidePanel.pressUpButton(this, system);
+    }
+
+    public void pressDown(ElevatorSystem system) {
+        outsidePanel.pressDownButton(this, system);
     }
 }
