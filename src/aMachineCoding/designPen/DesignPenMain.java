@@ -17,7 +17,15 @@ public class DesignPenMain {
         BallPointPen ballPen = new BallPointPen("Pilot", "Black", 1.5, ballpointRefill);
         System.out.println("Ball Pen Example:");
         ballPen.write("Writing with Pilot G2 Ballpoint pen.");
-        ballPen.refill(new Refill(new Ink("Red", PenType.BALL_POINT_PEN, java.util.Arrays.asList(Ink.InkFeature.FADE_RESISTANT, Ink.InkFeature.QUICK_DRYING)), 2.5, new Nib(1.4, NibType.BROAD), PenType.BALL_POINT_PEN)); // Refill Ballpoint pen with red ink and medium nib
+        ballPen.refill(
+                new Refill(
+                        new Ink("Red", PenType.BALL_POINT_PEN,
+                                java.util.Arrays.asList(Ink.InkFeature.FADE_RESISTANT, Ink.InkFeature.QUICK_DRYING)),
+                        2.5,
+                        new Nib(1.4, NibType.BROAD),
+                        PenType.BALL_POINT_PEN
+                )
+        ); // Refill Ballpoint pen with red ink and medium nib
         ballPen.write("Refilled with red ink!");
         System.out.println();
 
@@ -32,7 +40,15 @@ public class DesignPenMain {
         GelPen gelPen = new GelPen("Uni", "Blue", 2.0, gelRefill);
         System.out.println("Gel Pen Example:");
         gelPen.write("Writing with Uni-ball Gel pen.");
-        gelPen.refill(new Refill(new Ink("Green", PenType.GEL_PEN, java.util.Arrays.asList(Ink.InkFeature.GLITTER)), 1.8, new Nib(0.7, NibType.MEDIUM), PenType.GEL_PEN)); // Refill Gel pen with green ink and fine nib
+        gelPen.refill(
+                new Refill(
+                        new Ink("Green", PenType.GEL_PEN,
+                                java.util.Arrays.asList(Ink.InkFeature.GLITTER)),
+                        1.8,
+                        new Nib(0.7, NibType.MEDIUM),
+                        PenType.GEL_PEN
+                )
+        ); // Refill Gel pen with green ink and fine nib
         gelPen.write("Refilled with green ink!");
         System.out.println();
 
@@ -46,7 +62,10 @@ public class DesignPenMain {
         FountainPen fountainPen = new FountainPen("Parker", "Silver", 20.0, fountainInk, fountainNib);
         System.out.println("Fountain Pen Example:");
         fountainPen.write("Writing with Parker Fountain pen.");
-        fountainPen.refillInk(new Ink("Blue", PenType.FOUNTAIN_PEN, java.util.Arrays.asList(Ink.InkFeature.ACID_FREE, Ink.InkFeature.LOW_VISCOSITY))); // Refill Fountain pen with different ink
+        fountainPen.refillInk(
+                new Ink("Blue", PenType.FOUNTAIN_PEN,
+                        java.util.Arrays.asList(Ink.InkFeature.ACID_FREE, Ink.InkFeature.LOW_VISCOSITY))
+        ); // Refill Fountain pen with different ink
         fountainPen.write("Refilled with blue ink!");
         fountainPen.changeNib(new Nib(1.0, NibType.MEDIUM)); // Change nib of Fountain pen
         fountainPen.write("Writing with medium nib now!");
