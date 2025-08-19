@@ -15,11 +15,11 @@ public class SnapshotStrategy implements ReversibleMoveStrategy {
     }
 
     @Override
-    public void undo(TicTacToe game) {
+    public void undoMove(TicTacToe game) {
         if (!game.stateHistory.isEmpty()) {
-            GameState previousState = game.stateHistory.remove(game.stateHistory.size() - 1); // Retrieve last saved state
-            game.restoreBoard(previousState);                                                       // Restore the board to previous state
-            game.switchPlayer();                                                                    // Switch back to the previous player
+            GameState previousState = game.stateHistory.removeLast();   // Retrieve last saved state
+            previousState.restoreBoard(game);                           // Restore the board to previous state
+            game.switchPlayer();                                        // Switch back to the previous player
         }
     }
 }
