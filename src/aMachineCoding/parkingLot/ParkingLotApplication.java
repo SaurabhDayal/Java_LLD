@@ -129,7 +129,7 @@ public class ParkingLotApplication {
             floors.add(floor);
         }
 
-        // Save parking lot
+        // Save the parking lot
         ParkingLot parkingLot = new ParkingLot();
         parkingLot.setName("Mall Parking");
         parkingLot.setParkingLotStatus(ParkingLotStatus.OPEN);

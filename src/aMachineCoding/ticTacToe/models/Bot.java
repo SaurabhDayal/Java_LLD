@@ -4,8 +4,8 @@ import aMachineCoding.ticTacToe.factories.BotPlayingStrategyFactory;
 import aMachineCoding.ticTacToe.strategies.botPlayingStrategy.BotPlayingStrategy;
 
 public class Bot extends Player {
-    private BotDifficultyLevel botDifficultyLevel;
-    private BotPlayingStrategy botPlayingStrategy;
+    private final BotDifficultyLevel botDifficultyLevel;
+    private final BotPlayingStrategy botPlayingStrategy;
 
     public Bot(Symbol symbol, String name, PlayerType playerType, BotDifficultyLevel botDifficultyLevel) {
         super(symbol, name, playerType);
@@ -17,16 +17,8 @@ public class Bot extends Player {
         return botDifficultyLevel;
     }
 
-    public void setBotDifficultyLevel(BotDifficultyLevel botDifficultyLevel) {
-        this.botDifficultyLevel = botDifficultyLevel;
-    }
-
     public BotPlayingStrategy getBotPlayingStrategy() {
         return botPlayingStrategy;
-    }
-
-    public void setBotPlayingStrategy(BotPlayingStrategy botPlayingStrategy) {
-        this.botPlayingStrategy = botPlayingStrategy;
     }
 
     @Override

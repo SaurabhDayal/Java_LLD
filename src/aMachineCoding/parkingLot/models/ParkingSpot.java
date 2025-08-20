@@ -4,9 +4,9 @@ import java.util.List;
 
 public class ParkingSpot extends BaseModel {
     private int spotNumber;
-    private ParkingFloor parkingFloor;
     private ParkingSpotStatus parkingSpotStatus;
     private List<VehicleType> supportedVehicleTypes;
+    private ParkingFloor parkingFloor;
 
     public int getSpotNumber() {
         return spotNumber;

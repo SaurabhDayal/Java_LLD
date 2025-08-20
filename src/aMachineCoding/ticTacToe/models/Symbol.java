@@ -1,7 +1,7 @@
 package aMachineCoding.ticTacToe.models;
 
 public class Symbol {
-    private char aChar;
+    private final char aChar;
 
     public Symbol(char aChar) {
         this.aChar = aChar;
@@ -9,9 +9,5 @@ public class Symbol {
 
     public char getaChar() {
         return aChar;
-    }
-
-    public void setaChar(char aChar) {
-        this.aChar = aChar;
     }
 }

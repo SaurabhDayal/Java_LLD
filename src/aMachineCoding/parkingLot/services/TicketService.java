@@ -23,7 +23,8 @@ public class TicketService {
     public TicketService(GateRepository gateRepository,
                          VehicleRepository vehicleRepository,
                          ParkingSpotAssignmentStrategy parkingSpotAssignmentStrategy,
-                         TicketRepository ticketRepository, OperatorRepository operatorRepository) {
+                         TicketRepository ticketRepository,
+                         OperatorRepository operatorRepository) {
         this.gateRepository = gateRepository;
         this.vehicleRepository = vehicleRepository;
         this.parkingSpotAssignmentStrategy = parkingSpotAssignmentStrategy;
@@ -70,7 +71,7 @@ public class TicketService {
 
         ticket.setVehicle(vehicle);
 
-        // Assign parking spot and handle no availability
+        // Assign a parking spot and handle no availability
         ParkingLot parkingLot = gate.getParkingLot();
         ParkingSpot assignedSpot = null;
         try {

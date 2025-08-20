@@ -3,8 +3,6 @@ package aMachineCoding.ticTacToe;
 import aMachineCoding.ticTacToe.controllers.GameController;
 import aMachineCoding.ticTacToe.exception.InvalidMoveException;
 import aMachineCoding.ticTacToe.models.*;
-import aMachineCoding.ticTacToe.strategies.reversibleMoveStrategy.ReversibleMoveStrategy;
-import aMachineCoding.ticTacToe.strategies.reversibleMoveStrategy.SnapshotStrategy;
 import aMachineCoding.ticTacToe.strategies.winningStrategy.ColWinningStrategy;
 import aMachineCoding.ticTacToe.strategies.winningStrategy.DiagonalWinningStrategy;
 import aMachineCoding.ticTacToe.strategies.winningStrategy.RowWinningStrategy;
@@ -14,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class TicTacToeMain {
+public class Main {
     private static final Scanner scanner = new Scanner(System.in);
     private static final GameController gameController = new GameController();
 
@@ -39,10 +37,7 @@ public class TicTacToeMain {
                 new DiagonalWinningStrategy()
         );
 
-//        ReversibleMoveStrategy reversibleMoveStrategy = new StackStrategy();
-        ReversibleMoveStrategy reversibleMoveStrategy = new SnapshotStrategy();
-
-        return gameController.startGame(dimension, players, winningStrategies, reversibleMoveStrategy);
+        return gameController.startGame(dimension, players, winningStrategies);
     }
 
     private static void playGame(Game game) throws InvalidMoveException {

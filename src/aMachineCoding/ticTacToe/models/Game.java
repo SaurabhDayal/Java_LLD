@@ -1,12 +1,10 @@
 package aMachineCoding.ticTacToe.models;
 
 import aMachineCoding.ticTacToe.exception.InvalidMoveException;
-import aMachineCoding.ticTacToe.strategies.reversibleMoveStrategy.ReversibleMoveStrategy;
 import aMachineCoding.ticTacToe.strategies.winningStrategy.WinningStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Stack;
 
 public class Game {
 
@@ -19,18 +17,13 @@ public class Game {
 
     private final List<WinningStrategy> winningStrategies;
 
-    private final Stack<Move> moveStack = new Stack<>();
-    public ReversibleMoveStrategy reversibleMoveStrategy;
-    private final List<List<List<Cell>>> stateHistory = new ArrayList<>();
-
-    public Game(int dimension, List<Player> players, List<WinningStrategy> winningStrategies, ReversibleMoveStrategy reversibleMoveStrategy) {
+    public Game(int dimension, List<Player> players, List<WinningStrategy> winningStrategies) {
         this.board = new Board(dimension);
         this.players = players;
         this.nextMovePlayerIndex = 0;
         this.gameState = GameState.IN_PROGRESS;
         this.moves = new ArrayList<>();
         this.winningStrategies = winningStrategies;
-        this.reversibleMoveStrategy = reversibleMoveStrategy;
     }
 
     // --------------------------------------
@@ -48,24 +41,16 @@ public class Game {
             throw new InvalidMoveException("Invalid move, please retry");
         }
 
-        // Conditionally save BEFORE move (Snapshot strategy)
-        if (reversibleMoveStrategy.shouldSaveBeforeMove()) {
-            reversibleMoveStrategy.onMove(this);
-        }
-
         int row = move.getCell().getRow();
         int col = move.getCell().getCol();
 
+        // Update board state
         Cell cell = board.getBoard().get(row).get(col);
         cell.setCellState(CellState.FILLED);
         cell.setPlayer(currentPlayer);
 
+        // Save move in history
         moves.add(new Move(currentPlayer, cell));
-
-        // Conditionally save AFTER move (Stack strategy)
-        if (!reversibleMoveStrategy.shouldSaveBeforeMove()) {
-            reversibleMoveStrategy.onMove(this);
-        }
 
         if (checkWinner(move)) {
             winner = currentPlayer;
@@ -78,19 +63,30 @@ public class Game {
     }
 
     public void undoMove() throws InvalidMoveException {
-        
+
         if (moves.isEmpty()) {
-            throw new InvalidMoveException("Cannot undo move, please make Move");
+            throw new InvalidMoveException("Cannot undo move, please make a move first");
         }
 
-        reversibleMoveStrategy.undo(this);
+        // Remove last move
+        Move lastMove = moves.removeLast();
 
-        Move lastMove = moves.remove(moves.size() - 1);
+        // Reset cell to empty
+        Cell cell = lastMove.getCell();
+        cell.setCellState(CellState.EMPTY);
+        cell.setPlayer(null);
+
+        // Roll back winning strategies
         for (WinningStrategy winningStrategy : winningStrategies) {
             winningStrategy.handleUndo(board, lastMove);
         }
 
+        // Rewind turn
         nextMovePlayerIndex = (nextMovePlayerIndex - 1 + players.size()) % players.size();
+
+        // Reset winner/game state
+        winner = null;
+        gameState = GameState.IN_PROGRESS;
     }
 
     // --------------------------------------
@@ -122,37 +118,6 @@ public class Game {
     }
 
     // --------------------------------------
-    // Snapshot Handling (for undo)
-    // --------------------------------------
-
-    public void saveBoardSnapshot() {
-        List<List<Cell>> original = board.getBoard();
-        List<List<Cell>> snapshot = new ArrayList<>();
-
-        for (List<Cell> row : original) {
-            List<Cell> newRow = new ArrayList<>();
-            for (Cell c : row) {
-                Cell copy = new Cell(c.getRow(), c.getCol());
-                copy.setCellState(c.getCellState());
-                copy.setPlayer(c.getPlayer());
-                newRow.add(copy);
-            }
-            snapshot.add(newRow);
-        }
-
-        stateHistory.add(snapshot);
-    }
-
-    public void restoreBoardSnapshot(List<List<Cell>> snapshot) {
-        for (int i = 0; i < board.getDimension(); i++) {
-            for (int j = 0; j < board.getDimension(); j++) {
-                board.getBoard().get(i).get(j).setCellState(snapshot.get(i).get(j).getCellState());
-                board.getBoard().get(i).get(j).setPlayer(snapshot.get(i).get(j).getPlayer());
-            }
-        }
-    }
-
-    // --------------------------------------
     // Accessors
     // --------------------------------------
 
@@ -174,14 +139,6 @@ public class Game {
 
     public GameState getGameState() {
         return gameState;
-    }
-
-    public Stack<Move> getMoveStack() {
-        return moveStack;
-    }
-
-    public List<List<List<Cell>>> getStateHistory() {
-        return stateHistory;
     }
 
     public void printBoard() {

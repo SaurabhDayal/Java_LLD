@@ -3,9 +3,9 @@ package aMachineCoding.parkingLot.models;
 import java.util.List;
 
 public class ParkingFloor extends BaseModel {
-    private List<ParkingSpot> parkingSpots;
     private int floorNumber;
     private ParkingFloorStatus parkingFloorStatus;
+    private List<ParkingSpot> parkingSpots;
 
     public List<ParkingSpot> getParkingSpots() {
         return parkingSpots;

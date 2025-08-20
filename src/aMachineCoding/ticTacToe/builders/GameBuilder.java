@@ -3,7 +3,6 @@ package aMachineCoding.ticTacToe.builders;
 import aMachineCoding.ticTacToe.models.Game;
 import aMachineCoding.ticTacToe.models.Player;
 import aMachineCoding.ticTacToe.models.PlayerType;
-import aMachineCoding.ticTacToe.strategies.reversibleMoveStrategy.ReversibleMoveStrategy;
 import aMachineCoding.ticTacToe.strategies.winningStrategy.WinningStrategy;
 
 import java.util.ArrayList;
@@ -16,18 +15,16 @@ public class GameBuilder {
     private int dimension;
     private List<Player> players;
     private List<WinningStrategy> winningStrategies;
-    private ReversibleMoveStrategy reversibleMoveStrategy;
 
     public GameBuilder() {
         this.players = new ArrayList<>();
         this.dimension = 0;
         this.winningStrategies = new ArrayList<>();
-        this.reversibleMoveStrategy = null;
     }
 
     public Game build() {
         validations();
-        return new Game(dimension, players, winningStrategies, reversibleMoveStrategy);
+        return new Game(dimension, players, winningStrategies);
     }
 
     private void validations() {
@@ -70,11 +67,6 @@ public class GameBuilder {
 
     public GameBuilder setWinningStrategies(List<WinningStrategy> winningStrategies) {
         this.winningStrategies = winningStrategies;
-        return this;
-    }
-
-    public GameBuilder setReversibleMoveStrategy(ReversibleMoveStrategy reversibleMoveStrategy) {
-        this.reversibleMoveStrategy = reversibleMoveStrategy;
         return this;
     }
 }
