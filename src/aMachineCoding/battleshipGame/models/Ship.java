@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Set;
 
 public class Ship {
-    private ShipType type;
-    private List<Position> positions;
-    private Set<Position> hits;
+    private final ShipType type;            // The type of the ship (e.g., Carrier, Battleship, etc.) — defines name and size
+    private final List<Position> positions; // The exact grid positions this ship occupies on the board
+    private final Set<Position> hits;       // The set of positions on this ship that have been hit by attacks
 
     public Ship(ShipType type, List<Position> positions) {
         this.type = type;

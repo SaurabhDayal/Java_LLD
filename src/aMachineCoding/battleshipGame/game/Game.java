@@ -7,7 +7,7 @@ public class Game {
     private final Player player1;
     private final Player player2;
     private Player currentPlayer;
-    private boolean isGameOver;
+    private boolean gameOver;
     private Player winner;
 
     public Game(Player player1, Player player2) {
@@ -16,9 +16,9 @@ public class Game {
     }
 
     public void startNewGame() {
-        this.currentPlayer = player1;
-        this.isGameOver = false;
-        this.winner = null;
+        currentPlayer = player1;
+        gameOver = false;
+        winner = null;
         System.out.println();
         System.out.println("------ Game started between " + player1.getName() + " and " + player2.getName() + " ------");
     }
@@ -40,7 +40,7 @@ public class Game {
 
         // Check win condition
         if (opponent.hasLost()) {
-            isGameOver = true;
+            gameOver = true;
             winner = currentPlayer;
         }
     }
@@ -64,6 +64,6 @@ public class Game {
     }
 
     public boolean isGameOver() {
-        return isGameOver;
+        return gameOver;
     }
 }

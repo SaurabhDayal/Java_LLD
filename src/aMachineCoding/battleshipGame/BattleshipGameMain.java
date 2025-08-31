@@ -31,6 +31,8 @@ import java.util.Scanner;
     Winning the Game:
     - A player wins when all of their opponent's ships are completely sunk.
     - The first player to sink the entire enemy fleet is declared the winner.
+
+    No Tracking game board in this implementation
  */
 
 public class BattleshipGameMain {
