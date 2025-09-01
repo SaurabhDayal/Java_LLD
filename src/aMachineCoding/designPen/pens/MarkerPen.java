@@ -6,8 +6,8 @@ import aMachineCoding.designPen.components.PenType;
 
 // Concrete implementation of MarkerPen
 public class MarkerPen extends Pen {
-    private Ink ink; // Ink of the marker
-    private Nib nib; // Nib size and type for the marker
+    private final Ink ink; // Ink of the marker
+    private final Nib nib; // Nib size and type for the marker
 
     // Constructor initializing the ink and nib
     public MarkerPen(String brand, String color, double price, Ink ink, Nib nib) {

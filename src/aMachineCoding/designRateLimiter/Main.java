@@ -11,9 +11,6 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-/**
- * aMachineCoding.designRateLimiter.Main class to demonstrate the rate limiting system.
- */
 public class Main {
     public static void main(String[] args) {
         demonstrateRateLimiting();

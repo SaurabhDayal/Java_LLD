@@ -6,8 +6,8 @@ import aMachineCoding.designPen.components.PenType;
 
 // Concrete implementation of DisposableStickPen with Ink and Nib
 public class DisposableStickPen extends Pen {
-    private Ink ink; // Disposable pen ink
-    private Nib nib; // Disposable pen nib
+    private final Ink ink; // Disposable pen ink
+    private final Nib nib; // Disposable pen nib
 
     public DisposableStickPen(String brand, String color, double price, Ink ink, Nib nib) {
         super(brand, color, price, PenType.DISPOSABLE_STICK_PEN);
