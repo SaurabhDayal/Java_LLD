@@ -1,7 +1,4 @@
-package aMachineCoding.battleshipGame.game;
-
-import aMachineCoding.battleshipGame.models.Player;
-import aMachineCoding.battleshipGame.models.Position;
+package aMachineCoding.battleshipGame.models;
 
 public class Game {
     private final Player player1;

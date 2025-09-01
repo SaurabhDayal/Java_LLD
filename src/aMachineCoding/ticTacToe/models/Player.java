@@ -7,7 +7,7 @@ public class Player {
     private final Symbol symbol;
     private String name;
     private final PlayerType playerType;
-    private static Scanner scanner = new Scanner(System.in);
+    private static final Scanner scanner = new Scanner(System.in);
 
     public Player(Symbol symbol, String name, PlayerType playerType) {
         this.symbol = symbol;
