@@ -6,14 +6,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Game {
-    private List<Player> players;
+    private final List<Player> players;
     private Deck deck;
     private GameState gameState;
-    private WinningRule rule;
+    private final WinningRule rule;
 
     public Game(WinningRule rule) {
         this.players = new ArrayList<>();
-        this.deck = new Deck();
+        this.deck = null;
         this.gameState = GameState.NOT_STARTED;
         this.rule = rule;
     }

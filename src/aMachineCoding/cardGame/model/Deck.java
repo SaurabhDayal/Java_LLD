@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class Deck {
-    private List<Card> cards;
+    private final List<Card> cards;
 
     public Deck() {
         cards = new ArrayList<>();
@@ -22,7 +22,7 @@ public class Deck {
 
     public Card dealCard() {
         if (cards.isEmpty()) return null;
-        return cards.remove(cards.size() - 1);
+        return cards.removeLast();
     }
 
     public int remainingCards() {

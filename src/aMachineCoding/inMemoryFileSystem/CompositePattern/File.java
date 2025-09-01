@@ -1,8 +1,8 @@
-package aMachineCoding.designFileSystem.CompositePattern;
+package aMachineCoding.inMemoryFileSystem.CompositePattern;
 
 public class File extends FileSystemNode {
-    private String content; // Content stored in file
-    private String extension; // File extension (e.g., txt, md)
+    private String content;         // Content stored in file
+    private final String extension; // File extension (e.g., txt, md)
 
     public File(String name) {
         super(name);
@@ -23,6 +23,10 @@ public class File extends FileSystemNode {
         return content;
     }
 
+    public String getExtension() {
+        return extension;
+    }
+
     @Override
     public boolean isFile() {
         return true; // This is a file
@@ -30,7 +34,7 @@ public class File extends FileSystemNode {
 
     @Override
     public void display(int depth) {
-        String indent = " ".repeat(depth * 2); // Indent based on depth
+        String indent = " ".repeat(depth * 2);    // Indent based on depth
         System.out.println(indent + "📄 " + getName()); // Display with file emoji
     }
 }

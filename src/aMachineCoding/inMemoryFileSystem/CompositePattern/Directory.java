@@ -1,4 +1,4 @@
-package aMachineCoding.designFileSystem.CompositePattern;
+package aMachineCoding.inMemoryFileSystem.CompositePattern;
 
 public class Directory extends FileSystemNode {
     public Directory(String name) {

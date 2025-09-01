@@ -79,7 +79,7 @@ public class CardGameMain {
         game.addPlayer(new Player("Diana"));
 
         game.startNewGame();
-        game.dealInitialCards(1);
+        game.dealInitialCards(3);
 
         Player winner = game.declareWinner();
 

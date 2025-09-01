@@ -14,7 +14,7 @@ public class VisitorMain {
 
         // Create room objects on which we need to add operations
         Room bedroom = new Bedroom("Master Bedroom");
-        Room kitchen = new Kitchen("aMachineCoding.designFileSystem.aMachineCoding.designRateLimiter.Main Kitchen");
+        Room kitchen = new Kitchen("aMachineCoding.inMemoryFileSystem.aMachineCoding.designRateLimiter.Main Kitchen");
         Room livingRoom = new LivingRoom("Family Living Room");
 
         // Create visitors which host all the operations

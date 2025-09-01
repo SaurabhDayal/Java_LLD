@@ -1,14 +1,14 @@
-package aMachineCoding.designFileSystem;
+package aMachineCoding.inMemoryFileSystem;
 
-import aMachineCoding.designFileSystem.fileSystem.FileSystem;
+import aMachineCoding.inMemoryFileSystem.fileSystem.FileSystem;
 
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        FileSystem fs = new FileSystem(); // Initialize the file system
+        FileSystem fs = new FileSystem();         // Initialize the file system
         Scanner scanner = new Scanner(System.in); // Read user input from the console
-        boolean isRunning = true; // aMachineCoding.designRateLimiter.Main loop control flag
+        boolean isRunning = true;                 // Loop control flag
 
         // Print available commands for user interaction
         System.out.println("File System Manager - Commands:");
@@ -21,7 +21,7 @@ public class Main {
 
         // Command execution loop
         while (isRunning) {
-            System.out.print("nEnter command: ");
+            System.out.print("\nEnter command: ");
             String input = scanner.nextLine().trim(); // Read a line of input
             String[] parts = input.split("\\s+", 3); // Split into max 3 parts: command, path, content
 
