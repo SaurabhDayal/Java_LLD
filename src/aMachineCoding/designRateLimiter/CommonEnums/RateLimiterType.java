@@ -1,8 +1,5 @@
 package aMachineCoding.designRateLimiter.CommonEnums;
 
-/**
- * Enumeration of supported rate limiter types.
- */
 public enum RateLimiterType {
     TOKEN_BUCKET,
     LEAKY_BUCKET,

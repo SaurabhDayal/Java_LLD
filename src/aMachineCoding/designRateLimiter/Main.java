@@ -23,8 +23,7 @@ public class Main {
         config.put("refreshRate", 1);
 
         ExecutorService executor = Executors.newFixedThreadPool(10);
-        RateLimiterController controller =
-                new RateLimiterController(RateLimiterType.TOKEN_BUCKET, config, executor);
+        RateLimiterController controller = new RateLimiterController(RateLimiterType.TOKEN_BUCKET, config, executor);
 
         // --- Example 1: Global rate limiting – Burst of requests ---
         System.out.println("=== EXAMPLE 1: Global rate limiting – Burst of requests ===");
@@ -66,33 +65,25 @@ public class Main {
         controller.shutdown();
     }
 
-    /**
-     * Sends a burst of requests using the provided controller.
-     *
-     * @param controller   The RateLimiterController instance.
-     * @param count        The number of requests to send.
-     * @param rateLimitKey For per-user requests, this should be the same key (e.g., user ID);
-     *                     For global requests, pass null.
-     */
     private static void sendBurstRequests(RateLimiterController controller, int count, String rateLimitKey) {
+
         List<CompletableFuture<Boolean>> futures = new ArrayList<>();
+
         for (int i = 1; i <= count; i++) {
-            // In this example, the same rateLimitKey is used for each request so that they share the same bucket.
+            // In this example,
+            // the same rateLimitKey is used for each request so that they share the same bucket.
             futures.add(controller.processRequest(rateLimitKey));
         }
+
         // Wait for all requests in the burst to complete.
         CompletableFuture.allOf(futures.toArray(new CompletableFuture[0])).join();  // Blocks until all futures complete.
 
         // Count how many requests were allowed.
         long allowed = futures.stream().filter(CompletableFuture::join).count(); // Joins each future to get its boolean result.
+
         System.out.printf("Results: %d allowed, %d blocked (total: %d)%n", allowed, count - allowed, count);
     }
 
-    /**
-     * Utility method to pause execution for a given number of milliseconds.
-     *
-     * @param millis Milliseconds to sleep.
-     */
     private static void sleep(long millis) {
         try {
             Thread.sleep(millis);

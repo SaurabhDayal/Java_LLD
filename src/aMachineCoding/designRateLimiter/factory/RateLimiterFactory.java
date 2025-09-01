@@ -8,11 +8,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
-/**
- * Factory class that creates rate limiter instances based on the provided type and configuration.
- * New rate limiting strategies can be added by registering additional factory functions.
- */
 public class RateLimiterFactory {
+
     private static final Map<RateLimiterType, Function<Map<String, Object>, IRateLimiter>> limiterFactories = new HashMap<>();
 
     static {
@@ -32,14 +29,6 @@ public class RateLimiterFactory {
         // Additional strategies (FIXED_WINDOW, SLIDING_WINDOW, LEAKY_BUCKET, etc.) can be registered here.
     }
 
-    /**
-     * Creates an IRateLimiter instance for the specified type using the provided configuration.
-     *
-     * @param type   The type of rate limiter.
-     * @param config The configuration parameters.
-     * @return A new IRateLimiter instance.
-     * @throws IllegalArgumentException if the specified type is not supported.
-     */
     public static IRateLimiter createLimiter(RateLimiterType type, Map<String, Object> config) {
         Function<Map<String, Object>, IRateLimiter> factory = limiterFactories.get(type);
         if (factory == null) {
@@ -48,12 +37,6 @@ public class RateLimiterFactory {
         return factory.apply(config);
     }
 
-    /**
-     * Allows for dynamic registration of new rate limiter factory functions.
-     *
-     * @param type    The rate limiter type.
-     * @param factory The factory function to create the rate limiter.
-     */
     public static void registerLimiterFactory(RateLimiterType type, Function<Map<String, Object>, IRateLimiter> factory) {
         limiterFactories.put(type, factory);
     }
