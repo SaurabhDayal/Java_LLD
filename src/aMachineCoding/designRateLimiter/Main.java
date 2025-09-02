@@ -46,6 +46,7 @@ public class Main {
 
         // --- Example 4: High concurrency scenario ---
         System.out.println("\n=== EXAMPLE 4: High concurrency scenario ===");
+        sleep(5000);
         // Submit 20 requests rapidly using global rate limiting (null key) for demonstration.
         List<CompletableFuture<Boolean>> futures = new ArrayList<>();
         for (int i = 1; i <= 20; i++) {
