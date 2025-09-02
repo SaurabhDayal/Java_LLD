@@ -1,7 +1,7 @@
 package aMachineCoding.elevatorSystem.strategies;
 
-import aMachineCoding.elevatorSystem.enums.ElevatorStatus;
 import aMachineCoding.elevatorSystem.models.Elevator;
+import aMachineCoding.elevatorSystem.models.ElevatorStatus;
 import aMachineCoding.elevatorSystem.models.Request;
 
 import java.util.List;

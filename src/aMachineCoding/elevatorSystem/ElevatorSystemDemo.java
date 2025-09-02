@@ -1,13 +1,8 @@
 package aMachineCoding.elevatorSystem;
 
-import aMachineCoding.elevatorSystem.enums.DispatchStrategyType;
-import aMachineCoding.elevatorSystem.enums.ElevatorID;
-import aMachineCoding.elevatorSystem.enums.FloorNumber;
 import aMachineCoding.elevatorSystem.factories.DispatcherFactory;
 import aMachineCoding.elevatorSystem.listeners.FloorReachedListener;
-import aMachineCoding.elevatorSystem.models.Elevator;
-import aMachineCoding.elevatorSystem.models.ElevatorSystem;
-import aMachineCoding.elevatorSystem.models.Floor;
+import aMachineCoding.elevatorSystem.models.*;
 import aMachineCoding.elevatorSystem.strategies.ElevatorDispatcher;
 
 public class ElevatorSystemDemo {

@@ -1,6 +1,6 @@
 package aMachineCoding.elevatorSystem.models.buttons;
 
-import aMachineCoding.elevatorSystem.enums.FloorNumber;
+import aMachineCoding.elevatorSystem.models.FloorNumber;
 
 public class ElevatorButton implements Button {
     private boolean isPressed;

@@ -1,7 +1,7 @@
 package aMachineCoding.elevatorSystem.models.panels;
 
-import aMachineCoding.elevatorSystem.enums.FloorNumber;
 import aMachineCoding.elevatorSystem.models.Elevator;
+import aMachineCoding.elevatorSystem.models.FloorNumber;
 import aMachineCoding.elevatorSystem.models.buttons.ElevatorButton;
 
 import java.util.ArrayList;

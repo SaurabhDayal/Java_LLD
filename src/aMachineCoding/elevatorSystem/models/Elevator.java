@@ -1,9 +1,5 @@
 package aMachineCoding.elevatorSystem.models;
 
-import aMachineCoding.elevatorSystem.enums.Direction;
-import aMachineCoding.elevatorSystem.enums.ElevatorID;
-import aMachineCoding.elevatorSystem.enums.ElevatorStatus;
-import aMachineCoding.elevatorSystem.enums.FloorNumber;
 import aMachineCoding.elevatorSystem.listeners.FloorReachedListener;
 import aMachineCoding.elevatorSystem.models.panels.InsidePanel;
 

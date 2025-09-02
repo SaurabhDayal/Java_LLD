@@ -1,6 +1,6 @@
 package aMachineCoding.elevatorSystem.models.panels;
 
-import aMachineCoding.elevatorSystem.enums.Direction;
+import aMachineCoding.elevatorSystem.models.Direction;
 import aMachineCoding.elevatorSystem.models.ElevatorSystem;
 import aMachineCoding.elevatorSystem.models.Floor;
 import aMachineCoding.elevatorSystem.models.Request;

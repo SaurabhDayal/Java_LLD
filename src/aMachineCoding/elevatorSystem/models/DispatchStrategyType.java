@@ -1,4 +1,4 @@
-package aMachineCoding.elevatorSystem.enums;
+package aMachineCoding.elevatorSystem.models;
 
 public enum DispatchStrategyType {
     FIRST_COME_FIRST_SERVE,

@@ -1,6 +1,6 @@
 package aMachineCoding.elevatorSystem.factories;
 
-import aMachineCoding.elevatorSystem.enums.DispatchStrategyType;
+import aMachineCoding.elevatorSystem.models.DispatchStrategyType;
 import aMachineCoding.elevatorSystem.strategies.*;
 
 public class DispatcherFactory {
