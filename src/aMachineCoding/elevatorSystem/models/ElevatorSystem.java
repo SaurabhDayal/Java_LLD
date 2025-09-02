@@ -25,7 +25,7 @@ public class ElevatorSystem {
     }
 
     public void setFloorReachedListener(FloorReachedListener listener) {
-        this.floorReachedListener = listener;
+        floorReachedListener = listener;
         for (Elevator elevator : elevators) {
             elevator.setFloorReachedListener(listener);
         }
@@ -46,6 +46,18 @@ public class ElevatorSystem {
         return elevators;
     }
 
+    public void startElevators() {
+        for (Elevator elevator : elevators) {
+            new Thread(elevator).start();
+        }
+    }
+
+    public void stopElevators() {
+        for (Elevator elevator : elevators) {
+            elevator.stopElevator();
+        }
+    }
+
     public int getTotalFloors() {
         return totalFloors;
     }
@@ -59,15 +71,7 @@ public class ElevatorSystem {
         throw new IllegalArgumentException("Elevator ID not found: " + elevatorId);
     }
 
-    public void startElevators() {
-        for (Elevator elevator : elevators) {
-            new Thread(elevator).start();
-        }
-    }
-
-    public void stopElevators() {
-        for (Elevator elevator : elevators) {
-            elevator.stopElevator();
-        }
+    public FloorReachedListener getFloorReachedListener() {
+        return floorReachedListener;
     }
 }
