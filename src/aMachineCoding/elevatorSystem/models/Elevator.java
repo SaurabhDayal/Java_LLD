@@ -6,27 +6,32 @@ import aMachineCoding.elevatorSystem.models.enums.ElevatorID;
 import aMachineCoding.elevatorSystem.models.enums.ElevatorStatus;
 import aMachineCoding.elevatorSystem.models.enums.FloorNumber;
 import aMachineCoding.elevatorSystem.models.panels.InsidePanel;
+import aMachineCoding.elevatorSystem.models.panels.OutsidePanel;
 import aMachineCoding.elevatorSystem.strategies.ElevatorScheduler;
+
+import java.util.Map;
 
 public class Elevator implements Runnable {
 
-    private final ElevatorID id;                  // Unique ID of this elevator
-    private FloorNumber currentFloor;             // Current floor of the elevator
-    private Direction direction;                  // Current moving direction
-    private ElevatorStatus status;                // Current status (IDLE, MOVING, etc.)
-    private volatile boolean keepRunning;         // Flag to control elevator thread
-    private FloorReachedListener floorReachedListener; // Listener for floor reached events
-    private final InsidePanel insidePanel;        // Panel inside elevator with floor buttons
-    private final ElevatorScheduler scheduler;    // Scheduler for this elevator
+    private final ElevatorID id;                          // Unique ID of this elevator
+    private FloorNumber currentFloor;                     // Current floor of the elevator
+    private Direction direction;                          // Current moving direction
+    private ElevatorStatus status;                        // Current status (IDLE, MOVING, etc.)
+    private volatile boolean keepRunning;                 // Flag to control elevator thread
+    private final InsidePanel insidePanel;                // Panel inside elevator with floor buttons
+    private final ElevatorScheduler scheduler;            // Scheduler for this elevator
+    private final Map<FloorNumber, Floor> buildingFloors; // Registry of all floors (for outside panels)
+    private FloorReachedListener floorReachedListener;    // Listener for a floor reached events
 
-    public Elevator(ElevatorID id, ElevatorScheduler scheduler) {
+    public Elevator(ElevatorID id, ElevatorScheduler scheduler, Map<FloorNumber, Floor> buildingFloors) {
         this.id = id;
-        this.currentFloor = FloorNumber.GROUND;      // Start at ground floor
-        this.direction = Direction.UP;            // Default initial direction
-        this.status = ElevatorStatus.IDLE;        // Initially idle
-        this.keepRunning = true;                  // Thread should run
+        this.currentFloor = FloorNumber.GROUND;           // Start at the ground floor
+        this.direction = Direction.UP;                    // Default initial direction
+        this.status = ElevatorStatus.IDLE;                // Initially idle
+        this.keepRunning = true;                          // Thread should run
         this.insidePanel = new InsidePanel(this); // Attach inside panel
         this.scheduler = scheduler;
+        this.buildingFloors = buildingFloors;             // Store building floors map
     }
 
     public InsidePanel getInsidePanel() {
@@ -35,10 +40,6 @@ public class Elevator implements Runnable {
 
     public void setFloorReachedListener(FloorReachedListener listener) {
         this.floorReachedListener = listener; // Register floor reached listener
-    }
-
-    public void setDirection(Direction direction) {
-        this.direction = direction; // Set elevator direction manually
     }
 
     public ElevatorID getId() {
@@ -57,10 +58,6 @@ public class Elevator implements Runnable {
         return status; // Return current status
     }
 
-    public void setStatus(ElevatorStatus status) {
-        this.status = status; // Update elevator status
-    }
-
     public void stopElevator() {
         this.keepRunning = false; // Stop the elevator thread
     }
@@ -68,7 +65,7 @@ public class Elevator implements Runnable {
     public void addRequest(FloorNumber floor) {
         synchronized (scheduler) {
             if (!scheduler.hasPendingRequests(this) || !isDuplicate(floor)) {
-                scheduler.addRequest(this, floor); // delegate to scheduler
+                scheduler.addRequest(this, floor); // Delegate to scheduler
                 status = ElevatorStatus.MOVING;   // Elevator is now moving
                 // Update direction bias based on new target
                 FloorNumber target = scheduler.peekNext(this);
@@ -84,15 +81,13 @@ public class Elevator implements Runnable {
     }
 
     private boolean isDuplicate(FloorNumber floor) {
-        // best-effort duplicate detection: if scheduler already has that request
-        // This is scheduler implementation dependent. We'll try peek & scan where possible.
-        // For simplicity, call peekNext and check equality or rely on scheduler's internal dedupe.
+        // Best-effort duplicate detection
         FloorNumber p = scheduler.peekNext(this);
         return p != null && p.getFloorValue() == floor.getFloorValue();
     }
 
     public int getPendingRequestCount() {
-        return scheduler.hasPendingRequests(this) ? 1 : 0; // best-effort; many schedulers could be extended to return exact size
+        return scheduler.hasPendingRequests(this) ? 1 : 0;
     }
 
     @Override
@@ -116,7 +111,7 @@ public class Elevator implements Runnable {
             }
 
             FloorNumber targetFloor = scheduler.peekNext(this); // Next floor according to scheduler
-            if (targetFloor == null) { // nothing to do
+            if (targetFloor == null) {
                 status = ElevatorStatus.IDLE;
                 direction = Direction.IDLE;
                 return;
@@ -148,9 +143,20 @@ public class Elevator implements Runnable {
                     }
                 });
 
+                // Reset outside panel button for this floor
+                Floor servedFloor = buildingFloors.get(currentFloor);
+                if (servedFloor != null) {
+                    OutsidePanel outsidePanel = servedFloor.getOutsidePanel();
+                    if (direction == Direction.UP) {
+                        outsidePanel.getUpButton().reset();
+                    } else if (direction == Direction.DOWN) {
+                        outsidePanel.getDownButton().reset();
+                    }
+                }
+
                 // Update status and direction for next request
                 if (!scheduler.hasPendingRequests(this)) {
-                    status = ElevatorStatus.IDLE; // No more requests
+                    status = ElevatorStatus.IDLE;
                     direction = Direction.IDLE;
                 } else {
                     FloorNumber next = scheduler.peekNext(this);

@@ -5,7 +5,7 @@ import aMachineCoding.elevatorSystem.models.enums.FloorNumber;
 public class ElevatorButton implements Button {
 
     private boolean isPressed;
-    private FloorNumber floorNumber;
+    private final FloorNumber floorNumber;
 
     public ElevatorButton(FloorNumber floorNumber) {
         this.floorNumber = floorNumber;
@@ -16,16 +16,8 @@ public class ElevatorButton implements Button {
         return floorNumber;
     }
 
-    public void setFloorNumber(FloorNumber floorNumber) {
-        this.floorNumber = floorNumber;
-    }
-
     public void reset() {
         isPressed = false;
-    }
-
-    public void setStatus(boolean isPressed) {
-        this.isPressed = isPressed;
     }
 
     @Override

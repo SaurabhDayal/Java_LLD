@@ -9,43 +9,48 @@ import aMachineCoding.elevatorSystem.strategies.ElevatorDispatcher;
 import aMachineCoding.elevatorSystem.strategies.ElevatorScheduler;
 
 import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 
 public class ElevatorSystem {
 
     private final List<Elevator> elevators;
-    private final int totalFloors;
     private final ElevatorDispatcher dispatchStrategy;
-    private FloorReachedListener floorReachedListener;
-    private final SchedulingStrategy schedulingStrategy;
 
     public ElevatorSystem(ElevatorDispatcher dispatchStrategy, SchedulingStrategy schedulingStrategy) {
-        this.totalFloors = FloorNumber.values().length;
-        this.elevators = new ArrayList<>();
+
         this.dispatchStrategy = dispatchStrategy;
-        this.schedulingStrategy = schedulingStrategy;
+
+        // Build floors map once
+        // Single source of truth for all floors & hall panels
+        Map<FloorNumber, Floor> floors = new EnumMap<>(FloorNumber.class);
+        for (FloorNumber fn : FloorNumber.values()) {
+            floors.put(fn, new Floor(fn));
+        }
+
+        // Create elevators, each gets the same floors map
+        this.elevators = new ArrayList<>();
         for (ElevatorID elevatorId : ElevatorID.values()) {
             ElevatorScheduler scheduler = SchedulerFactory.getScheduler(schedulingStrategy);
-            elevators.add(new Elevator(elevatorId, scheduler));
+            elevators.add(new Elevator(elevatorId, scheduler, floors));
         }
     }
 
     public void setFloorReachedListener(FloorReachedListener listener) {
-        floorReachedListener = listener;
         for (Elevator elevator : elevators) {
             elevator.setFloorReachedListener(listener);
         }
     }
 
-    public Elevator handleRequest(Request request) {
-        Elevator selectedElevator = dispatchStrategy.selectElevator(elevators, request);
+    public void handleRequest(HallRequest hallRequest) {
+        Elevator selectedElevator = dispatchStrategy.selectElevator(elevators, hallRequest);
         if (selectedElevator != null) {
-            selectedElevator.addRequest(request.getFloor());
+            selectedElevator.addRequest(hallRequest.floor());
             System.out.println("Request assigned to Elevator " + selectedElevator.getId());
         } else {
-            System.out.println("No elevatorSystem available to handle request.");
+            System.out.println("No elevator available to handle request.");
         }
-        return selectedElevator;
     }
 
     public List<Elevator> getElevators() {
@@ -54,7 +59,7 @@ public class ElevatorSystem {
 
     public void startElevators() {
         for (Elevator elevator : elevators) {
-            new Thread(elevator).start();
+            new Thread(elevator, "Elevator-" + elevator.getId()).start();
         }
     }
 
@@ -62,22 +67,5 @@ public class ElevatorSystem {
         for (Elevator elevator : elevators) {
             elevator.stopElevator();
         }
-    }
-
-    public int getTotalFloors() {
-        return totalFloors;
-    }
-
-    public Elevator getElevator(ElevatorID elevatorId) {
-        for (Elevator elevator : elevators) {
-            if (elevator.getId().equals(elevatorId)) {
-                return elevator;
-            }
-        }
-        throw new IllegalArgumentException("Elevator ID not found: " + elevatorId);
-    }
-
-    public FloorReachedListener getFloorReachedListener() {
-        return floorReachedListener;
     }
 }

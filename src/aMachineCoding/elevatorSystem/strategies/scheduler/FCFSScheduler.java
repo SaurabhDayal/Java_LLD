@@ -17,9 +17,10 @@ public class FCFSScheduler implements ElevatorScheduler {
 
     @Override
     public synchronized void addRequest(Elevator elevator, FloorNumber floor) {
-        map.computeIfAbsent(elevator.getId(), k -> new LinkedList<>());
-        Queue<FloorNumber> q = map.get(elevator.getId());
-        if (!q.contains(floor)) q.add(floor);
+        Queue<FloorNumber> q = map.computeIfAbsent(elevator.getId(), k -> new LinkedList<>());
+        if (!q.contains(floor)) {
+            q.add(floor);
+        }
     }
 
     @Override

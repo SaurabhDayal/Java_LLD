@@ -2,7 +2,7 @@ package aMachineCoding.elevatorSystem.models.panels;
 
 import aMachineCoding.elevatorSystem.models.ElevatorSystem;
 import aMachineCoding.elevatorSystem.models.Floor;
-import aMachineCoding.elevatorSystem.models.Request;
+import aMachineCoding.elevatorSystem.models.HallRequest;
 import aMachineCoding.elevatorSystem.models.buttons.HallButton;
 import aMachineCoding.elevatorSystem.models.enums.Direction;
 
@@ -20,14 +20,22 @@ public class OutsidePanel implements Panel {
     public void pressUpButton(Floor floor, ElevatorSystem system) {
         if (!upButton.isPressed()) {
             upButton.press();
-            system.handleRequest(new Request(floor.getFloorNumber(), Direction.UP));
+            system.handleRequest(new HallRequest(floor.getFloorNumber(), upButton.getDirection()));
         }
     }
 
     public void pressDownButton(Floor floor, ElevatorSystem system) {
         if (!downButton.isPressed()) {
             downButton.press();
-            system.handleRequest(new Request(floor.getFloorNumber(), Direction.DOWN));
+            system.handleRequest(new HallRequest(floor.getFloorNumber(), downButton.getDirection()));
         }
+    }
+
+    public HallButton getUpButton() {
+        return upButton;
+    }
+
+    public HallButton getDownButton() {
+        return downButton;
     }
 }

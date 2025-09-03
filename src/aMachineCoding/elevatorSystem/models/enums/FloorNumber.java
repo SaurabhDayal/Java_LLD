@@ -29,10 +29,6 @@ public enum FloorNumber {
         return floorValue;
     }
 
-    public boolean isAboveGroundFloor() {
-        return floorValue > 0;
-    }
-
     @Override
     public String toString() {
         return String.valueOf(floorValue);

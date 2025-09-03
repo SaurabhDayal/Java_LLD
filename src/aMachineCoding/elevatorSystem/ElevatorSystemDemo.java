@@ -50,12 +50,12 @@ public class ElevatorSystemDemo {
 
     private static void simulateElevatorSystem(ElevatorSystem system) throws InterruptedException {
         // Create Floor objects
+        Floor floor0 = new Floor(FloorNumber.GROUND);
         Floor floor3 = new Floor(FloorNumber.F_3);
         Floor floor4 = new Floor(FloorNumber.F_4);
         Floor floor6 = new Floor(FloorNumber.F_6);
         Floor floor2 = new Floor(FloorNumber.F_2);
         Floor floor9 = new Floor(FloorNumber.F_9);
-        Floor floor0 = new Floor(FloorNumber.GROUND);
 
         // ---- Simulate hall button presses ----
         System.out.println("\n[Action 1] Floor 3 UP button pressed");
