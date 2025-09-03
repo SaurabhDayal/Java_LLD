@@ -1,7 +1,7 @@
 package aMachineCoding.elevatorSystem.listeners;
 
 import aMachineCoding.elevatorSystem.models.Elevator;
-import aMachineCoding.elevatorSystem.models.FloorNumber;
+import aMachineCoding.elevatorSystem.models.enums.FloorNumber;
 
 public interface FloorReachedListener {
     void onFloorReached(Elevator elevator, FloorNumber floor);

@@ -1,8 +1,9 @@
 package aMachineCoding.elevatorSystem.models.buttons;
 
-import aMachineCoding.elevatorSystem.models.FloorNumber;
+import aMachineCoding.elevatorSystem.models.enums.FloorNumber;
 
 public class ElevatorButton implements Button {
+
     private boolean isPressed;
     private FloorNumber floorNumber;
 

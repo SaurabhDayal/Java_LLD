@@ -1,5 +1,8 @@
 package aMachineCoding.elevatorSystem.models;
 
+import aMachineCoding.elevatorSystem.models.enums.Direction;
+import aMachineCoding.elevatorSystem.models.enums.FloorNumber;
+
 public class Request {
     private final FloorNumber floor;
     private final Direction direction;

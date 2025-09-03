@@ -1,7 +1,12 @@
 package aMachineCoding.elevatorSystem.models;
 
+import aMachineCoding.elevatorSystem.factories.SchedulerFactory;
 import aMachineCoding.elevatorSystem.listeners.FloorReachedListener;
+import aMachineCoding.elevatorSystem.models.enums.ElevatorID;
+import aMachineCoding.elevatorSystem.models.enums.FloorNumber;
+import aMachineCoding.elevatorSystem.models.enums.SchedulingStrategy;
 import aMachineCoding.elevatorSystem.strategies.ElevatorDispatcher;
+import aMachineCoding.elevatorSystem.strategies.ElevatorScheduler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,13 +17,16 @@ public class ElevatorSystem {
     private final int totalFloors;
     private final ElevatorDispatcher dispatchStrategy;
     private FloorReachedListener floorReachedListener;
+    private final SchedulingStrategy schedulingStrategy;
 
-    public ElevatorSystem(ElevatorDispatcher dispatchStrategy) {
+    public ElevatorSystem(ElevatorDispatcher dispatchStrategy, SchedulingStrategy schedulingStrategy) {
         this.totalFloors = FloorNumber.values().length;
         this.elevators = new ArrayList<>();
         this.dispatchStrategy = dispatchStrategy;
+        this.schedulingStrategy = schedulingStrategy;
         for (ElevatorID elevatorId : ElevatorID.values()) {
-            elevators.add(new Elevator(elevatorId));
+            ElevatorScheduler scheduler = SchedulerFactory.getScheduler(schedulingStrategy);
+            elevators.add(new Elevator(elevatorId, scheduler));
         }
     }
 

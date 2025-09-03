@@ -1,8 +1,10 @@
 package aMachineCoding.elevatorSystem.models;
 
+import aMachineCoding.elevatorSystem.models.enums.FloorNumber;
 import aMachineCoding.elevatorSystem.models.panels.OutsidePanel;
 
 public class Floor {
+
     private final FloorNumber floorNumber;
     private final OutsidePanel outsidePanel;
 

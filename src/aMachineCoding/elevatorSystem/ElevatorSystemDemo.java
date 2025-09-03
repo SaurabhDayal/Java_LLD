@@ -2,15 +2,23 @@ package aMachineCoding.elevatorSystem;
 
 import aMachineCoding.elevatorSystem.factories.DispatcherFactory;
 import aMachineCoding.elevatorSystem.listeners.FloorReachedListener;
-import aMachineCoding.elevatorSystem.models.*;
+import aMachineCoding.elevatorSystem.models.Elevator;
+import aMachineCoding.elevatorSystem.models.ElevatorSystem;
+import aMachineCoding.elevatorSystem.models.Floor;
+import aMachineCoding.elevatorSystem.models.enums.DispatchStrategy;
+import aMachineCoding.elevatorSystem.models.enums.ElevatorID;
+import aMachineCoding.elevatorSystem.models.enums.FloorNumber;
+import aMachineCoding.elevatorSystem.models.enums.SchedulingStrategy;
 import aMachineCoding.elevatorSystem.strategies.ElevatorDispatcher;
 
 public class ElevatorSystemDemo {
 
     private static ElevatorSystem init() {
-        DispatchStrategyType strategyType = DispatchStrategyType.FIRST_COME_FIRST_SERVE;
-        ElevatorDispatcher dispatcher = DispatcherFactory.getStrategy(strategyType);
-        ElevatorSystem system = new ElevatorSystem(dispatcher);
+        DispatchStrategy dispatchType = DispatchStrategy.NEAREST_CAR; // system-level dispatcher
+        SchedulingStrategy schedulerType = SchedulingStrategy.LOOK;   // elevator-level scheduler
+
+        ElevatorDispatcher dispatcher = DispatcherFactory.getStrategy(dispatchType);
+        ElevatorSystem system = new ElevatorSystem(dispatcher, schedulerType);
         system.startElevators();
         registerListener(system);  // Keep listener for dynamic internal requests
         return system;
@@ -47,7 +55,7 @@ public class ElevatorSystemDemo {
         Floor floor6 = new Floor(FloorNumber.F_6);
         Floor floor2 = new Floor(FloorNumber.F_2);
         Floor floor9 = new Floor(FloorNumber.F_9);
-        Floor floor0 = new Floor(FloorNumber.F_0);
+        Floor floor0 = new Floor(FloorNumber.GROUND);
 
         // ---- Simulate hall button presses ----
         System.out.println("\n[Action 1] Floor 3 UP button pressed");
@@ -93,7 +101,7 @@ public class ElevatorSystemDemo {
                     elevator.getCurrentFloor(),
                     elevator.getStatus(),
                     elevator.getDirection(),
-                    elevator.getRequests());
+                    elevator.getPendingRequestCount());
         });
         System.out.println("------------------------------------------------------------------------");
     }

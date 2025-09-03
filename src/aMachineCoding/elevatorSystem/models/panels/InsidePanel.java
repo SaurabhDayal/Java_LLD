@@ -1,15 +1,15 @@
 package aMachineCoding.elevatorSystem.models.panels;
 
 import aMachineCoding.elevatorSystem.models.Elevator;
-import aMachineCoding.elevatorSystem.models.FloorNumber;
 import aMachineCoding.elevatorSystem.models.buttons.ElevatorButton;
+import aMachineCoding.elevatorSystem.models.enums.FloorNumber;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class InsidePanel implements Panel {
 
-    private final List<ElevatorButton> elevatorButtonList; // List of buttons for each floor
+    private final List<ElevatorButton> elevatorButtonList;  // List of buttons for each floor
     private final Elevator elevator;                        // Reference to the parent elevator
 
     public InsidePanel(Elevator elevator) {
@@ -26,7 +26,7 @@ public class InsidePanel implements Panel {
             ElevatorButton button = elevatorButtonList.get(floorNumber);
             if (!button.isPressed()) {                     // Only press if not already pressed
                 button.press();                            // Set button pressed state
-                elevator.addRequest(FloorNumber.values()[floorNumber]); // Add request to elevator
+                elevator.addRequest(FloorNumber.values()[floorNumber]); // Add request to elevator's scheduler
             }
         } else {
             System.out.println("Invalid floor number: " + floorNumber); // Handle invalid input

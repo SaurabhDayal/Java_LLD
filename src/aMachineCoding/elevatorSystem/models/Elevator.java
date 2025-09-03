@@ -1,10 +1,12 @@
 package aMachineCoding.elevatorSystem.models;
 
 import aMachineCoding.elevatorSystem.listeners.FloorReachedListener;
+import aMachineCoding.elevatorSystem.models.enums.Direction;
+import aMachineCoding.elevatorSystem.models.enums.ElevatorID;
+import aMachineCoding.elevatorSystem.models.enums.ElevatorStatus;
+import aMachineCoding.elevatorSystem.models.enums.FloorNumber;
 import aMachineCoding.elevatorSystem.models.panels.InsidePanel;
-
-import java.util.LinkedList;
-import java.util.Queue;
+import aMachineCoding.elevatorSystem.strategies.ElevatorScheduler;
 
 public class Elevator implements Runnable {
 
@@ -12,19 +14,19 @@ public class Elevator implements Runnable {
     private FloorNumber currentFloor;             // Current floor of the elevator
     private Direction direction;                  // Current moving direction
     private ElevatorStatus status;                // Current status (IDLE, MOVING, etc.)
-    private final Queue<FloorNumber> requests;    // Queue of pending floor requests
     private volatile boolean keepRunning;         // Flag to control elevator thread
     private FloorReachedListener floorReachedListener; // Listener for floor reached events
     private final InsidePanel insidePanel;        // Panel inside elevator with floor buttons
+    private final ElevatorScheduler scheduler;    // Scheduler for this elevator
 
-    public Elevator(ElevatorID id) {
+    public Elevator(ElevatorID id, ElevatorScheduler scheduler) {
         this.id = id;
-        this.currentFloor = FloorNumber.F_0;      // Start at ground floor
+        this.currentFloor = FloorNumber.GROUND;      // Start at ground floor
         this.direction = Direction.UP;            // Default initial direction
         this.status = ElevatorStatus.IDLE;        // Initially idle
-        this.requests = new LinkedList<>();       // Initialize request queue
         this.keepRunning = true;                  // Thread should run
         this.insidePanel = new InsidePanel(this); // Attach inside panel
+        this.scheduler = scheduler;
     }
 
     public InsidePanel getInsidePanel() {
@@ -64,41 +66,33 @@ public class Elevator implements Runnable {
     }
 
     public void addRequest(FloorNumber floor) {
-        synchronized (requests) {
-            if (!requests.contains(floor)) { // Avoid duplicate requests
-                requests.add(floor);         // Add new floor request
-                status = ElevatorStatus.MOVING; // Elevator is now moving
-
-                // Determine direction based on target floor
-                if (floor.getFloorValue() > currentFloor.getFloorValue()) {
-                    direction = Direction.UP;
-                } else if (floor.getFloorValue() < currentFloor.getFloorValue()) {
-                    direction = Direction.DOWN;
+        synchronized (scheduler) {
+            if (!scheduler.hasPendingRequests(this) || !isDuplicate(floor)) {
+                scheduler.addRequest(this, floor); // delegate to scheduler
+                status = ElevatorStatus.MOVING;   // Elevator is now moving
+                // Update direction bias based on new target
+                FloorNumber target = scheduler.peekNext(this);
+                if (target != null) {
+                    if (target.getFloorValue() > currentFloor.getFloorValue()) {
+                        direction = Direction.UP;
+                    } else if (target.getFloorValue() < currentFloor.getFloorValue()) {
+                        direction = Direction.DOWN;
+                    }
                 }
             }
         }
     }
 
-    public Queue<FloorNumber> getRequests() {
-        return requests; // Return all pending requests
+    private boolean isDuplicate(FloorNumber floor) {
+        // best-effort duplicate detection: if scheduler already has that request
+        // This is scheduler implementation dependent. We'll try peek & scan where possible.
+        // For simplicity, call peekNext and check equality or rely on scheduler's internal dedupe.
+        FloorNumber p = scheduler.peekNext(this);
+        return p != null && p.getFloorValue() == floor.getFloorValue();
     }
 
-    public boolean hasPendingRequestAbove(FloorNumber floor) {
-        synchronized (requests) {
-            for (FloorNumber req : requests) {
-                if (req.getFloorValue() > floor.getFloorValue()) return true; // Pending request above
-            }
-            return false; // No pending request above
-        }
-    }
-
-    public boolean hasPendingRequestBelow(FloorNumber floor) {
-        synchronized (requests) {
-            for (FloorNumber req : requests) {
-                if (req.getFloorValue() < floor.getFloorValue()) return true; // Pending request below
-            }
-            return false; // No pending request below
-        }
+    public int getPendingRequestCount() {
+        return scheduler.hasPendingRequests(this) ? 1 : 0; // best-effort; many schedulers could be extended to return exact size
     }
 
     @Override
@@ -114,13 +108,19 @@ public class Elevator implements Runnable {
     }
 
     private void move() {
-        synchronized (requests) {
-            if (requests.isEmpty()) { // No requests, stay idle
+        synchronized (scheduler) {
+            if (!scheduler.hasPendingRequests(this)) { // No requests, stay idle
                 status = ElevatorStatus.IDLE;
+                direction = Direction.IDLE;
                 return;
             }
 
-            FloorNumber targetFloor = requests.peek(); // Next floor in queue
+            FloorNumber targetFloor = scheduler.peekNext(this); // Next floor according to scheduler
+            if (targetFloor == null) { // nothing to do
+                status = ElevatorStatus.IDLE;
+                direction = Direction.IDLE;
+                return;
+            }
 
             // Move one floor up or down
             if (currentFloor.getFloorValue() < targetFloor.getFloorValue()) {
@@ -135,7 +135,7 @@ public class Elevator implements Runnable {
 
             if (currentFloor == targetFloor) { // Reached target floor
                 System.out.printf("    - Elevator %s reached target floor %s%n", id, currentFloor);
-                requests.poll(); // Remove fulfilled request
+                scheduler.removeRequest(this, targetFloor); // Remove fulfilled request
 
                 if (floorReachedListener != null) { // Notify listener
                     floorReachedListener.onFloorReached(this, currentFloor);
@@ -149,12 +149,15 @@ public class Elevator implements Runnable {
                 });
 
                 // Update status and direction for next request
-                if (requests.isEmpty()) {
+                if (!scheduler.hasPendingRequests(this)) {
                     status = ElevatorStatus.IDLE; // No more requests
+                    direction = Direction.IDLE;
                 } else {
-                    FloorNumber next = requests.peek();
-                    if (next.getFloorValue() > currentFloor.getFloorValue()) direction = Direction.UP;
-                    else if (next.getFloorValue() < currentFloor.getFloorValue()) direction = Direction.DOWN;
+                    FloorNumber next = scheduler.peekNext(this);
+                    if (next != null) {
+                        if (next.getFloorValue() > currentFloor.getFloorValue()) direction = Direction.UP;
+                        else if (next.getFloorValue() < currentFloor.getFloorValue()) direction = Direction.DOWN;
+                    }
                 }
             }
         }

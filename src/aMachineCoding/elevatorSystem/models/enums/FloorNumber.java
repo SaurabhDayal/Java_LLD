@@ -1,7 +1,8 @@
-package aMachineCoding.elevatorSystem.models;
+package aMachineCoding.elevatorSystem.models.enums;
 
 public enum FloorNumber {
-    F_0(0),
+
+    GROUND(0),
     F_1(1),
     F_2(2),
     F_3(3),

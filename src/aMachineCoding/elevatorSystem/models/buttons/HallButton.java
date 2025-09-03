@@ -1,10 +1,11 @@
 package aMachineCoding.elevatorSystem.models.buttons;
 
-import aMachineCoding.elevatorSystem.models.Direction;
+import aMachineCoding.elevatorSystem.models.enums.Direction;
 
 public class HallButton implements Button {
+
     private boolean isPressed;
-    private Direction direction;
+    private final Direction direction;
 
     public HallButton(boolean isPressed, Direction direction) {
         this.isPressed = isPressed;
