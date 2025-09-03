@@ -128,11 +128,13 @@ public class Elevator implements Runnable {
 
             System.out.printf("    - Elevator %s at floor %s, moving towards %s%n", id, currentFloor, targetFloor);
 
-            if (currentFloor == targetFloor) { // Reached target floor
+            // Reached the target floor
+            if (currentFloor == targetFloor) {
                 System.out.printf("    - Elevator %s reached target floor %s%n", id, currentFloor);
                 scheduler.removeRequest(this, targetFloor); // Remove fulfilled request
 
-                if (floorReachedListener != null) { // Notify listener
+                // Notify listener
+                if (floorReachedListener != null) {
                     floorReachedListener.onFloorReached(this, currentFloor);
                 }
 
@@ -161,8 +163,11 @@ public class Elevator implements Runnable {
                 } else {
                     FloorNumber next = scheduler.peekNext(this);
                     if (next != null) {
-                        if (next.getFloorValue() > currentFloor.getFloorValue()) direction = Direction.UP;
-                        else if (next.getFloorValue() < currentFloor.getFloorValue()) direction = Direction.DOWN;
+                        if (next.getFloorValue() > currentFloor.getFloorValue()) {
+                            direction = Direction.UP;
+                        } else if (next.getFloorValue() < currentFloor.getFloorValue()) {
+                            direction = Direction.DOWN;
+                        }
                     }
                 }
             }

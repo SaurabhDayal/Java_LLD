@@ -33,7 +33,9 @@ public class FCFSScheduler implements ElevatorScheduler {
     @Override
     public synchronized void removeRequest(Elevator elevator, FloorNumber floor) {
         Queue<FloorNumber> q = map.get(elevator.getId());
-        if (q != null) q.remove(floor);
+        if (q != null) {
+            q.remove(floor);
+        }
     }
 
     @Override

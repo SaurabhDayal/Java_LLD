@@ -13,40 +13,54 @@ import java.util.concurrent.ConcurrentHashMap;
 public class SCANScheduler implements ElevatorScheduler {
 
     private static class PerElevator {
-        final TreeSet<Integer> up = new TreeSet<>();
-        final TreeSet<Integer> down = new TreeSet<>();
+        final TreeSet<Integer> up = new TreeSet<>();   // Floors above current position
+        final TreeSet<Integer> down = new TreeSet<>(); // Floors below current position
     }
 
     private final Map<ElevatorID, PerElevator> map = new ConcurrentHashMap<>();
 
     @Override
     public synchronized void addRequest(Elevator elevator, FloorNumber floor) {
+        // Fetch per-elevator queues, create if absent
         PerElevator p = map.computeIfAbsent(elevator.getId(), k -> new PerElevator());
+
         int f = floor.getFloorValue();
-        if (f > elevator.getCurrentFloor().getFloorValue()) p.up.add(f);
-        else if (f < elevator.getCurrentFloor().getFloorValue()) p.down.add(f);
-        else p.up.add(f);
+        if (f > elevator.getCurrentFloor().getFloorValue()) {
+            p.up.add(f);   // future UP movement
+        } else if (f < elevator.getCurrentFloor().getFloorValue()) {
+            p.down.add(f); // future DOWN movement
+        } else {
+            // same floor → add to UP queue by convention
+            p.up.add(f);
+        }
     }
 
     @Override
     public synchronized FloorNumber peekNext(Elevator elevator) {
         PerElevator p = map.get(elevator.getId());
         if (p == null) return null;
+
         Direction dir = elevator.getDirection();
         int cur = elevator.getCurrentFloor().getFloorValue();
 
         if (dir == Direction.UP) {
             Integer nextUp = p.up.ceiling(cur);
             if (nextUp != null) return FloorNumber.values()[nextUp];
-            // go to the top (simulate SCAN) then switch
+
+            // Difference from LOOK:
+            // SCAN simulates going to TOP even if no request, then reverses
             Integer nextDown = p.down.isEmpty() ? null : p.down.last();
             if (nextDown != null) return FloorNumber.values()[nextDown];
         } else if (dir == Direction.DOWN) {
             Integer nextDown = p.down.floor(cur);
             if (nextDown != null) return FloorNumber.values()[nextDown];
+
+            // Difference from LOOK:
+            // SCAN simulates going to BOTTOM even if no request, then reverses
             Integer nextUp = p.up.isEmpty() ? null : p.up.first();
             if (nextUp != null) return FloorNumber.values()[nextUp];
         } else {
+            // IDLE → prefer UP first, else DOWN
             if (!p.up.isEmpty()) return FloorNumber.values()[p.up.first()];
             if (!p.down.isEmpty()) return FloorNumber.values()[p.down.last()];
         }

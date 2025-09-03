@@ -16,14 +16,17 @@ public class SSTFScheduler implements ElevatorScheduler {
 
     @Override
     public synchronized void addRequest(Elevator elevator, FloorNumber floor) {
-        map.computeIfAbsent(elevator.getId(), k -> new HashSet<>());
-        map.get(elevator.getId()).add(floor);
+        map.computeIfAbsent(elevator.getId(), k -> new HashSet<>()).add(floor);
     }
 
     @Override
     public synchronized FloorNumber peekNext(Elevator elevator) {
+
         Set<FloorNumber> set = map.get(elevator.getId());
-        if (set == null || set.isEmpty()) return null;
+        if (set == null || set.isEmpty()) {
+            return null;
+        }
+        
         int cur = elevator.getCurrentFloor().getFloorValue();
         FloorNumber best = null;
         int min = Integer.MAX_VALUE;
@@ -40,7 +43,9 @@ public class SSTFScheduler implements ElevatorScheduler {
     @Override
     public synchronized void removeRequest(Elevator elevator, FloorNumber floor) {
         Set<FloorNumber> set = map.get(elevator.getId());
-        if (set != null) set.remove(floor);
+        if (set != null) {
+            set.remove(floor);
+        }
     }
 
     @Override
