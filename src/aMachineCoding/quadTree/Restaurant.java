@@ -15,7 +15,7 @@ class Restaurant {
 
     @Override
     public String toString() {
-        return String.format("Restaurant{id=%d, name='%s', lat=%.4f, lon=%.4f}",
+        return String.format("Restaurant{id=%d, name='%s', lat=%.2f, lon=%.2f}",
                 id, name, latitude, longitude);
     }
 }

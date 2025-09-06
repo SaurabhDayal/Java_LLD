@@ -90,6 +90,8 @@ class QuadTree {
         }
     }
 
+    // ---------------- private ------------------------------------
+
     private boolean inBounds(double lat, double lon) {
         return lat >= left && lat < right && lon >= top && lon < bottom;
     }
