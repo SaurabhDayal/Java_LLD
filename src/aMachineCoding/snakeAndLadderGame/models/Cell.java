@@ -3,7 +3,8 @@ package aMachineCoding.snakeAndLadderGame.models;
 import aMachineCoding.snakeAndLadderGame.element.GameElement;
 
 class Cell {
-    private int position;
+
+    private final int position;
     private GameElement gameElement;
 
     public Cell(int position) {

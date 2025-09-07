@@ -45,20 +45,20 @@ Choosing the right strategy:
     1. Redo Support
         - Move-Based (Stack):
             • Maintain two stacks: undoStack and redoStack.
-            • On undo → pop from undoStack and push onto redoStack.
-            • On redo → pop from redoStack and apply again to undoStack.
+            • On undo → pop the last move from undoStack, apply the undo effect on the game state, and push that move onto redoStack.
+            • On redo → pop the last move from redoStack, reapply it to the game state, and push it back onto undoStack.
+
         - Snapshot-Based:
             • Maintain two lists: pastStates and futureStates.
-            • On undo → move the current state to futureStates and restore the last pastState.
-            • On redo → move a state back from futureStates to pastStates and restore it.
+            • On undo → move the current state to futureStates, then restore the last saved state from pastStates to the game.
+            • On redo → move the most recent state from futureStates back to pastStates, then restore it as the current game state.
 
     2. Linear Versioning
         - Move-Based (Stack):
-            • If a new move is made after an undo, clear the redoStack
-              to maintain a single linear history (no branching).
+            • If a new move is made after an undo, clear redoStack to maintain a strictly linear history (no branching timelines).
+
         - Snapshot-Based:
-            • If a new snapshot is taken after an undo, discard all futureStates
-              so history remains strictly linear.
+            • If a new snapshot is taken after an undo, discard all futureStates so the history remains strictly linear (no branching versions).
 
 */
 

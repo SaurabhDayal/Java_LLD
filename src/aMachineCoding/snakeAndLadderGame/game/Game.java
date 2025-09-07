@@ -8,9 +8,10 @@ import aMachineCoding.snakeAndLadderGame.models.Player;
 import java.util.List;
 
 public class Game {
-    private List<Player> players;
-    private Board board;
-    private DiceStrategy diceStrategy;
+
+    private final List<Player> players;
+    private final Board board;
+    private final DiceStrategy diceStrategy;
     private int currentPlayerIndex = 0;
     private boolean isGameOver = false;
     private Player winner;

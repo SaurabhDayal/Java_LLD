@@ -7,11 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Board {
-    private int size = 100;
-    private List<Cell> cells;
-    private List<GameElement> gameElements;
+
+    private final int size = 100;
+    private final List<Cell> cells;
+    private final List<GameElement> gameElements;
 
     public Board(GameElementFactory factory) {
+
         this.cells = new ArrayList<>();
         for (int i = 1; i <= size; i++) {
             cells.add(new Cell(i));

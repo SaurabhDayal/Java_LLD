@@ -1,8 +1,8 @@
 package aMachineCoding.snakeAndLadderGame.element;
 
 public class Snake implements GameElement {
-    private int mouth;
-    private int tail;
+    private final int mouth;
+    private final int tail;
 
     public Snake(int mouth, int tail) {
         this.mouth = mouth;

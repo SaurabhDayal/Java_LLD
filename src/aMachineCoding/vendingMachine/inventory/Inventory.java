@@ -7,13 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Inventory {
-    private List<Item> items;
+    private final List<Item> items;
 
     public Inventory() {
         items = new ArrayList<>();
-        items.add(new Item("coke", ItemType.COKE, 25, 5));
-        items.add(new Item("juice", ItemType.JUICE, 35, 3));
-        items.add(new Item("pepsi", ItemType.PEPSI, 45, 4));
+        items.add(new Item("coke", ItemType.COKE, 20, 10));
+        items.add(new Item("juice", ItemType.JUICE, 30, 10));
+        items.add(new Item("pepsi", ItemType.PEPSI, 40, 10));
     }
 
     public Item findItemByCode(String itemCode) {

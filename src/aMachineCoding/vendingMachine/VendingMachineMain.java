@@ -8,13 +8,14 @@ public class VendingMachineMain {
     public static void main(String[] args) {
         vendingMachine = VendingMachine.getInstance();
 
-        runTransaction(new int[]{10, 15}, "coke", true); // Dispense Coke
-        runTransaction(new int[]{20, 20}, "juice", false); // Cancel Juice
-        runTransaction(new int[]{30, 15}, "pepsi", true); // Dispense Pepsi
+        runTransaction(new int[]{10, 10}, "coke", true); // Dispense Coke
+        runTransaction(new int[]{10, 20}, "juice", false); // Cancel Juice
+        runTransaction(new int[]{20, 20}, "pepsi", true); // Dispense Pepsi
 
         System.out.println("\nEND INVENTORY STATUS");
         System.out.println();
         vendingMachine.displayInventory();
+        System.out.println("Total Earnings: " + vendingMachine.getTotalEarnings());
         System.out.println("------------------------------");
     }
 

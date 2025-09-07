@@ -1,8 +1,8 @@
 package aMachineCoding.snakeAndLadderGame.element;
 
 public class Ladder implements GameElement {
-    private int bottom;
-    private int top;
+    private final int bottom;
+    private final int top;
 
     public Ladder(int bottom, int top) {
         this.bottom = bottom;

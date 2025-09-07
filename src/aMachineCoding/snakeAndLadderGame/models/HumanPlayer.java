@@ -11,8 +11,10 @@ public class HumanPlayer extends Player {
     public void takeTurn(Board board, DiceStrategy dice) {
         int steps = dice.roll();
         int target = position + steps;
-        if (target > board.getSize()) return;
+        if (target > board.getSize()) {
+            return;
+        }
         Cell cell = board.getCell(target);
-        this.position = cell.getNextPosition();
+        position = cell.getNextPosition();
     }
 }
