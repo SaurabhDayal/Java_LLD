@@ -146,6 +146,7 @@ public class VendingMachine {
         // Add the current transaction’s money to total earnings
         totalEarnings += balance;
         resetBalance();
+        resetSelectedProduct();
     }
 
     // --------------------------------------

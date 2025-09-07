@@ -27,8 +27,6 @@ public class DispenseState implements State {
         if (item != null) {
             System.out.println("Dispensing: " + item.getType());
             vendingMachine.dispenseCurrentProduct();
-            vendingMachine.resetBalance();
-            vendingMachine.resetSelectedProduct();
         } else {
             System.out.println("No item selected to dispense.");
         }

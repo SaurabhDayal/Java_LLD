@@ -47,6 +47,7 @@ public class SelectionState implements State {
     @Override
     public void cancelTransaction() throws Exception {
         vendingMachine.refund();
+        vendingMachine.resetSelectedProduct();
         vendingMachine.changeState(vendingMachine.getIdleState());
     }
 }
