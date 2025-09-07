@@ -4,34 +4,38 @@ import aMachineCoding.chessGame.factories.Piece;
 import aMachineCoding.chessGame.factories.concretePieces.King;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class ChessGame {
-    private final Board board;
-    // Assuming player1 is always WHITE
-    private final Player player1;
-    // Assuming player2 is always BLACK
-    private final Player player2;
-    boolean isWhiteTurn;
-    private final ArrayList<Move> gameLog;
-    private Status status;
 
-    // Constructor to initialize the game with two players
-    public ChessGame(Player player1, Player player2) {
-        this.player1 = player1;
-        this.player2 = player2;
+    private final Board board;
+    private final Player playerWhite;
+    private final Player playerBlack;
+    boolean isWhiteTurn;
+    private Status status;
+    private final List<Move> gameLog;
+
+    public ChessGame(Player playerWhite, Player playerBlack) {
+
         this.board = Board.getInstance(8); // Initialize board with 8 rows
+
+        this.playerWhite = playerWhite;
+        this.playerBlack = playerBlack;
+
         this.isWhiteTurn = true;
         this.status = Status.ACTIVE;
         this.gameLog = new ArrayList<>();
     }
-    // Start the game
 
+    // Start the game
     public void start() {
+
         Scanner scanner = new Scanner(System.in);
 
-        while (this.status == Status.ACTIVE) {
-            Player currentPlayer = isWhiteTurn ? player1 : player2;
+        while (status == Status.ACTIVE) {
+
+            Player currentPlayer = isWhiteTurn ? playerWhite : playerBlack;
             System.out.println(currentPlayer.getName() + "'s turn (" + (currentPlayer.isWhiteSide() ? "White" : "Black") + ")");
 
             // Ask for source coordinates
@@ -62,6 +66,7 @@ public class ChessGame {
 
     // Make a move in the game
     public void makeMove(Move move, Player player) {
+
         // Initial check for a valid move
         // To check if source and destination don't contain the same color pieces
         if (move.isValid()) {
