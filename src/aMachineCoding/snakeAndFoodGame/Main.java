@@ -33,9 +33,10 @@ public class Main {
 
         // Main game loop
         while (gameRunning) {
-            // Display current game state (in a real implementation, you would
-            // have a graphical representation of the board)
+
+            // Display the current game state (in a real implementation, you would have a graphical representation of the board)
             displayGameState(game);
+
             // Get user input
             System.out.print("Enter move (W/A/S/D) or Q to quit: ");
             String input = scanner.nextLine().toUpperCase();
@@ -57,7 +58,7 @@ public class Main {
             // Check for game over
             if (score == -1) {
                 System.out.println("GAME OVER! You hit a wall or bit yourself.");
-                System.out.println("Final score: " + (game.snake.size() - 1));
+                System.out.println("Final score: " + (game.getSnake().size() - 1));
                 gameRunning = false;
             } else {
                 System.out.println("Score: " + score);
@@ -88,41 +89,3 @@ public class Main {
         // snake, food, and boundaries visually
     }
 }
-
-/*
-
-Output :
-
-===== SNAKE GAME =====
-Controls: W (Up), S (Down), A (Left), D (Right), Q (Quit)
-Eat food to grow your snake and increase your score.
-Don't hit the walls or bite yourself!
-=======================
-nCurrent snake length: 1
-Enter move (W/A/S/D) or Q to quit: D
-Score: 1
-nCurrent snake length: 2
-Enter move (W/A/S/D) or Q to quit: D
-Score: 1
-nCurrent snake length: 2
-Enter move (W/A/S/D) or Q to quit: A
-Score: 1
-nCurrent snake length: 2
-Enter move (W/A/S/D) or Q to quit: A
-Score: 1
-nCurrent snake length: 2
-Enter move (W/A/S/D) or Q to quit: S
-Score: 1
-nCurrent snake length: 2
-Enter move (W/A/S/D) or Q to quit: S
-Score: 1
-nCurrent snake length: 2
-Enter move (W/A/S/D) or Q to quit: S
-Score: 1
-nCurrent snake length: 2
-Enter move (W/A/S/D) or Q to quit: A
-GAME OVER! You hit a wall or bit yourself.
-Final score: 1
-Thanks for playing!
-
-*/

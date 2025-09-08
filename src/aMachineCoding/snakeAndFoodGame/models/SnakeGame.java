@@ -6,19 +6,15 @@ import aMachineCoding.snakeAndFoodGame.strategies.HumanMovementStrategy;
 import aMachineCoding.snakeAndFoodGame.strategies.MovementStrategy;
 
 import java.util.Deque;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
 
 public class SnakeGame {
 
-    private final Board board;                 // Game board (singleton)
-    public Deque<Pair> snake;                  // Snake body represented as a deque
-    private final Map<Pair, Boolean> snakeMap; // Quick lookup for collision detection
-    private final int[][] foodPositions;       // List of food coordinates
-    private int foodIndex;                     // Index of next food to appear
+    private final Board board;           // Game board (singleton)
+    private final Snake snake;           // Snake object
+    private final int[][] foodPositions; // List of food coordinates
+    private int foodIndex;               // Index of next food to appear
     private MovementStrategy movementStrategy; // Strategy (Human/AI)
-    private int score;                         // Player’s score
+    private int score;                   // Player’s score
 
     // Initialize the game with specified dimensions and food positions
     public SnakeGame(int width, int height, int[][] food) {
@@ -27,12 +23,8 @@ public class SnakeGame {
         foodIndex = 0;
         score = 0;
 
-        // Start snake at position (0,0)
-        snake = new LinkedList<>();
-        snakeMap = new HashMap<>();
-        Pair initialPos = new Pair(0, 0);
-        snake.offerFirst(initialPos);
-        snakeMap.put(initialPos, true);
+        // Initialize snake
+        snake = new Snake();
 
         // Default movement strategy is human-controlled
         movementStrategy = new HumanMovementStrategy();
@@ -46,7 +38,7 @@ public class SnakeGame {
     // Process one move; returns updated score or -1 if game over
     public int move(String direction) {
         // Current snake head
-        Pair currentHead = snake.peekFirst();
+        Pair currentHead = snake.getBody().peekFirst();
 
         // Get new head position using chosen strategy
         Pair newHead = movementStrategy.getNextPosition(currentHead, direction);
@@ -58,10 +50,10 @@ public class SnakeGame {
                 || newHeadCol < 0 || newHeadCol >= board.getWidth();
 
         // Current tail (used to allow safe movement into previous tail position)
-        Pair currentTail = snake.peekLast();
+        Pair currentTail = snake.getBody().peekLast();
 
         // Check if snake collides with itself (excluding tail, since it will move)
-        boolean bitesItself = snakeMap.containsKey(newHead) &&
+        boolean bitesItself = snake.getPositionMap().containsKey(newHead) &&
                 !(newHead.getRow() == currentTail.getRow() &&
                         newHead.getCol() == currentTail.getCol());
 
@@ -77,25 +69,33 @@ public class SnakeGame {
 
         if (ateFood) {
             // Create food object (bonus for every 3rd food)
-            FoodItem food = FoodFactory.createFood(foodPositions[foodIndex], (foodIndex % 3 == 0) ? "bonus" : "normal");
+            FoodItem food = FoodFactory.createFood(
+                    foodPositions[foodIndex],
+                    (foodIndex % 3 == 0) ? "bonus" : "normal"
+            );
             score += food.getPoints();  // Add points to score
             foodIndex++;                // Move to next food
         } else {
             // No food eaten → remove tail (snake moves forward)
-            snake.pollLast();
-            snakeMap.remove(currentTail);
+            snake.getBody().pollLast();
+            snake.getPositionMap().remove(currentTail);
         }
 
         // Add new head to snake body
-        snake.addFirst(newHead);
-        snakeMap.put(newHead, true);
+        snake.getBody().addFirst(newHead);
+        snake.getPositionMap().put(newHead, true);
 
         // Return current score
         return score;
     }
 
     // Getter for snake body (used by rendering/printing)
-    public Deque<Pair> getSnake() {
+    public Deque<Pair> getSnakeBody() {
+        return snake.getBody();
+    }
+
+    // Getter for snake object (if needed directly)
+    public Snake getSnake() {
         return snake;
     }
 }

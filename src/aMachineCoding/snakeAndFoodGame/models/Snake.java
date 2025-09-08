@@ -26,4 +26,8 @@ public class Snake {
     public Map<Pair, Boolean> getPositionMap() {
         return positionMap;
     }
+
+    public int size() {
+        return body.size();
+    }
 }
