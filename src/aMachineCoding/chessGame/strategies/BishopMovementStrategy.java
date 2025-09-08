@@ -20,7 +20,9 @@ public class BishopMovementStrategy implements MovementStrategy {
         int row = startRow + rowStep;
         int col = startCol + colStep;
         while (row != endRow && col != endCol) {
-            if (board.getCell(row, col).getPiece() != null) return false;
+            if (board.getCell(row, col).getPiece() != null) {
+                return false;
+            }
             row += rowStep;
             col += colStep;
         }

@@ -38,8 +38,7 @@ public class ChessGame {
             board.displayBoard();
 
             Player currentPlayer = isWhiteTurn ? playerWhite : playerBlack;
-            System.out.println(currentPlayer.getName() + "'s turn ("
-                    + (currentPlayer.isWhiteSide() ? "White" : "Black") + ")");
+            System.out.println(currentPlayer.getName() + "'s turn (" + (currentPlayer.isWhiteSide() ? "White" : "Black") + ")");
 
             // ---------------- Source Input ----------------
             System.out.print("Enter source row and column (e.g., 6 4): ");
@@ -83,6 +82,12 @@ public class ChessGame {
 
             if (startCell == null || startCell.getPiece() == null) {
                 System.out.println("Invalid move: No piece at source cell.");
+                continue;
+            }
+            
+            // ✅ Check if source and destination are the same
+            if (startCell == endCell) {
+                System.out.println("Invalid move: Source and destination cannot be the same.");
                 continue;
             }
 
