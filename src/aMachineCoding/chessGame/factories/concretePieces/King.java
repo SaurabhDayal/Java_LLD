@@ -7,8 +7,9 @@ import aMachineCoding.chessGame.strategies.KingMovementStrategy;
 
 
 public class King extends Piece {
+
     public King(boolean isWhitePiece) {
-        super(isWhitePiece, new KingMovementStrategy());
+        super(isWhitePiece, new KingMovementStrategy(), isWhitePiece ? 'K' : 'k');
     }
 
     @Override

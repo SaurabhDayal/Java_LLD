@@ -13,8 +13,19 @@ public class Move {
 
     // Validate if the move is valid
     public boolean isValid() {
-        if (endCell.getPiece() == null) return true;
-        else return !(startCell.getPiece().isWhite() == endCell.getPiece().isWhite());
+        // Case 1: If the destination cell is empty, the move is valid
+        if (endCell.getPiece() == null) {
+            return true;
+        }
+
+        // Case 2: If the destination cell already has a piece,
+        // then check the color of both pieces.
+        boolean isStartWhite = startCell.getPiece().isWhite();  // color of the moving piece
+        boolean isEndWhite = endCell.getPiece().isWhite();      // color of the target piece
+
+        // If the two pieces are of the same color, move is invalid
+        // Otherwise, the pieces are of opposite colors, so capturing is valid
+        return isStartWhite != isEndWhite;
     }
 
     // gets the start cell

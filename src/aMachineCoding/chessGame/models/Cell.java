@@ -4,8 +4,8 @@ import aMachineCoding.chessGame.factories.Piece;
 
 public class Cell {
 
-    private int row;
-    private int col;
+    private final int row;
+    private final int col;
     private String label;
     private Piece piece;
 
@@ -25,4 +25,13 @@ public class Cell {
     public void setPiece(Piece piece) {
         this.piece = piece;
     }
+
+    public int getRow() {
+        return row;
+    }
+
+    public int getCol() {
+        return col;
+    }
+
 }

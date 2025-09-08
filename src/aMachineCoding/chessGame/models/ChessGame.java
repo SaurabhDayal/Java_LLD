@@ -3,9 +3,9 @@ package aMachineCoding.chessGame.models;
 import aMachineCoding.chessGame.factories.Piece;
 import aMachineCoding.chessGame.factories.concretePieces.King;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Stack;
 
 public class ChessGame {
 
@@ -14,7 +14,7 @@ public class ChessGame {
     private final Player playerBlack;
     boolean isWhiteTurn;
     private Status status;
-    private final List<Move> gameLog;
+    private final List<Move> moveStack;
 
     public ChessGame(Player playerWhite, Player playerBlack) {
 
@@ -25,7 +25,7 @@ public class ChessGame {
 
         this.isWhiteTurn = true;
         this.status = Status.ACTIVE;
-        this.gameLog = new ArrayList<>();
+        this.moveStack = new Stack<>();
     }
 
     // Start the game
@@ -35,20 +35,49 @@ public class ChessGame {
 
         while (status == Status.ACTIVE) {
 
+            board.displayBoard();
+
             Player currentPlayer = isWhiteTurn ? playerWhite : playerBlack;
-            System.out.println(currentPlayer.getName() + "'s turn (" + (currentPlayer.isWhiteSide() ? "White" : "Black") + ")");
+            System.out.println(currentPlayer.getName() + "'s turn ("
+                    + (currentPlayer.isWhiteSide() ? "White" : "Black") + ")");
 
-            // Ask for source coordinates
+            // ---------------- Source Input ----------------
             System.out.print("Enter source row and column (e.g., 6 4): ");
-            int startRow = scanner.nextInt();
-            int startCol = scanner.nextInt();
+            String sourceInput = scanner.nextLine().trim();
+            String[] sourceParts = sourceInput.split(" ");
+            if (sourceParts.length != 2) {
+                System.out.println("Invalid input. Please enter row and column separated by a space.");
+                continue;
+            }
 
-            // Ask for destination coordinates
+            int startRow, startCol;
+            try {
+                startRow = Integer.parseInt(sourceParts[0]);
+                startCol = Integer.parseInt(sourceParts[1]);
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Coordinates must be numbers.");
+                continue;
+            }
+
+            // ---------------- Destination Input ----------------
             System.out.print("Enter destination row and column (e.g., 4 4): ");
-            int endRow = scanner.nextInt();
-            int endCol = scanner.nextInt();
+            String destInput = scanner.nextLine().trim();
+            String[] destParts = destInput.split(" ");
+            if (destParts.length != 2) {
+                System.out.println("Invalid input. Please enter row and column separated by a space.");
+                continue;
+            }
 
-            // Get the start and end cells from the board
+            int endRow, endCol;
+            try {
+                endRow = Integer.parseInt(destParts[0]);
+                endCol = Integer.parseInt(destParts[1]);
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Coordinates must be numbers.");
+                continue;
+            }
+
+            // ---------------- Validate & Execute ----------------
             Cell startCell = board.getCell(startRow, startCol);
             Cell endCell = board.getCell(endRow, endCol);
 
@@ -57,7 +86,6 @@ public class ChessGame {
                 continue;
             }
 
-            // Make the move
             makeMove(new Move(startCell, endCell), currentPlayer);
         }
 
@@ -70,35 +98,41 @@ public class ChessGame {
         // Initial check for a valid move
         // To check if source and destination don't contain the same color pieces
         if (move.isValid()) {
+
             Piece sourcePiece = move.getStartCell().getPiece();
+
             // Check if the source piece can be moved or not
-            if (sourcePiece.canMove(this.board, move.getStartCell(), move.getEndCell())) {
+            if (sourcePiece.canMove(board, move.getStartCell(), move.getEndCell())) {
+
                 Piece destinationPiece = move.getEndCell().getPiece();
+
                 // Check if the destination cell contains some piece
                 if (destinationPiece != null) {
-                    // If the destination cell contains King and currently white is
-                    // playing --> White wins
-                    if (destinationPiece instanceof King && isWhiteTurn) {
-                        this.status = Status.WHITE_WIN;
+
+                    if (destinationPiece instanceof King) {
+                        if (isWhiteTurn) {
+                            status = Status.WHITE_WIN;
+                        } else {
+                            status = Status.BLACK_WIN;
+                        }
                         return;
                     }
-                    // If the destination cell contains King and currently Black is
-                    // playing --> Black wins
-                    if (destinationPiece instanceof King && !isWhiteTurn) {
-                        this.status = Status.BLACK_WIN;
-                        return;
-                    }
+
                     // Set the destination piece as killed
                     destinationPiece.setKilled(true);
                 }
+
                 // Adding the valid move to the game logs
-                gameLog.add(move);
+                moveStack.add(move);
+
                 // Moving the source piece to the destination cell
                 move.getEndCell().setPiece(sourcePiece);
+
                 // Setting the source cell to null (means it doesn't have any piece)
                 move.getStartCell().setPiece(null);
+
                 // Toggling the turn
-                this.isWhiteTurn = !isWhiteTurn;
+                isWhiteTurn = !isWhiteTurn;
                 System.out.println(isWhiteTurn);
             }
         }

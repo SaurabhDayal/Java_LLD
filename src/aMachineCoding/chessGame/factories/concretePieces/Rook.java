@@ -5,10 +5,11 @@ import aMachineCoding.chessGame.models.Board;
 import aMachineCoding.chessGame.models.Cell;
 import aMachineCoding.chessGame.strategies.RookMovementStrategy;
 
+
 public class Rook extends Piece {
 
     public Rook(boolean isWhitePiece) {
-        super(isWhitePiece, new RookMovementStrategy());
+        super(isWhitePiece, new RookMovementStrategy(), isWhitePiece ? 'R' : 'r');
     }
 
     @Override

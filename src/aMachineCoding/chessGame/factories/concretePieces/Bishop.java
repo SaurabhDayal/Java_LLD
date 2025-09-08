@@ -7,8 +7,9 @@ import aMachineCoding.chessGame.strategies.BishopMovementStrategy;
 
 
 public class Bishop extends Piece {
+
     public Bishop(boolean isWhitePiece) {
-        super(isWhitePiece, new BishopMovementStrategy());
+        super(isWhitePiece, new BishopMovementStrategy(), isWhitePiece ? 'B' : 'b');
     }
 
     @Override

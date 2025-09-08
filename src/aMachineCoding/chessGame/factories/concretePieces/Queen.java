@@ -5,9 +5,11 @@ import aMachineCoding.chessGame.models.Board;
 import aMachineCoding.chessGame.models.Cell;
 import aMachineCoding.chessGame.strategies.QueenMovementStrategy;
 
+
 public class Queen extends Piece {
+
     public Queen(boolean isWhitePiece) {
-        super(isWhitePiece, new QueenMovementStrategy());
+        super(isWhitePiece, new QueenMovementStrategy(), isWhitePiece ? 'Q' : 'q');
     }
 
     @Override

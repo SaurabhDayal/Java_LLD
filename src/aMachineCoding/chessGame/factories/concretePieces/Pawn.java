@@ -6,8 +6,9 @@ import aMachineCoding.chessGame.models.Cell;
 import aMachineCoding.chessGame.strategies.PawnMovementStrategy;
 
 public class Pawn extends Piece {
+
     public Pawn(boolean isWhitePiece) {
-        super(isWhitePiece, new PawnMovementStrategy());
+        super(isWhitePiece, new PawnMovementStrategy(), isWhitePiece ? 'P' : 'p');
     }
 
     @Override
