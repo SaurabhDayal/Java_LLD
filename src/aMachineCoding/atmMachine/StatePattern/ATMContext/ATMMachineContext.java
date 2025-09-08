@@ -1,7 +1,5 @@
 package StatePattern.ATMContext;
 
-import CommonEnum.CashType;
-import CommonEnum.TransactionType;
 import StatePattern.ATMFactory.ATMStateFactory;
 import StatePattern.ATMState;
 import StatePattern.ConcreteATMState.HasCardState;
@@ -11,6 +9,8 @@ import StatePattern.ConcreteATMState.TransactionState;
 import UtilityClasses.ATMInventory;
 import UtilityClasses.Account;
 import UtilityClasses.Card;
+import aMachineCoding.atmMachine.UtilityClasses.CashType;
+import aMachineCoding.atmMachine.UtilityClasses.TransactionType;
 
 import java.util.HashMap;
 import java.util.Map;

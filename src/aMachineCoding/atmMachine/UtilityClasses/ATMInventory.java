@@ -1,6 +1,6 @@
 package UtilityClasses;
 
-import CommonEnum.CashType;
+import aMachineCoding.atmMachine.UtilityClasses.CashType;
 
 import java.util.HashMap;
 import java.util.Map;

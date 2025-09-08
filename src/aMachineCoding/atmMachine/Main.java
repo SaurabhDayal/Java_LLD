@@ -1,7 +1,7 @@
-import CommonEnum.TransactionType;
 import StatePattern.ATMContext.ATMMachineContext;
 import UtilityClasses.Account;
 import UtilityClasses.Card;
+import aMachineCoding.atmMachine.UtilityClasses.TransactionType;
 
 public class Main {
     public static void main(String[] args) {
