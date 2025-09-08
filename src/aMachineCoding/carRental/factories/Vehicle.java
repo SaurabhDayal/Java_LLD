@@ -8,17 +8,18 @@ public abstract class Vehicle {
     private final String registrationNumber;
     private final String model;
     private final VehicleType type;
-    private VehicleStatus status;
     private final double baseRentalPrice;
+    private VehicleStatus status;
 
-    // Constructor
-    public Vehicle(String registrationNumber, String model, VehicleType type,
+    public Vehicle(String registrationNumber,
+                   String model,
+                   VehicleType type,
                    double baseRentalPrice) {
         this.registrationNumber = registrationNumber;
         this.model = model;
         this.type = type;
-        this.status = VehicleStatus.AVAILABLE;
         this.baseRentalPrice = baseRentalPrice;
+        this.status = VehicleStatus.AVAILABLE;
     }
 
     // Abstract method for calculating rental fee

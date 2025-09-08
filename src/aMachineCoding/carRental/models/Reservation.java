@@ -1,24 +1,28 @@
 package aMachineCoding.carRental.models;
 
-
 import aMachineCoding.carRental.factories.Vehicle;
 
 import java.util.Date;
 
 public class Reservation {
 
-    private int id;
-    private User user;
-    private Vehicle vehicle;
-    private RentalStore pickupStore;
-    private RentalStore returnStore;
-    private Date startDate;
-    private Date endDate;
-    private ReservationStatus status;
-    private double totalAmount;
+    private final int id;
+    private final User user;
+    private final Vehicle vehicle;
+    private final RentalStore pickupStore;
+    private final RentalStore returnStore;
+    private final Date startDate;
+    private final Date endDate;
 
-    public Reservation(int id, User user, Vehicle vehicle,
-                       RentalStore pickupStore, RentalStore returnStore, Date startDate,
+    private ReservationStatus status;
+    private final double totalAmount;
+
+    public Reservation(int id,
+                       User user,
+                       Vehicle vehicle,
+                       RentalStore pickupStore,
+                       RentalStore returnStore,
+                       Date startDate,
                        Date endDate) {
         this.id = id;
         this.user = user;
@@ -28,10 +32,9 @@ public class Reservation {
         this.startDate = startDate;
         this.endDate = endDate;
         this.status = ReservationStatus.PENDING;
-
         // Calculate days between start and end dates
-        long diffInMillies = endDate.getTime() - startDate.getTime();
-        int days = (int) (diffInMillies / (1000 * 60 * 60 * 24)) + 1;
+        long diffInMillis = endDate.getTime() - startDate.getTime();
+        int days = (int) (diffInMillis / (1000 * 60 * 60 * 24)) + 1;
         this.totalAmount = vehicle.calculateRentalFee(days);
     }
 
@@ -64,6 +67,11 @@ public class Reservation {
         }
     }
 
+    // Getters and setters can be defined here
+    public User getUser() {
+        return user;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -71,5 +79,28 @@ public class Reservation {
     public double getTotalAmount() {
         return totalAmount;
     }
-    // Getters and setters can be defined here
+
+    public Vehicle getVehicle() {
+        return vehicle;
+    }
+
+    public ReservationStatus getStatus() {
+        return status;
+    }
+
+    public RentalStore getPickupStore() {
+        return pickupStore;
+    }
+
+    public RentalStore getReturnStore() {
+        return returnStore;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
 }

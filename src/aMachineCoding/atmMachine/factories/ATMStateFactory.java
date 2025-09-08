@@ -17,18 +17,18 @@ public class ATMStateFactory {
     }
 
     public ATMState createIdleState() {
-        return (ATMState) new IdleState();
+        return new IdleState();
     }
 
     public ATMState createHasCardState() {
-        return (ATMState) new HasCardState();
+        return new HasCardState();
     }
 
     public ATMState createSelectOperationState() {
-        return (ATMState) new SelectOperationState();
+        return new SelectOperationState();
     }
 
     public ATMState createTransactionState() {
-        return (ATMState) new TransactionState();
+        return new TransactionState();
     }
 }

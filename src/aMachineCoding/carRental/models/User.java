@@ -4,10 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class User {
-    private int id;
-    private String name;
-    private String email;
-    private List<Reservation> reservations;
+
+    private final int id;
+    private final String name;
+    private final String email;
+    private final List<Reservation> reservations;
 
     public User(int id, String name, String email) {
         this.id = id;
@@ -24,8 +25,19 @@ public class User {
         reservations.remove(reservation);
     }
 
-    // Getters and Setters can be defined here
     public int getId() {
         return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public List<Reservation> getReservations() {
+        return reservations;
     }
 }

@@ -4,6 +4,7 @@ import aMachineCoding.carRental.factories.Vehicle;
 import aMachineCoding.carRental.models.VehicleType;
 
 public class LuxuryVehicle extends Vehicle {
+
     private static final double RATE_MULTIPLIER = 2.5;
     private static final double PREMIUM_FEE = 50.0;
 

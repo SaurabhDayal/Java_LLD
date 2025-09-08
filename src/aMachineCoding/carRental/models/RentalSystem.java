@@ -1,7 +1,6 @@
 package aMachineCoding.carRental.models;
 
 import aMachineCoding.carRental.factories.Vehicle;
-import aMachineCoding.carRental.factories.VehicleFactory;
 import aMachineCoding.carRental.strategies.PaymentProcessor;
 import aMachineCoding.carRental.strategies.PaymentStrategy;
 
@@ -10,20 +9,21 @@ import java.util.*;
 public class RentalSystem {
 
     private static RentalSystem instance;
+
     private final List<RentalStore> stores;
-    private VehicleFactory vehicleFactory;
-    private ReservationManager reservationManager;
-    private PaymentProcessor paymentProcessor;
-    private Map<Integer, User> users;
-    private int nextUserId;
+    private final Map<Integer, User> users;
+    private final ReservationManager reservationManager;
+    private final PaymentProcessor paymentProcessor;
+
+    // --------------------------------------
+    // Constructor & Singleton Access
+    // --------------------------------------
 
     private RentalSystem() {
         this.stores = new ArrayList<>();
-        this.vehicleFactory = new VehicleFactory();
+        this.users = new HashMap<>();
         this.reservationManager = new ReservationManager();
         this.paymentProcessor = new PaymentProcessor();
-        this.users = new HashMap<>();
-        this.nextUserId = 1;
     }
 
     public static synchronized RentalSystem getInstance() {
@@ -32,6 +32,10 @@ public class RentalSystem {
         }
         return instance;
     }
+
+    // --------------------------------------
+    // Store Management
+    // --------------------------------------
 
     public void addStore(RentalStore store) {
         stores.add(store);
@@ -46,25 +50,54 @@ public class RentalSystem {
         return null;
     }
 
-
     public List<RentalStore> getStores() {
         return stores;
     }
 
+    // --------------------------------------
+    // User Management
+    // --------------------------------------
+
+    public void registerUser(User user) {
+        int userId = user.getId();
+        if (users.containsKey(userId)) {
+            System.out.println("User with id: " + userId + " already exists in the system");
+            return;
+        }
+        users.put(userId, user);
+    }
 
     public User getUser(int userId) {
         return users.get(userId);
     }
 
+    // --------------------------------------
+    // Reservation Management
+    // --------------------------------------
 
-    public Reservation createReservation(int userId, String vehicleRegistration,
-                                         int pickupStoreId, int returnStoreId, Date startDate, Date endDate) {
+    public Reservation createReservation(int userId,
+                                         String vehicleRegistration,
+                                         int pickupStoreId,
+                                         int returnStoreId,
+                                         Date startDate,
+                                         Date endDate) {
         User user = users.get(userId);
         RentalStore pickupStore = getStore(pickupStoreId);
         RentalStore returnStore = getStore(returnStoreId);
-        Vehicle vehicle = (pickupStore != null) ? pickupStore.getVehicle(vehicleRegistration) : null;
 
-        if (user != null && pickupStore != null && returnStore != null && vehicle != null) {
+        if (user == null || pickupStore == null || returnStore == null) {
+            return null;
+        }
+
+        // Check vehicle availability with date range
+        if (!pickupStore.isVehicleAvailable(vehicleRegistration, startDate, endDate)) {
+            System.out.println("Vehicle " + vehicleRegistration + " is not available for the selected dates.");
+            return null;
+        }
+
+        Vehicle vehicle = pickupStore.getVehicle(vehicleRegistration);
+
+        if (vehicle != null) {
             return reservationManager.createReservation(
                     user,
                     vehicle,
@@ -74,16 +107,25 @@ public class RentalSystem {
                     endDate
             );
         }
+
         return null;
     }
 
-    public boolean processPayment(
-            int reservationId, PaymentStrategy paymentStrategy) {
-        Reservation reservation =
-                reservationManager.getReservation(reservationId);
+    public void cancelReservation(int reservationId) {
+        reservationManager.cancelReservation(reservationId);
+    }
+
+    // --------------------------------------
+    // Payment & Rental Flow
+    // --------------------------------------
+
+    public boolean processPayment(int reservationId, PaymentStrategy paymentStrategy) {
+        Reservation reservation = reservationManager.getReservation(reservationId);
         if (reservation != null) {
             boolean result = paymentProcessor.processPayment(
-                    reservation.getTotalAmount(), paymentStrategy);
+                    reservation.getTotalAmount(),
+                    paymentStrategy
+            );
             if (result) {
                 reservationManager.confirmReservation(reservationId);
                 return true;
@@ -98,18 +140,5 @@ public class RentalSystem {
 
     public void completeRental(int reservationId) {
         reservationManager.completeRental(reservationId);
-    }
-
-    public void cancelReservation(int reservationId) {
-        reservationManager.cancelReservation(reservationId);
-    }
-
-    public void registerUser(User user) {
-        int userID = user.getId();
-        if (users.containsKey(userID)) {
-            System.out.println("User with id : " + userID + "Already exists in the system");
-            return;
-        }
-        users.put(userID, user);
     }
 }

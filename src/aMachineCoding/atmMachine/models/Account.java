@@ -1,6 +1,7 @@
 package aMachineCoding.atmMachine.models;
 
 public class Account {
+
     private final String accountNumber;
     private double balance;
 

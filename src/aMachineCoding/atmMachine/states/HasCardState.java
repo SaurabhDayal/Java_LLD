@@ -1,6 +1,5 @@
 package aMachineCoding.atmMachine.states;
 
-
 import aMachineCoding.atmMachine.models.ATMMachineContext;
 
 public class HasCardState implements ATMState {

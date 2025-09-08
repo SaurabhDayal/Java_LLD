@@ -1,6 +1,5 @@
 package aMachineCoding.atmMachine.models;
 
-
 import aMachineCoding.atmMachine.factories.ATMStateFactory;
 import aMachineCoding.atmMachine.states.*;
 
@@ -8,15 +7,20 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ATMMachineContext {
+
+    private final ATMStateFactory stateFactory;
     private ATMState currentState;
+    private final ATMInventory atmInventory;
+    private final Map<String, Account> accounts;  // Simplified account storage
+
     private Card currentCard;
     private Account currentAccount;
-    private ATMInventory atmInventory;
-    private Map<String, Account> accounts; // Simplified account storage
-    private ATMStateFactory stateFactory;
     private TransactionType selectedOperation;
 
-    // Constructor
+    // --------------------------------------
+    // Constructor & Initialization
+    // --------------------------------------
+
     public ATMMachineContext() {
         this.stateFactory = ATMStateFactory.getInstance();
         this.currentState = stateFactory.createIdleState();
@@ -25,6 +29,10 @@ public class ATMMachineContext {
         System.out.println("ATM initialized in: " + currentState.getStateName());
     }
 
+    // --------------------------------------
+    // State Progression
+    // --------------------------------------
+
     // Method to advance to the next state
     public void advanceState() {
         ATMState nextState = currentState.next(this);
@@ -32,15 +40,18 @@ public class ATMMachineContext {
         System.out.println("Current state: " + currentState.getStateName());
     }
 
+    // --------------------------------------
+    // Card & Authentication Operations
+    // --------------------------------------
+
     // Card insertion operation
     public void insertCard(Card card) {
         if (currentState instanceof IdleState) {
             System.out.println("Card inserted");
-            this.currentCard = card;
+            currentCard = card;
             advanceState();
         } else {
-            System.out.println(
-                    "Cannot insert card in " + currentState.getStateName());
+            System.out.println("Cannot insert card in " + currentState.getStateName());
         }
     }
 
@@ -60,15 +71,18 @@ public class ATMMachineContext {
         }
     }
 
+    // --------------------------------------
+    // Transaction Operations
+    // --------------------------------------
+
     // Select operation (withdrawal, balance check, etc.)
     public void selectOperation(TransactionType transactionType) {
         if (currentState instanceof SelectOperationState) {
             System.out.println("Selected operation: " + transactionType);
-            this.selectedOperation = transactionType;
+            selectedOperation = transactionType;
             advanceState();
         } else {
-            System.out.println(
-                    "Cannot select operation in " + currentState.getStateName());
+            System.out.println("Cannot select operation in " + currentState.getStateName());
         }
     }
 
@@ -89,10 +103,24 @@ public class ATMMachineContext {
                 currentState = stateFactory.createSelectOperationState();
             }
         } else {
-            System.out.println(
-                    "Cannot perform transaction in " + currentState.getStateName());
+            System.out.println("Cannot perform transaction in " + currentState.getStateName());
         }
     }
+
+    // Cancel current transaction
+    public void cancelTransaction() {
+        if (currentState instanceof SelectOperationState
+                || currentState instanceof TransactionState) {
+            System.out.println("Transaction cancelled");
+            returnCard();
+        } else {
+            System.out.println("No transaction to cancel in " + currentState.getStateName());
+        }
+    }
+
+    // --------------------------------------
+    // Card Handling
+    // --------------------------------------
 
     // Return card to user
     public void returnCard() {
@@ -106,37 +134,33 @@ public class ATMMachineContext {
         }
     }
 
-    // Cancel current transaction
-    public void cancelTransaction() {
-        if (currentState instanceof TransactionState
-                || currentState instanceof TransactionState) {
-            System.out.println("Transaction cancelled");
-            returnCard();
-        } else {
-            System.out.println(
-                    "No transaction to cancel in " + currentState.getStateName());
-        }
-    }
+    // --------------------------------------
+    // Helper Methods
+    // --------------------------------------
 
     // Helper method to perform withdrawal
     private void performWithdrawal(double amount) throws Exception {
+
         // Check if user has sufficient balance
         if (!currentAccount.withdraw(amount)) {
             throw new Exception("Insufficient funds in account");
         }
+
         // Check if ATM has sufficient cash
         if (!atmInventory.hasSufficientCash((int) amount)) {
             // Rollback the account withdrawal
             currentAccount.deposit(amount);
             throw new Exception("Insufficient cash in ATM");
         }
-        Map<CashType, Integer> dispensedCash =
-                atmInventory.dispenseCash((int) amount);
+
+        // Dispense requested amount
+        Map<CashType, Integer> dispensedCash = atmInventory.dispenseCash((int) amount);
         if (dispensedCash == null) {
             // Rollback the account withdrawal
             currentAccount.deposit(amount);
             throw new Exception("Unable to dispense exact amount");
         }
+
         System.out.println("Transaction successful. Please collect your cash:");
         for (Map.Entry<CashType, Integer> entry : dispensedCash.entrySet()) {
             System.out.println(entry.getValue() + " x $" + entry.getKey().value);
@@ -145,11 +169,10 @@ public class ATMMachineContext {
 
     // Helper method to check balance
     private void checkBalance() {
-        System.out.println(
-                "Your current balance is: $" + currentAccount.getBalance());
+        System.out.println("Your current balance is: $" + currentAccount.getBalance());
     }
 
-    // Reset ATM state
+    // Reset ATM state after card ejection
     private void resetATM() {
         this.currentCard = null;
         this.currentAccount = null;
@@ -157,7 +180,10 @@ public class ATMMachineContext {
         this.currentState = stateFactory.createIdleState();
     }
 
-    // Getters and setters
+    // --------------------------------------
+    // Getters & Setters
+    // --------------------------------------
+
     public ATMState getCurrentState() {
         return currentState;
     }
@@ -185,6 +211,10 @@ public class ATMMachineContext {
     public ATMStateFactory getStateFactory() {
         return stateFactory;
     }
+
+    // --------------------------------------
+    // Account Management
+    // --------------------------------------
 
     // Add an account to the ATM (for demo purposes)
     public void addAccount(Account account) {

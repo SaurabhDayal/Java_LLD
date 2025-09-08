@@ -46,7 +46,9 @@ public class ATMInventory {
         // Dispense from largest denomination to smallest
         for (CashType cashType : CashType.values()) {
             int count = Math.min(
-                    remainingAmount / cashType.value, cashInventory.get(cashType));
+                    remainingAmount / cashType.value,
+                    cashInventory.get(cashType)
+            );
             if (count > 0) {
                 dispensedCash.put(cashType, count);
                 remainingAmount -= count * cashType.value;

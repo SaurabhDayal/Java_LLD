@@ -1,6 +1,5 @@
 package aMachineCoding.carRental.models;
 
-
 import aMachineCoding.carRental.factories.Vehicle;
 
 import java.util.Date;
@@ -8,7 +7,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ReservationManager {
-    private Map<Integer, Reservation> reservations;
+
+    private final Map<Integer, Reservation> reservations;
     private int nextReservationId;
 
     public ReservationManager() {
@@ -16,11 +16,13 @@ public class ReservationManager {
         this.nextReservationId = 1;
     }
 
-    public Reservation createReservation(User user, Vehicle vehicle,
-                                         RentalStore pickupStore, RentalStore returnStore, Date startDate,
+    public Reservation createReservation(User user,
+                                         Vehicle vehicle,
+                                         RentalStore pickupStore,
+                                         RentalStore returnStore,
+                                         Date startDate,
                                          Date endDate) {
-        Reservation reservation = new Reservation(nextReservationId++, user,
-                vehicle, pickupStore, returnStore, startDate, endDate);
+        Reservation reservation = new Reservation(nextReservationId++, user, vehicle, pickupStore, returnStore, startDate, endDate);
         reservations.put(reservation.getId(), reservation);
         user.addReservation(reservation);
         return reservation;

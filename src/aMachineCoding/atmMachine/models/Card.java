@@ -17,7 +17,7 @@ public class Card {
     }
 
     public boolean validatePin(int enteredPin) {
-        return this.pin == enteredPin;
+        return pin == enteredPin;
     }
 
     public String getAccountNumber() {
