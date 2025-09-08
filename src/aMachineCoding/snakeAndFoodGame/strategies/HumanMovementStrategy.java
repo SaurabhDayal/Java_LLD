@@ -2,10 +2,17 @@ package aMachineCoding.snakeAndFoodGame.strategies;
 
 import aMachineCoding.snakeAndFoodGame.models.Pair;
 
-
 public class HumanMovementStrategy implements MovementStrategy {
+    private String lastDirection = "R"; // default initial movement (right)
+
     @Override
     public Pair getNextPosition(Pair currentHead, String direction) {
+        // Prevent opposite moves
+        if (isOpposite(direction, lastDirection)) {
+            direction = lastDirection; // ignore invalid move, keep moving in last direction
+        }
+        lastDirection = direction;
+
         int row = currentHead.getRow();
         int col = currentHead.getCol();
         return switch (direction) {
@@ -15,5 +22,12 @@ public class HumanMovementStrategy implements MovementStrategy {
             case "R" -> new Pair(row, col + 1);
             default -> currentHead;
         };
+    }
+
+    private boolean isOpposite(String dir1, String dir2) {
+        return (dir1.equals("U") && dir2.equals("D")) ||
+                (dir1.equals("D") && dir2.equals("U")) ||
+                (dir1.equals("L") && dir2.equals("R")) ||
+                (dir1.equals("R") && dir2.equals("L"));
     }
 }
