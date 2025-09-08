@@ -1,11 +1,14 @@
-import CommonEnum.ProductCategory;
-import InventoryStockManager.InventoryManager;
-import ProductReplenishmentStrategies.ConcreteReplenishmentStrategies.BulkOrderStrategy;
-import ProductReplenishmentStrategies.ConcreteReplenishmentStrategies.JustInTimeStrategy;
-import ProductReplenishmentStrategies.ReplenishmentStrategy;
-import ProductsFactory.Product;
-import ProductsFactory.ProductFactory;
-import UtilityClasses.Warehouse;
+package aMachineCoding.inventoryManagementSystem;
+
+import aMachineCoding.inventoryManagementSystem.factories.Product;
+import aMachineCoding.inventoryManagementSystem.factories.ProductFactory;
+import aMachineCoding.inventoryManagementSystem.models.InventoryManager;
+import aMachineCoding.inventoryManagementSystem.models.ProductCategory;
+import aMachineCoding.inventoryManagementSystem.models.Warehouse;
+import aMachineCoding.inventoryManagementSystem.strategies.BulkOrderStrategy;
+import aMachineCoding.inventoryManagementSystem.strategies.JustInTimeStrategy;
+import aMachineCoding.inventoryManagementSystem.strategies.ReplenishmentStrategy;
+
 
 public class Main {
     public static void main(String[] args) {

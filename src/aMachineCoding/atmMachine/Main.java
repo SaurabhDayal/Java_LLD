@@ -1,7 +1,9 @@
-import StatePattern.ATMContext.ATMMachineContext;
-import UtilityClasses.Account;
-import UtilityClasses.Card;
-import aMachineCoding.atmMachine.UtilityClasses.TransactionType;
+package aMachineCoding.atmMachine;
+
+import aMachineCoding.atmMachine.models.ATMMachineContext;
+import aMachineCoding.atmMachine.models.Account;
+import aMachineCoding.atmMachine.models.Card;
+import aMachineCoding.atmMachine.models.TransactionType;
 
 public class Main {
     public static void main(String[] args) {
