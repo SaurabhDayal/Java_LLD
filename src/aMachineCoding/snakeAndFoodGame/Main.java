@@ -6,20 +6,22 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+
         // Define game configuration can be taken as user input as well
         int width = 20;
         int height = 15;
         // Define some food positions (more can be generated during gameplay)
         int[][] foodPositions = {
-                {0, 1},  // Initial food
-                {10, 8}, // Second food
-                {3, 12}, // Third food
-                {8, 17}, // Fourth food
-                {12, 3}  // Fifth food
+                {0, 1},   // First food
+                {2, 4},   // Second food
+                {10, 8},  // Third food
+                {3, 12},  // Fourth food
+                {8, 17},  // Fifth food
+                {12, 3}   // Sixth food
         };
-        // Initialize the game
+
         SnakeGame game = new SnakeGame(width, height, foodPositions);
-        // Display game instructions
+
         System.out.println("===== SNAKE GAME =====");
         System.out.println("Controls: W (Up), S (Down), A (Left), D (Right), Q (Quit)");
         System.out.println("Eat food to grow your snake and increase your score.");
@@ -34,7 +36,6 @@ public class Main {
         // Main game loop
         while (gameRunning) {
 
-            // Display the current game state (in a real implementation, you would have a graphical representation of the board)
             displayGameState(game);
 
             // Get user input
@@ -46,15 +47,15 @@ public class Main {
                 gameRunning = false;
                 continue;
             }
-            // Convert WASD input to UDLR for game processing
-            String direction = convertInput(input);
+            String direction = convertInput(input);   // Convert WASD input to UDLR for game processing
             // Skip invalid inputs
             if (direction.isEmpty()) {
-                System.out.println("Invalid input! Use W/A/S/D to move or Q to quit.");
-                continue;
+                direction = game.getMovementStrategy().getLastDirection();
             }
+
             // Make the move and get the new score
             score = game.move(direction);
+
             // Check for game over
             if (score == -1) {
                 System.out.println("GAME OVER! You hit a wall or bit yourself.");
@@ -82,10 +83,9 @@ public class Main {
     // A simple method to display the game state in the console
     // In a real implementation, this would be replaced with graphics
     private static void displayGameState(SnakeGame game) {
-        // This is a placeholder - in a real implementation, you would
-        // access the game's state and render it appropriately
-        System.out.println("nCurrent snake length: " + game.getSnake().size());
         // In a complete implementation, you would render the board with the
         // snake, food, and boundaries visually
+        System.out.println("Snake length   : " + game.getSnake().size());
+        System.out.println("Snake position : " + game.getSnake().getBody().peekFirst());
     }
 }

@@ -9,6 +9,11 @@ public class AIMovementStrategy implements MovementStrategy {
     private String lastDirection = "R"; // Default initial movement (right)
 
     @Override
+    public String getLastDirection() {
+        return lastDirection;
+    }
+
+    @Override
     public Pair getNextPosition(Pair currentHead, String direction) {
         // Possible directions
         String[] dirs = {"U", "D", "L", "R"};

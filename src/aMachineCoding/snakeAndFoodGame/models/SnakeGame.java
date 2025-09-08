@@ -5,34 +5,23 @@ import aMachineCoding.snakeAndFoodGame.factories.FoodItem;
 import aMachineCoding.snakeAndFoodGame.strategies.HumanMovementStrategy;
 import aMachineCoding.snakeAndFoodGame.strategies.MovementStrategy;
 
-import java.util.Deque;
-
 public class SnakeGame {
 
-    private final Board board;           // Game board (singleton)
-    private final Snake snake;           // Snake object
-    private final int[][] foodPositions; // List of food coordinates
-    private int foodIndex;               // Index of next food to appear
-    private MovementStrategy movementStrategy; // Strategy (Human/AI)
-    private int score;                   // Player’s score
+    private final Board board;                 // Game board (singleton)
+    private final Snake snake;                 // Snake object
+    private final int[][] foodPositions;       // List of food coordinates
+    private int foodIndex;                     // Index of next food to appear
+    private final MovementStrategy movementStrategy; // Strategy (Human/AI)
+    private int score;                         // Player’s score
 
     // Initialize the game with specified dimensions and food positions
     public SnakeGame(int width, int height, int[][] food) {
         board = Board.getInstance(width, height);
+        snake = new Snake();
         foodPositions = food;
         foodIndex = 0;
+        movementStrategy = new HumanMovementStrategy(); // Default movement strategy is human-controlled
         score = 0;
-
-        // Initialize snake
-        snake = new Snake();
-
-        // Default movement strategy is human-controlled
-        movementStrategy = new HumanMovementStrategy();
-    }
-
-    // Allow switching between human or AI movement
-    public void setMovementStrategy(MovementStrategy strategy) {
-        movementStrategy = strategy;
     }
 
     // Process one move; returns updated score or -1 if game over
@@ -49,15 +38,12 @@ public class SnakeGame {
         boolean crossesBoundary = newHeadRow < 0 || newHeadRow >= board.getHeight()
                 || newHeadCol < 0 || newHeadCol >= board.getWidth();
 
-        // Current tail (used to allow safe movement into previous tail position)
+        // Check if the snake collides with itself (excluding tail, since it will move)
         Pair currentTail = snake.getBody().peekLast();
-
-        // Check if snake collides with itself (excluding tail, since it will move)
         boolean bitesItself = snake.getPositionMap().containsKey(newHead) &&
-                !(newHead.getRow() == currentTail.getRow() &&
-                        newHead.getCol() == currentTail.getCol());
+                !(newHead.getRow() == currentTail.getRow() && newHead.getCol() == currentTail.getCol());
 
-        // Game over if boundary crossed or snake bites itself
+        // Game over if the boundary crossed or snake bites itself
         if (crossesBoundary || bitesItself) {
             return -1;
         }
@@ -68,11 +54,13 @@ public class SnakeGame {
                 (foodPositions[foodIndex][1] == newHeadCol);
 
         if (ateFood) {
-            // Create food object (bonus for every 3rd food)
+            // Create the food object (bonus for every 3rd food)
+            Pair foodPos = new Pair(foodPositions[foodIndex][0], foodPositions[foodIndex][1]);
             FoodItem food = FoodFactory.createFood(
-                    foodPositions[foodIndex],
+                    foodPos,
                     (foodIndex % 3 == 0) ? "bonus" : "normal"
             );
+
             score += food.getPoints();  // Add points to score
             foodIndex++;                // Move to next food
         } else {
@@ -89,13 +77,11 @@ public class SnakeGame {
         return score;
     }
 
-    // Getter for snake body (used by rendering/printing)
-    public Deque<Pair> getSnakeBody() {
-        return snake.getBody();
-    }
-
-    // Getter for snake object (if needed directly)
     public Snake getSnake() {
         return snake;
+    }
+
+    public MovementStrategy getMovementStrategy() {
+        return movementStrategy;
     }
 }

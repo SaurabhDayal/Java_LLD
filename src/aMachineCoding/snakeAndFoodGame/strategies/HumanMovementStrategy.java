@@ -6,6 +6,11 @@ public class HumanMovementStrategy implements MovementStrategy {
     private String lastDirection = "R"; // default initial movement (right)
 
     @Override
+    public String getLastDirection() {
+        return lastDirection;
+    }
+
+    @Override
     public Pair getNextPosition(Pair currentHead, String direction) {
         // Prevent opposite moves
         if (isOpposite(direction, lastDirection)) {
