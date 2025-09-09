@@ -1,11 +1,10 @@
 package aMachineCoding.loggingSystem.corPattern;
 
-
+import aMachineCoding.loggingSystem.models.LogLevel;
 import aMachineCoding.loggingSystem.strategies.LogAppender;
 
 public class ErrorLogger extends LogHandler {
-
-    public ErrorLogger(int level, LogAppender appender) {
+    public ErrorLogger(LogLevel level, LogAppender appender) {
         super(level, appender);
     }
 

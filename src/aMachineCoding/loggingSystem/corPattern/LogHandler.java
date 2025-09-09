@@ -5,48 +5,34 @@ import aMachineCoding.loggingSystem.models.LogMessage;
 import aMachineCoding.loggingSystem.strategies.LogAppender;
 
 public abstract class LogHandler {
-    public static int INFO = 1;
-    public static int DEBUG = 2;
-    public static int ERROR = 3;
-    protected int level;
-    protected LogHandler nextLogger;
-    protected LogAppender appender; // the appender where we need to append the logs
 
-    // Constructor to initialize with appender
-    public LogHandler(int level, LogAppender appender) {
+    protected LogLevel level; // Use enum
+    protected LogAppender appender;
+    protected LogHandler nextLogger;
+
+    public LogHandler(LogLevel level, LogAppender appender) {
         this.level = level;
         this.appender = appender;
     }
 
-    // Set the next logger in the chain
     public void setNextLogger(LogHandler nextLogger) {
         this.nextLogger = nextLogger;
     }
 
-    // Corrected to use LogLevel instead of int for consistency
-    public void logMessage(int level, String message) {
-        if (this.level >= level) {
-            // Convert int level to LogLevel enum
-            LogLevel logLevel = intToLogLevel(level);
-            LogMessage logMsg = new LogMessage(logLevel, message);
-            // Use the appender to log
-            if (appender != null)
+    public void logMessage(LogLevel msgLevel, String message) {
+
+        // Compare using enum
+        // true if the message’s severity is greater than or equal to the logger’s severity.
+        if (msgLevel.isGreaterOrEqual(level)) {
+            LogMessage logMsg = new LogMessage(msgLevel, message);
+            if (appender != null) {
                 appender.append(logMsg);
-            write(message);
-        } else if (nextLogger != null)
-            nextLogger.logMessage(level, message);
+            }
+            write(message); // Optional if you want COR-specific print
+        } else if (nextLogger != null) {
+            nextLogger.logMessage(msgLevel, message);
+        }
     }
 
-    // Helper method to convert int level to LogLevel enum
-    private LogLevel intToLogLevel(int level) {
-        return switch (level) {
-            case 1 -> LogLevel.INFO;
-            case 2 -> LogLevel.DEBUG;
-            case 3 -> LogLevel.ERROR;
-            default -> LogLevel.INFO;
-        };
-    }
-
-    // Each concrete logger will implement its own writing mechanism
     abstract protected void write(String message);
 }
