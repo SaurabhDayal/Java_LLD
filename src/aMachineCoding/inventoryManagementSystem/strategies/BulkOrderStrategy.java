@@ -1,12 +1,17 @@
 package aMachineCoding.inventoryManagementSystem.strategies;
 
 import aMachineCoding.inventoryManagementSystem.factories.Product;
+import aMachineCoding.inventoryManagementSystem.models.InventoryItem;
 
 public class BulkOrderStrategy implements ReplenishmentStrategy {
+
     @Override
-    public void replenish(Product product) {
-        // Implement Bulk Order replenishment logic
+    public void replenish(InventoryItem item) {
+        Product product = item.getProduct();
         System.out.println("Applying Bulk Order replenishment for " + product.getName());
-        // Order in large quantities to minimize order costs
+
+        // order fixed bulk (example: 100 units)
+        item.setQuantity(item.getQuantity() + 100);
+        System.out.println("Bulk order placed. New quantity: " + item.getQuantity());
     }
 }

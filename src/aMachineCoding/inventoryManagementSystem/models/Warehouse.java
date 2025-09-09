@@ -9,82 +9,109 @@ import java.util.Map;
 public class Warehouse {
 
     private int id;
-    private String name;
+    private final String name;
     private String location;
-    private Map<String, Product> products; // SKU -> Product
 
+    // SKU -> InventoryItem
+    private final Map<String, InventoryItem> inventory;
+
+    // -----------------------------------
+    // Constructor
+    // -----------------------------------
     public Warehouse(String name) {
         this.name = name;
-        this.products = new HashMap<>();
+        this.inventory = new HashMap<>();
+    }
+
+    // -----------------------------------
+    // Inventory Operations
+    // -----------------------------------
+
+    // Add product with quantity and threshold
+    public void addProduct(Product product, int quantity, int threshold) {
+        String sku = product.getSku();
+
+        InventoryItem item = inventory.get(sku);
+        if (item != null) {
+            item.setQuantity(item.getQuantity() + quantity);
+        } else {
+            item = new InventoryItem(product, quantity, threshold);
+            inventory.put(sku, item);
+        }
+
+        logOperation(InventoryOperation.ADD, product, quantity, item.getQuantity());
+    }
+
+    // Remove product from warehouse
+    public boolean removeProduct(String sku, int quantity) {
+        if (!inventory.containsKey(sku)) {
+            System.out.println("Error: Product with SKU " + sku + " not found in " + name);
+            return false;
+        }
+
+        InventoryItem item = inventory.get(sku);
+        if (item.getQuantity() < quantity) {
+            System.out.println("Error: Insufficient inventory. Requested: " + quantity + ", Available: " + item.getQuantity());
+            return false;
+        }
+
+        item.setQuantity(item.getQuantity() - quantity);
+        logOperation(InventoryOperation.REMOVE, item.getProduct(), quantity, item.getQuantity());
+
+        if (item.getQuantity() == 0) {
+            inventory.remove(sku);
+            System.out.println("Product " + item.getProduct().getName() + " removed from inventory as quantity is now zero.");
+        }
+        
+        return true;
+    }
+
+    // Get available quantity
+    public int getAvailableQuantity(String sku) {
+        return inventory.containsKey(sku) ? inventory.get(sku).getQuantity() : 0;
+    }
+
+    // Get item by SKU
+    public InventoryItem getItemBySku(String sku) {
+        return inventory.get(sku);
+    }
+
+    // Get all inventory items
+    public Collection<InventoryItem> getAllItems() {
+        return inventory.values();
+    }
+
+    // -----------------------------------
+    // Helpers
+    // -----------------------------------
+    private void logOperation(InventoryOperation operation, Product product, int quantity, int finalQuantity) {
+        System.out.println(quantity + " units of " + product.getName()
+                + " (SKU: " + product.getSku() + ") "
+                + operation.name().toLowerCase() + " in " + name
+                + ". Current updated quantity: " + finalQuantity
+        );
+    }
+
+    // -----------------------------------
+    // Getters & Setters
+    // -----------------------------------
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getLocation() {
+        return location;
     }
 
     public void setLocation(String location) {
         this.location = location;
     }
 
-    // Add a product to the warehouse
-    public void addProduct(Product product, int quantity) {
-        String sku = product.getSku();
-        if (products.containsKey(sku)) {
-            // Product exists, update quantity
-            Product existingProduct = products.get(sku);
-            existingProduct.setQuantity(existingProduct.getQuantity() + quantity);
-        } else {
-            // New product, add to inventory
-            product.setQuantity(quantity);
-        }
-        products.put(sku, product);
-        System.out.println(quantity + " units of " + product.getName()
-                + " (SKU: " + sku + ") added to " + name
-                + ". New quantity: " + getAvailableQuantity(sku));
-    }
-
-    // Remove a product from the warehouse
-    public boolean removeProduct(String sku, int quantity) {
-        if (products.containsKey(sku)) {
-            Product product = products.get(sku);
-            int currentQuantity = product.getQuantity();
-            if (currentQuantity >= quantity) {
-                // Sufficient inventory to remove
-                product.setQuantity(currentQuantity - quantity);
-                System.out.println(quantity + " units of " + product.getName()
-                        + " (SKU: " + sku + ") removed from " + name
-                        + ". Remaining quantity: " + product.getQuantity());
-                // If quantity becomes zero, consider removing the product entirely
-                if (product.getQuantity() == 0) {
-                    // Remove products with zero quantity
-                    products.remove(sku);
-                    System.out.println("Product " + product.getName()
-                            + " removed from inventory as quantity is now zero.");
-                }
-                return true;
-            } else {
-                System.out.println("Error: Insufficient inventory. Requested: "
-                        + quantity + ", Available: " + currentQuantity);
-                return false;
-            }
-        } else {
-            System.out.println(
-                    "Error: Product with SKU " + sku + " not found in " + name);
-            return false;
-        }
-    }
-
-    // Get available quantity of a product
-    public int getAvailableQuantity(String sku) {
-        if (products.containsKey(sku)) {
-            return products.get(sku).getQuantity();
-        }
-        return 0; // Product not found
-    }
-
-    // Get a product by SKU
-    public Product getProductBySku(String sku) {
-        return products.get(sku);
-    }
-
-    // Get all products in this warehouse
-    public Collection<Product> getAllProducts() {
-        return products.values();
+    public Map<String, InventoryItem> getInventory() {
+        return inventory;
     }
 }

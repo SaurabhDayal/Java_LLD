@@ -9,14 +9,14 @@ public class GroceryProduct extends Product {
     private Date expiryDate;
     private boolean refrigerated;
 
-    public GroceryProduct(String sku, String name, double price, int quantity, int threshold) {
+    public GroceryProduct(String sku, String name, double price, Date expiryDate, boolean refrigerated) {
         super();
         setSku(sku);
         setName(name);
         setPrice(price);
-        setQuantity(quantity);
         setCategory(ProductCategory.GROCERY);
-        setThreshold(threshold);
+        this.expiryDate = expiryDate;
+        this.refrigerated = refrigerated;
     }
 
     // Getters and setters for grocery-specific attributes

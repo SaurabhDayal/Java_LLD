@@ -2,16 +2,14 @@ package aMachineCoding.inventoryManagementSystem.factories;
 
 import aMachineCoding.inventoryManagementSystem.models.ProductCategory;
 
-public class Product {
+public abstract class Product {
 
     private String sku;
     private String name;
     private double price;
-    private int quantity;
-    private int threshold;
-    private ProductCategory productCategory;
+    private ProductCategory category;
 
-    // Getters and setters
+    // Common getters and setters
     public String getSku() {
         return sku;
     }
@@ -36,27 +34,11 @@ public class Product {
         this.price = price;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public ProductCategory getCategory() {
+        return category;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public int getThreshold() {
-        return quantity;
-    }
-
-    public void setThreshold(int threshold) {
-        this.threshold = threshold;
-    }
-
-    public ProductCategory getProductCategory() {
-        return productCategory;
-    }
-
-    public void setCategory(ProductCategory productCategory) {
-        this.productCategory = productCategory;
+    public void setCategory(ProductCategory category) {
+        this.category = category;
     }
 }

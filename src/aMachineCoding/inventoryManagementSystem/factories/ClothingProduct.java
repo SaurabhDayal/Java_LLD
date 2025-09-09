@@ -7,17 +7,17 @@ public class ClothingProduct extends Product {
     private String size;
     private String color;
 
-    public ClothingProduct(String sku, String name, double price, int quantity, int threshold) {
+    public ClothingProduct(String sku, String name, double price, String size, String color) {
         super();
         setSku(sku);
         setName(name);
         setPrice(price);
-        setQuantity(quantity);
         setCategory(ProductCategory.CLOTHING);
-        setThreshold(threshold);
+        this.size = size;
+        this.color = color;
     }
 
-    // Getters and setters for clothing-specific attributes
+    // Clothing-specific attributes
     public String getSize() {
         return size;
     }

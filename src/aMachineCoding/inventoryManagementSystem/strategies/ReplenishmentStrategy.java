@@ -1,9 +1,7 @@
 package aMachineCoding.inventoryManagementSystem.strategies;
 
-import aMachineCoding.inventoryManagementSystem.factories.Product;
+import aMachineCoding.inventoryManagementSystem.models.InventoryItem;
 
-// Interface for different replenishment strategies
 public interface ReplenishmentStrategy {
-    // Method to replenish stock for a given product
-    void replenish(Product product);
+    void replenish(InventoryItem item);
 }

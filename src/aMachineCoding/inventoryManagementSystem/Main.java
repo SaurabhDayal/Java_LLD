@@ -9,54 +9,80 @@ import aMachineCoding.inventoryManagementSystem.strategies.BulkOrderStrategy;
 import aMachineCoding.inventoryManagementSystem.strategies.JustInTimeStrategy;
 import aMachineCoding.inventoryManagementSystem.strategies.ReplenishmentStrategy;
 
+import java.util.Date;
 
 public class Main {
     public static void main(String[] args) {
-        // Get the singleton instance of InventoryManager
+
+        // Initialize with Just-In-Time replenishment
         ReplenishmentStrategy replenishmentStrategy = new JustInTimeStrategy();
         InventoryManager inventoryManager = InventoryManager.getInstance(replenishmentStrategy);
 
-        // Create and add warehouses
+        // -----------------------------------
+        // Create and Add Warehouses
+        // -----------------------------------
         Warehouse warehouse1 = new Warehouse("Warehouse 1");
         Warehouse warehouse2 = new Warehouse("Warehouse 2");
+
         inventoryManager.addWarehouse(warehouse1);
         inventoryManager.addWarehouse(warehouse2);
 
-        // Create products using ProductFactory
+        // -----------------------------------
+        // Create Products using Factory (no stock info here)
+        // -----------------------------------
         ProductFactory productFactory = new ProductFactory();
+
         Product laptop = productFactory.createProduct(
-                ProductCategory.ELECTRONICS, "SKU123", "Laptop", 1000.0, 50, 25);
+                ProductCategory.ELECTRONICS,
+                "SKU123",
+                "Laptop",
+                1000.0,
+                "Dell",   // brand
+                24        // warrantyPeriod (months)
+        );
+
         Product tShirt = productFactory.createProduct(
-                ProductCategory.CLOTHING, "SKU456", "T-Shirt", 20.0, 200, 100);
+                ProductCategory.CLOTHING,
+                "SKU456",
+                "T-Shirt",
+                20.0,
+                "L",      // size
+                "Blue"    // color
+        );
+
         Product apple = productFactory.createProduct(
-                ProductCategory.GROCERY, "SKU789", "Apple", 1.0, 100, 200);
+                ProductCategory.GROCERY,
+                "SKU789",
+                "Apple",
+                1.0,
+                new Date(), // expiryDate
+                true                // refrigerated
+        );
 
-        // Add products to warehouses
-        warehouse1.addProduct(laptop, 15);
-        warehouse1.addProduct(tShirt, 20);
-        warehouse2.addProduct(apple, 50);
+        // -----------------------------------
+        // Add Products to Warehouses with stock info
+        // -----------------------------------
+        System.out.println();
+        warehouse1.addProduct(laptop, 15, 25);   // quantity = 15, threshold = 25
+        warehouse1.addProduct(tShirt, 20, 100);  // quantity = 20, threshold = 100
+        warehouse2.addProduct(apple, 50, 200);   // quantity = 50, threshold = 200
 
-        // Set replenishment strategy to Just-In-Time
-        inventoryManager.setReplenishmentStrategy(new JustInTimeStrategy());
-
-        // Perform inventory check and replenish if needed
+        // -----------------------------------
+        // Perform Inventory Check (JIT)
+        // -----------------------------------
+        System.out.println();
         inventoryManager.performInventoryCheck();
 
-        // Switch replenishment strategy to Bulk Order
+        // -----------------------------------
+        // Switch to Bulk Order Strategy
+        // -----------------------------------
+
+        System.out.println();
+        warehouse1.removeProduct("SKU123", 2);
         inventoryManager.setReplenishmentStrategy(new BulkOrderStrategy());
 
-        // Replenish a specific product if needed
+        // Replenish a specific product (Laptop)
+        System.out.println();
         inventoryManager.checkAndReplenish("SKU123");
     }
 }
-
-/*
-
-Output :
-
-15 units of Laptop (SKU: SKU123) added to Warehouse 1. New quantity: 15
-20 units of T-Shirt (SKU: SKU456) added to Warehouse 1. New quantity: 20
-50 units of Apple (SKU: SKU789) added to Warehouse 2. New quantity: 50
-
-
-*/
