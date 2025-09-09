@@ -7,19 +7,25 @@ import aMachineCoding.cacheSystem.storageMechanisms.CacheStorage;
 import aMachineCoding.cacheSystem.storageMechanisms.DBStorage;
 import aMachineCoding.cacheSystem.storageMechanisms.InMemoryCacheStorage;
 import aMachineCoding.cacheSystem.storageMechanisms.SimpleDBStorage;
+import aMachineCoding.cacheSystem.writePolicies.WritePolicy;
 import aMachineCoding.cacheSystem.writePolicies.WriteThroughPolicy;
 
 public class Main {
     public static void main(String[] args) {
         try {
+
             // Set a small capacity for the in-memory cache (e.g., 5 items)
             CacheStorage<String, String> cacheStorage = new InMemoryCacheStorage<>(5);
+
             // The underlying persistent store (DB storage) can be assumed to have large or unlimited capacity.
             DBStorage<String, String> dbStorage = new SimpleDBStorage<>();
+
             // Create the write-through policy (writes concurrently to both storages).
-            WritePolicies.WritePolicy<String, String> writePolicy = new WriteThroughPolicy<>();
+            WritePolicy<String, String> writePolicy = new WriteThroughPolicy<>();
+
             // Create the LRU eviction algorithm.
             EvictionAlgorithm<String> evictionAlg = new LRUEvictionAlgorithm<>();
+
             // Create the cache with 4 executor threads to guarantee per-key ordering.
             Cache<String, String> cache = new Cache<>(cacheStorage, dbStorage, writePolicy, evictionAlg, 4);
 
@@ -58,13 +64,3 @@ public class Main {
         }
     }
 }
-
-/*
-
-Output :
-
-A is evicted or not found in cache.
-F: Fig
-B: Blueberry
-
-*/

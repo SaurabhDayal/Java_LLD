@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class InMemoryCacheStorage<K, V> implements CacheStorage<K, V> {
+
     private final Map<K, V> cache;
     private final int capacity;
 

@@ -4,29 +4,22 @@ import aMachineCoding.cacheSystem.evictionAlgorithms.EvictionAlgorithm;
 import aMachineCoding.cacheSystem.executors.KeyBasedExecutor;
 import aMachineCoding.cacheSystem.storageMechanisms.CacheStorage;
 import aMachineCoding.cacheSystem.storageMechanisms.DBStorage;
+import aMachineCoding.cacheSystem.writePolicies.WritePolicy;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionException;
 
 public class Cache<K, V> {
+
     private final CacheStorage<K, V> cacheStorage;
     private final DBStorage<K, V> dbStorage;
-    private final WritePolicies.WritePolicy<K, V> writePolicy;
+    private final WritePolicy<K, V> writePolicy;
     private final EvictionAlgorithm<K> evictionAlgorithm;
     private final KeyBasedExecutor keyBasedExecutor;
 
-    /**
-     * Constructs the cache.
-     *
-     * @param cacheStorage      The in-memory cache (with limited capacity).
-     * @param dbStorage         The underlying persistent storage (database).
-     * @param writePolicy       The write-through policy.
-     * @param evictionAlgorithm The eviction strategy (custom LRU implementation).
-     * @param numExecutors      Number of single-thread executors for key-based dispatch.
-     */
     public Cache(CacheStorage<K, V> cacheStorage,
                  DBStorage<K, V> dbStorage,
-                 WritePolicies.WritePolicy<K, V> writePolicy,
+                 WritePolicy<K, V> writePolicy,
                  EvictionAlgorithm<K> evictionAlgorithm,
                  int numExecutors) {
         this.cacheStorage = cacheStorage;
@@ -68,14 +61,20 @@ public class Cache<K, V> {
                 } else {
                     // New key: If the cache is full, evict one key.
                     if (cacheStorage.size() >= cacheStorage.getCapacity()) {
-                        K evictedKey = evictionAlgorithm.evictKey();
+                        K evictedKey = evictionAlgorithm.evictKey();   // eviction algorithm decides which key to evict
                         if (evictedKey != null) {
-                            // Removal on the evicted key's executor to maintain ordering.
+                            // Figure out which executor handles the current key being inserted/updated
                             int currentIndex = keyBasedExecutor.getExecutorIndexForKey(key);
+                            // Figure out which executor handles the evicted key
                             int evictedIndex = keyBasedExecutor.getExecutorIndexForKey(evictedKey);
+
                             if (currentIndex == evictedIndex) {
+                                // ✅ Case 1: Same executor handles both keys
+                                // Safe to remove the evicted key directly, since ordering is preserved
                                 cacheStorage.remove(evictedKey);
                             } else {
+                                // ✅ Case 2: Different executors handle currentKey and evictedKey
+                                // We must schedule eviction on the evictedKey’s own executor
                                 CompletableFuture<Void> removalFuture = keyBasedExecutor.submitTask(evictedKey, () -> {
                                     try {
                                         cacheStorage.remove(evictedKey);
@@ -84,7 +83,7 @@ public class Cache<K, V> {
                                         throw new CompletionException(ex);
                                     }
                                 });
-                                removalFuture.join();
+                                removalFuture.join(); // Wait for eviction to finish before proceeding
                             }
                         }
                     }

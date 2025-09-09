@@ -7,9 +7,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LRUEvictionAlgorithm<K> implements EvictionAlgorithm<K> {
-    // A custom doubly linked list to track the LRU order.
+
     private final DoublyLinkedList<K> dll;
-    // Map of key to its node in the linked list.
     private final Map<K, DoublyLinkedListNode<K>> keyToNodeMap;
 
     public LRUEvictionAlgorithm() {
