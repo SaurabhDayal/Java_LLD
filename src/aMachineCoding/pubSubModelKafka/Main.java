@@ -32,19 +32,13 @@ public class Main {
         SimplePublisher publisher2 = new SimplePublisher("Publisher2");
 
         // Register publishers with topics
-        kafkaController.registerPublisher(publisher1, topic1.getTopicId());
-        kafkaController.registerPublisher(publisher1, topic2.getTopicId());
-        kafkaController.registerPublisher(publisher2, topic2.getTopicId());
-
-        // Retrieve TopicPublisher and publish messages
-        TopicPublisher tp1 = new TopicPublisher(topic1, publisher1);
-        TopicPublisher tp2 = new TopicPublisher(topic2, publisher2);
-
-        tp1.getTopic().addMessage(new Message("Message m1"));
-        kafkaController.publishMessage(tp1, new Message("Message m1"));
-
-        kafkaController.publishMessage(tp1, new Message("Message m2"));
-        kafkaController.publishMessage(tp2, new Message("Message m3"));
+        TopicPublisher t1p1 = kafkaController.registerPublisher(publisher1, topic1.getTopicId());
+        TopicPublisher t2p1 = kafkaController.registerPublisher(publisher1, topic2.getTopicId());
+        TopicPublisher t2p2 = kafkaController.registerPublisher(publisher2, topic2.getTopicId());
+        
+        kafkaController.publishMessage(t1p1, new Message("Message m1"));
+        kafkaController.publishMessage(t2p1, new Message("Message m2"));
+        kafkaController.publishMessage(t2p2, new Message("Message m3"));
 
         // Allow time
         try {
@@ -52,8 +46,8 @@ public class Main {
         } catch (InterruptedException ignored) {
         }
 
-        kafkaController.publishMessage(tp2, new Message("Message m4"));
-        kafkaController.publishMessage(tp1, new Message("Message m5"));
+        kafkaController.publishMessage(t2p2, new Message("Message m4"));
+        kafkaController.publishMessage(t1p1, new Message("Message m5"));
 
         // Reset offset
         kafkaController.resetOffset(topic1.getTopicId(), subscriber1, 0);

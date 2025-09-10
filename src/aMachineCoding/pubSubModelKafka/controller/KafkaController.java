@@ -53,15 +53,16 @@ public class KafkaController {
     }
 
     // Register a publisher to a topic
-    public void registerPublisher(Publisher publisher, String topicId) {
+    public TopicPublisher registerPublisher(Publisher publisher, String topicId) {
         Topic topic = topics.get(topicId);
         if (topic == null) {
             System.err.println("Topic with id " + topicId + " does not exist");
-            return;
+            return null;
         }
         TopicPublisher tp = new TopicPublisher(topic, publisher);
         topicPublishers.get(topicId).add(tp);
         System.out.println("Publisher " + publisher.getId() + " registered to topic: " + topic.getTopicName());
+        return tp;
     }
 
     // Called by TopicPublisher when publishing a message
