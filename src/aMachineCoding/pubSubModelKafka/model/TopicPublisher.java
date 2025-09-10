@@ -4,8 +4,8 @@ import aMachineCoding.pubSubModelKafka.Publisher.Publisher;
 
 public class TopicPublisher {
 
-    private final Topic topic;
-    private final Publisher publisher;
+    private final Topic topic;            // Associated topic
+    private final Publisher publisher;    // Associated publisher
 
     public TopicPublisher(Topic topic, Publisher publisher) {
         this.topic = topic;

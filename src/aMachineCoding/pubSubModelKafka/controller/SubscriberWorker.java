@@ -5,11 +5,11 @@ import aMachineCoding.pubSubModelKafka.model.Message;
 import aMachineCoding.pubSubModelKafka.model.Topic;
 import aMachineCoding.pubSubModelKafka.model.TopicSubscriber;
 
-public class TopicSubscriberController implements Runnable {
+public class SubscriberWorker implements Runnable {
 
     private final TopicSubscriber topicSubscriber;
 
-    public TopicSubscriberController(TopicSubscriber topicSubscriber) {
+    public SubscriberWorker(TopicSubscriber topicSubscriber) {
         this.topicSubscriber = topicSubscriber;
     }
 
