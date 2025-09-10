@@ -70,6 +70,11 @@ public class KafkaController {
         Topic topic = tp.getTopic();
         topic.addMessage(message);
 
+        System.out.println("Publisher " + tp.getPublisher().getId() +
+                " published message \"" + message.getMessage() + "\"" +
+                " to topic " + topic.getTopicName() +
+                " (id=" + topic.getTopicId() + ")");
+
         // Wake up subscribers
         List<TopicSubscriber> subs = topicSubscribers.get(topic.getTopicId());
         for (TopicSubscriber topicSubscriber : subs) {
@@ -77,11 +82,6 @@ public class KafkaController {
                 topicSubscriber.notify();
             }
         }
-
-        System.out.println("Publisher " + tp.getPublisher().getId() +
-                " published message \"" + message.getMessage() + "\"" +
-                " to topic " + topic.getTopicName() +
-                " (id=" + topic.getTopicId() + ")");
     }
 
     // Reset subscriber offset
@@ -93,13 +93,15 @@ public class KafkaController {
         }
         for (TopicSubscriber ts : subscribers) {
             if (ts.getSubscriber().getId().equals(subscriber.getId())) {
+                
+                System.out.println("Offset for subscriber " + subscriber.getId() +
+                        " on topic " + ts.getTopic().getTopicName() +
+                        " reset to " + newOffset);
+
                 ts.getOffset().set(newOffset);
                 synchronized (ts) {
                     ts.notify();
                 }
-                System.out.println("Offset for subscriber " + subscriber.getId() +
-                        " on topic " + ts.getTopic().getTopicName() +
-                        " reset to " + newOffset);
                 break;
             }
         }

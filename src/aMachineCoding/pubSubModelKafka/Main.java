@@ -35,14 +35,14 @@ public class Main {
         TopicPublisher t1p1 = kafkaController.registerPublisher(publisher1, topic1.getTopicId());
         TopicPublisher t2p1 = kafkaController.registerPublisher(publisher1, topic2.getTopicId());
         TopicPublisher t2p2 = kafkaController.registerPublisher(publisher2, topic2.getTopicId());
-        
+
         kafkaController.publishMessage(t1p1, new Message("Message m1"));
         kafkaController.publishMessage(t2p1, new Message("Message m2"));
         kafkaController.publishMessage(t2p2, new Message("Message m3"));
 
         // Allow time
         try {
-            Thread.sleep(5000);
+            Thread.sleep(2000);
         } catch (InterruptedException ignored) {
         }
 
@@ -54,7 +54,7 @@ public class Main {
 
         // Allow time before shutdown
         try {
-            Thread.sleep(5000);
+            Thread.sleep(3000);
         } catch (InterruptedException ignored) {
         }
 
