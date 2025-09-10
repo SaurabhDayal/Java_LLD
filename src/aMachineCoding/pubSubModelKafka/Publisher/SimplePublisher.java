@@ -6,6 +6,7 @@ import aMachineCoding.pubSubModelKafka.model.Message;
 
 
 public class SimplePublisher implements Publisher {
+
     private final String id;
     private final KafkaController kafkaController;
 

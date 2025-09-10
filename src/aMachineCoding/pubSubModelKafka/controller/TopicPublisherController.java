@@ -1,12 +1,11 @@
 package aMachineCoding.pubSubModelKafka.controller;
 
-
 import aMachineCoding.pubSubModelKafka.Publisher.Publisher;
 import aMachineCoding.pubSubModelKafka.model.Message;
 import aMachineCoding.pubSubModelKafka.model.Topic;
 
-
 public class TopicPublisherController {
+
     private final Topic topic;
     private final Publisher publisher;
 

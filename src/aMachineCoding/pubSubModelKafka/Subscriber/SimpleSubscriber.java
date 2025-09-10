@@ -4,6 +4,7 @@ package aMachineCoding.pubSubModelKafka.Subscriber;
 import aMachineCoding.pubSubModelKafka.model.Message;
 
 public class SimpleSubscriber implements Subscriber {
+
     private final String id;
 
     public SimpleSubscriber(String id) {

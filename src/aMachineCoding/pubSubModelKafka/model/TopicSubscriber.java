@@ -5,6 +5,7 @@ import aMachineCoding.pubSubModelKafka.Subscriber.Subscriber;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class TopicSubscriber {
+
     private final Topic topic;
     private final Subscriber subscriber;
     private final AtomicInteger offset;

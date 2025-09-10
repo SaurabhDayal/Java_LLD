@@ -8,6 +8,7 @@ import aMachineCoding.pubSubModelKafka.model.Topic;
 
 public class Main {
     public static void main(String[] args) {
+
         KafkaController kafkaController = new KafkaController();
 
         // Create topics.

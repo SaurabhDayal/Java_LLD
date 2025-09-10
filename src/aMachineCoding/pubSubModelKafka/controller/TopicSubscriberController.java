@@ -1,12 +1,12 @@
 package aMachineCoding.pubSubModelKafka.controller;
 
-
 import aMachineCoding.pubSubModelKafka.Subscriber.Subscriber;
 import aMachineCoding.pubSubModelKafka.model.Message;
 import aMachineCoding.pubSubModelKafka.model.Topic;
 import aMachineCoding.pubSubModelKafka.model.TopicSubscriber;
 
 public class TopicSubscriberController implements Runnable {
+
     private final TopicSubscriber topicSubscriber;
 
     public TopicSubscriberController(TopicSubscriber topicSubscriber) {
@@ -33,7 +33,7 @@ public class TopicSubscriberController implements Runnable {
                 int currentOffset = topicSubscriber.getOffset().getAndIncrement();
                 messageToProcess = topic.getMessages().get(currentOffset);
             }
-            // Process the message outside of the synchronized block
+            // Process the message outside the synchronized block
             try {
                 subscriber.onMessage(messageToProcess);
             } catch (InterruptedException e) {

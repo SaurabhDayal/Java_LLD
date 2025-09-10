@@ -3,6 +3,7 @@ package aMachineCoding.pubSubModelKafka.model;
 import aMachineCoding.pubSubModelKafka.Publisher.Publisher;
 
 public class TopicPublisher {
+
     private final Topic topic;
     private final Publisher publisher;
 

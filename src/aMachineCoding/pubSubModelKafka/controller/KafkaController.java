@@ -1,6 +1,5 @@
 package aMachineCoding.pubSubModelKafka.controller;
 
-
 import aMachineCoding.pubSubModelKafka.Publisher.Publisher;
 import aMachineCoding.pubSubModelKafka.Subscriber.Subscriber;
 import aMachineCoding.pubSubModelKafka.model.Message;
@@ -14,19 +13,15 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class KafkaController {
 
-    // Map of topic IDs to Topic objects.
-    private final Map<String, Topic> topics;
-    // Map of topic IDs to their list of TopicSubscriber associations.
-    private final Map<String, List<TopicSubscriber>> topicSubscribers;
-    // ExecutorService to run subscriber tasks concurrently.
-    private final ExecutorService subscriberExecutor;
+    private final Map<String, Topic> topics;                            // Map of topic IDs to Topic objects.
+    private final Map<String, List<TopicSubscriber>> topicSubscribers;  // Map of topic IDs to their list of TopicSubscriber associations.
+    private final ExecutorService subscriberExecutor;                   // ExecutorService to run subscriber tasks concurrently.
     private final AtomicInteger topicIdCounter;
 
     public KafkaController() {
         topics = new ConcurrentHashMap<>();
         topicSubscribers = new ConcurrentHashMap<>();
-        // Using a cached thread pool to dynamically manage threads.
-        subscriberExecutor = Executors.newCachedThreadPool();
+        subscriberExecutor = Executors.newCachedThreadPool();         // Using a cached thread pool to dynamically manage threads.
         topicIdCounter = new AtomicInteger(0);
     }
 
