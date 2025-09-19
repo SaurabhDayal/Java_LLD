@@ -1,7 +1,7 @@
-package aMachineCoding.designRateLimiter;
+package aMachineCoding.rateLimiter;
 
-import aMachineCoding.designRateLimiter.CommonEnums.RateLimiterType;
-import aMachineCoding.designRateLimiter.Controller.RateLimiterController;
+import aMachineCoding.rateLimiter.CommonEnums.RateLimiterType;
+import aMachineCoding.rateLimiter.Controller.RateLimiterController;
 
 import java.util.ArrayList;
 import java.util.HashMap;

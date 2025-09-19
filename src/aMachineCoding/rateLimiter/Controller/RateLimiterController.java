@@ -1,8 +1,8 @@
-package aMachineCoding.designRateLimiter.Controller;
+package aMachineCoding.rateLimiter.Controller;
 
-import aMachineCoding.designRateLimiter.Algorithms.IRateLimiter;
-import aMachineCoding.designRateLimiter.CommonEnums.RateLimiterType;
-import aMachineCoding.designRateLimiter.factory.RateLimiterFactory;
+import aMachineCoding.rateLimiter.Algorithms.IRateLimiter;
+import aMachineCoding.rateLimiter.CommonEnums.RateLimiterType;
+import aMachineCoding.rateLimiter.factory.RateLimiterFactory;
 
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;

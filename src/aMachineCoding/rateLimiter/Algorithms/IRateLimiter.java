@@ -1,4 +1,4 @@
-package aMachineCoding.designRateLimiter.Algorithms;
+package aMachineCoding.rateLimiter.Algorithms;
 
 import java.util.Map;
 

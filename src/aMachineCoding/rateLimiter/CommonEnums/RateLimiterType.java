@@ -1,4 +1,4 @@
-package aMachineCoding.designRateLimiter.CommonEnums;
+package aMachineCoding.rateLimiter.CommonEnums;
 
 public enum RateLimiterType {
     TOKEN_BUCKET,

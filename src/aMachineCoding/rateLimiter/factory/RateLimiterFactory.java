@@ -1,8 +1,8 @@
-package aMachineCoding.designRateLimiter.factory;
+package aMachineCoding.rateLimiter.factory;
 
-import aMachineCoding.designRateLimiter.Algorithms.IRateLimiter;
-import aMachineCoding.designRateLimiter.Algorithms.TokenBucketStrategy;
-import aMachineCoding.designRateLimiter.CommonEnums.RateLimiterType;
+import aMachineCoding.rateLimiter.Algorithms.IRateLimiter;
+import aMachineCoding.rateLimiter.Algorithms.TokenBucketStrategy;
+import aMachineCoding.rateLimiter.CommonEnums.RateLimiterType;
 
 import java.util.HashMap;
 import java.util.Map;
