@@ -11,13 +11,23 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 /*
-ATM: Middleware checks if the account is valid, verifies the PIN, and checks account balance before allowing withdrawals.
-Vending Machine: Middleware validates coin input, ensures sufficient stock of items, and processes the payment transaction.
-Design Logger for Amazon: Chain includes middleware to log requests, validate user authentication, check rate limits,
-and ensure security before allowing access to Amazon's API.
-E-commerce Shopping Cart: Middleware ensures that the cart is not empty, checks the availability of items,
-calculates total prices, and verifies user authentication before proceeding to checkout.
- */
+ATM:
+    Middleware checks if the account is valid, verifies the PIN,
+    and checks account balance before allowing withdrawals.
+
+Vending Machine:
+    Middleware validates coin input, ensures sufficient stock of items,
+    and processes the payment transaction.
+
+Design Logger for Amazon:
+    Chain includes middleware to log requests, validate user authentication,
+    check rate limits, and ensure security before allowing access to Amazon's API.
+
+E-commerce Shopping Cart:
+    Middleware ensures that the cart is not empty, checks the availability of items,
+    calculates total prices, and verifies user authentication before proceeding to checkout.
+*/
+
 public class ChainOfResponsibilityMain {
 
     private static BufferedReader reader;
